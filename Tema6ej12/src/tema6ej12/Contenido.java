@@ -3,18 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tema6ej12;
+
 import java.util.Scanner;
 
 /**
  *
  * @author alumno
  */
-public class Contenido implements ValoracionContenido{
-    
+public class Contenido implements ValoracionContenido {
+
     private String titulo;
-    
+
     private boolean entregado;
-    
+
     private String genero;
 
     public Contenido(String titulo, boolean entregado, String genero) {
@@ -22,27 +23,27 @@ public class Contenido implements ValoracionContenido{
         this.entregado = entregado;
         this.genero = genero;
     }
-    
-    public Contenido(String titulo, String genero){
+
+    public Contenido(String titulo, String genero) {
         this.titulo = titulo;
         this.genero = genero;
         entregado = false;
     }
-    
-    public Contenido(String titulo){
+
+    public Contenido(String titulo) {
         this.titulo = titulo;
         this.entregado = false;
         this.genero = "";
-        
+
     }
-    
-    public Contenido(boolean entregado){
+
+    public Contenido(boolean entregado) {
         this.titulo = "";
         this.entregado = entregado;
         this.genero = "";
     }
-    
-    public Contenido(){
+
+    public Contenido() {
         this.titulo = "";
         this.entregado = false;
         this.genero = "";
@@ -68,12 +69,14 @@ public class Contenido implements ValoracionContenido{
     public String toString() {
         return "Contenido{" + "titulo=" + titulo + ", entregado=" + entregado + ", genero=" + genero + '}';
     }
-    
-    public void scanner (int numero){
+
+    public int scanner() {
         Scanner entrada = new Scanner(System.in);
-        numero = entrada.nextInt();
+
+        return entrada.nextInt();
+
     }
-    
+
     @Override
     public void entregar() {
         entregado = true;
@@ -81,15 +84,12 @@ public class Contenido implements ValoracionContenido{
 
     @Override
     public void devolver() {
-       entregado = false;
+        entregado = false;
     }
 
     @Override
     public boolean esEntregado() {
-       return entregado;
+        return entregado;
     }
-    
-    
-    
-    
+
 }

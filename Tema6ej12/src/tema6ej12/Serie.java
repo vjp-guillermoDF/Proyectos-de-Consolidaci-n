@@ -31,12 +31,16 @@ public final class Serie extends Contenido {
     }
 
     public int valorar() {
-        int a = 0, b = 0, c = 0;
-
-        System.out.println("Por favor, valore del 1 al 5 las categorias guion, interpretacion y fotografia. Introduzca tres numeros con cada respectiva valoracion");
-        super.scanner(a);
-        super.scanner(b);
-        super.scanner(c);
+        int a, b, c;
+        do {
+            System.out.println("Por favor, valore del 1 al 5 las categorias guion, interpretacion y fotografia. Introduzca tres numeros con cada respectiva valoracion");
+            a = super.scanner();
+            b = super.scanner();
+            c = super.scanner();
+            if (a < 1 || a > 5 || b < 1 || b > 5 || c < 1 || c > 5) {
+                System.out.println("Por favor, introduzca numeros entre 1 y 5");
+            }
+        } while (a < 1 || a > 5 || b < 1 || b > 5 || c < 1 || c > 5);
         int media = (a + b + c) / 3;
         System.out.println("La valoracion media es " + media + ".¡Muchas gracias!");
 
@@ -47,7 +51,7 @@ public final class Serie extends Contenido {
     public void entregar() {
         if (!super.esEntregado()) {
             super.entregar();
-            System.out.println("Has alquilado " + getTitulo() + "de " + creador);
+            System.out.println("Has alquilado " + getTitulo() + " de " + creador);
 
         } else {
             System.out.println(getTitulo() + "no disponible");
@@ -57,7 +61,7 @@ public final class Serie extends Contenido {
     public void devolver() {
         if (super.esEntregado()) {
             super.devolver();
-            System.out.println(getTitulo() + " de" + creador + " devuelto correctamente");
+            System.out.println(getTitulo() + " de " + creador + " devuelto correctamente");
         } else {
             System.out.println("No se puede devolver");
         }

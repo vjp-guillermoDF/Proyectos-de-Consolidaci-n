@@ -9,11 +9,11 @@ package tema6ej12;
  * @author alumno
  */
 public interface ValoracionContenido {
-    
+
     public void entregar();
-    
+
     public void devolver();
-    
+
     public boolean esEntregado();
-    
+
 }
