@@ -55,7 +55,9 @@ public final class Videojuego extends Contenido {
     }
 
     public int valorar() {
+
         int a, b, c;
+
         do {
             System.out.println("Por favor, valore del 1 al 5 las categorias de contenido exclusivo, gameplay e innovacion. Introduzca tres numeros con cada respectiva valoracion");
             a = super.scanner();
@@ -65,7 +67,6 @@ public final class Videojuego extends Contenido {
                 System.out.println("Por favor, introduzca numeros entre 1 y 5");
             }
         } while (a < 1 || a > 5 || b < 1 || b > 5 || c < 1 || c > 5);
-
         int media = (a + b + c) / 3;
         System.out.println("La valoracion media es " + media + ".¡Muchas gracias!");
 

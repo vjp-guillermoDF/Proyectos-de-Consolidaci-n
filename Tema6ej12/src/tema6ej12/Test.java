@@ -35,10 +35,10 @@ public class Test {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        Serie serie = new Serie("Matt Groening", "Los Simpson");
+        Contenido serie = new Serie("Matt Groening", "Los Simpson");
         mostrarTodo(serie);
         Estudio estudio = new Estudio("BioWare", "2024");
-        Videojuego videojuego = new Videojuego(80, estudio, "Dragon Underage: the Gayguard", "Homoaventuras");
+        Contenido videojuego = new Videojuego(80, estudio, "Dragon Underage: the Gayguard", "Homoaventuras");
         mostrarTodo(videojuego);
     }
 
