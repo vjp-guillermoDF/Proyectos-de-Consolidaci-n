@@ -10,13 +10,14 @@ package tema6ej12;
  */
 public final class Serie extends Contenido {
 
-    private int numeroTemporadas = 3;
+    private int numeroTemporadas;
 
     private String creador;
 
     public Serie(String creador, String titulo) {
         super(titulo);
         this.creador = creador;
+        this.numeroTemporadas = 3;
 
     }
 
@@ -32,15 +33,18 @@ public final class Serie extends Contenido {
 
     public int valorar() {
         int a, b, c;
+        boolean cerrarBucle;
         do {
+            cerrarBucle = true;
             System.out.println("Por favor, valore del 1 al 5 las categorias guion, interpretacion y fotografia. Introduzca tres numeros con cada respectiva valoracion");
             a = super.scanner();
             b = super.scanner();
             c = super.scanner();
             if (a < 1 || a > 5 || b < 1 || b > 5 || c < 1 || c > 5) {
+                cerrarBucle = false;
                 System.out.println("Por favor, introduzca numeros entre 1 y 5");
             }
-        } while (a < 1 || a > 5 || b < 1 || b > 5 || c < 1 || c > 5);
+        } while (!cerrarBucle);
         int media = (a + b + c) / 3;
         System.out.println("La valoracion media es " + media + ".¡Muchas gracias!");
 
