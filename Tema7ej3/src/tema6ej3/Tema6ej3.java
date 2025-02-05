@@ -32,7 +32,7 @@ public class Tema6ej3 {
 
     public static int longitudVector() {
         int longitud = 0;
-        boolean longitudAdecuada = true;
+        boolean longitudAdecuada;
         Scanner entrada = new Scanner(System.in);
         do {
             System.out.println("Elija la longitud del vector: \n");
@@ -48,7 +48,7 @@ public class Tema6ej3 {
                     longitudAdecuada = true;
                 }
             } catch (Exception e) {
-                System.out.println("Introduce un numero. DE VERDAD QUE ME DESESPERA lo lerd@ que eres eh??\n");
+                System.out.println("Introduce un numero, por Dios.\n");
                 entrada.nextLine();
                 longitudAdecuada = false;
             }
