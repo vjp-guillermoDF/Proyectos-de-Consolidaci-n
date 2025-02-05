@@ -10,17 +10,14 @@ package Tema7ej4;
  */
 public class Tema7ej4 {
 
-    public static void rellenarTabla(int[] tablaVacia[]) {
+    public static void rellenarTabla(int[][] tablaVacia) {
 
-        int i, j;
         int numeroAleatorio;
-        for (i = 0; i < tablaVacia.length; i++) {
-            numeroAleatorio = (int) (Math.random() * 101) + 100;
-                tablaVacia[i][0] = numeroAleatorio;
-            for (j = 0; j < tablaVacia[i].length; j++) {
-                numeroAleatorio = (int) (Math.random() * 101) + 100;
-                tablaVacia[0][j] = numeroAleatorio;
-                
+        for (int i = 0; i < tablaVacia.length; i++) {
+            for (int j = 0; j < tablaVacia[i].length; j++) {
+                numeroAleatorio = (int) (Math.random() * 101.0) + 100;
+                tablaVacia[i][j] = numeroAleatorio;
+
             }
 
         }
@@ -29,10 +26,8 @@ public class Tema7ej4 {
 
     public static void mostrarPares(int[][] tablaLlena) {
 
-        int i, j;
-
-        for (i = 0; i < tablaLlena.length; i++) {
-            for (j = 0; j < tablaLlena[i].length; j++) {
+        for (int i = 0; i < tablaLlena.length; i++) {
+            for (int j = 0; j < tablaLlena[i].length; j++) {
                 if (tablaLlena[i][j] % 2 == 0) {
                     System.out.println("Mostrando los numeros pares. El valor " + tablaLlena[i][j] + " tiene asignada la fila " + i + j);
 
@@ -48,6 +43,7 @@ public class Tema7ej4 {
     public static void main(String[] args) {
         // TODO code application logic here
         int tablaFinal[][] = new int[4][3];
+        rellenarTabla(tablaFinal);
         mostrarPares(tablaFinal);
     }
 
