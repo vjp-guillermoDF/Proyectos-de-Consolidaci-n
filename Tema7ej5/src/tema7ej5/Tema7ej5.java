@@ -28,7 +28,7 @@ public class Tema7ej5 {
         System.out.println("\nValores asignados:");
         for (int i = 0; i < tablaLlena.length; i++) {
             for (int j = 0; j < tablaLlena[i].length; j++) {
-                System.out.print("\n [" + tablaLlena[i][j] + "] --> " + i + j);
+                System.out.print("\n [" + i + j + "] --> " + tablaLlena[i][j]);
             }
 
         }
