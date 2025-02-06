@@ -6,7 +6,7 @@ package Tema7ej4;
 
 /**
  *
- * @author alumno
+ * @author Don Guillermo Domínguez de la Fuente I de España y Portugal
  */
 public class Tema7ej4 {
 
@@ -25,6 +25,7 @@ public class Tema7ej4 {
     }
 
     public static void mostrarPares(int[][] tablaLlena) {
+        rellenarTabla(tablaLlena);
 
         for (int i = 0; i < tablaLlena.length; i++) {
             for (int j = 0; j < tablaLlena[i].length; j++) {
@@ -43,7 +44,6 @@ public class Tema7ej4 {
     public static void main(String[] args) {
         // TODO code application logic here
         int tablaFinal[][] = new int[4][3];
-        rellenarTabla(tablaFinal);
         mostrarPares(tablaFinal);
     }
 
