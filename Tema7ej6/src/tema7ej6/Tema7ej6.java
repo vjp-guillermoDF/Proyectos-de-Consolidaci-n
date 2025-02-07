@@ -11,19 +11,28 @@ package tema7ej6;
 public class Tema7ej6 {
 
     public static void crearTabla(int[] tabla) {
-        int n = 0;
+        int num = 2;// Comenzamos desde el primer número primo
         int contador = 0;
-        do {
-            n++;
-            if (tabla[n] % 2 != 0) {
-                contador++;
-                System.out.println(n);
-                
-            }
 
-        } while (contador != tabla.length);
+        while (contador < 80) {
+            if (esPrimo(num)) {
+                tabla[contador++] = num;
+            }
+            num++;
+        }
+        for (int p : tabla) {
+            System.out.print(p + " ");
+        }
     }
-    
+
+    static boolean esPrimo(int n) {
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return n > 1;
+    }
 
     /**
      * @param args the command line arguments
