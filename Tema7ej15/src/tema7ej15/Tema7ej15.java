@@ -145,7 +145,7 @@ public class Tema7ej15 {
 
         while (!entrada.hasNextInt()) {
             System.out.println("Entrada inválida. Intente de nuevo.");
-            entrada.next();
+            int nextInt = entrada.nextInt();
         }
         return entrada.nextInt();
     }
