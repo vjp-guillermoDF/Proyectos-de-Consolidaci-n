@@ -20,9 +20,9 @@ public class Tema7ej17 {
     }
 
     public static void ordenarCosa(int[] chumbawamba) {
-        int max = 0;
-        for (int i = 0; i < chumbawamba.length - 1; i++) {
-            for (int j = 0; j < chumbawamba.length - 1 - i; j++) {
+
+        for (int i = 0; i < chumbawamba.length; i++) {
+            for (int j = 0; j < chumbawamba.length - 1; j++) {
                 if (chumbawamba[j] < chumbawamba[j + 1]) {
                     int temp = chumbawamba[j];
                     chumbawamba[j] = chumbawamba[j + 1];

@@ -19,9 +19,7 @@ public class Tema7ej15 {
     public static final int[] VENTAS = new int[YEAR.length];
 
     public static void crearTabla(String[] year, int[] ventas) {
-        year = YEAR;
-        ventas = VENTAS;
-
+        
         String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
         for (int i = 0; i < ventas.length; i++) {

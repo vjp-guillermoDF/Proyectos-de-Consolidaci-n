@@ -19,8 +19,9 @@ public class Tema7ej18 {
     /**
      * @param chumbawamba
      * @param tubthumping
+     * @param chumbawambaTubthumping
      */
-    public static void mostrarCosas(int[] chumbawamba, int[] tubthumping) {
+    public static void mostrarCosas(int[] chumbawamba, int[] tubthumping, int[] chumbawambaTubthumping) {
 
         System.out.print("Array chumbawamba ordenado: [ ");
         for (int num : chumbawamba) {
@@ -35,16 +36,17 @@ public class Tema7ej18 {
         System.out.println("]");
 
         System.out.print("Array combinado y ordenado: [ ");
-        for (int i = 0; i < (chumbawamba.length + tubthumping.length); i++) {
+        for (int i = 0; i < chumbawambaTubthumping.length; i++) {
             System.out.print(i + " ");
         }
         System.out.println("]");
 
     }
 
-    public static void juntarCosas(int[] chumbawamba, int[] tubthumping, int[] chumbawambaTubthumping) {
+    public static int[] juntarCosas(int[] chumbawamba, int[] tubthumping, int[] chumbawambaTubthumping) {
 
         for (int i = 0; i < chumbawamba.length; i++) {
+
             chumbawambaTubthumping[i] = chumbawamba[i];
         }
 
@@ -52,8 +54,8 @@ public class Tema7ej18 {
             chumbawambaTubthumping[chumbawamba.length + i] = tubthumping[i];
         }
 
-        for (int i = 0; i < chumbawambaTubthumping.length - 1; i++) {
-            for (int j = 0; j < chumbawambaTubthumping.length - 1 - i; j++) {
+        for (int i = 0; i < chumbawambaTubthumping.length; i++) {
+            for (int j = 0; j < chumbawambaTubthumping.length - 1; j++) {
                 if (chumbawambaTubthumping[j] > chumbawambaTubthumping[j + 1]) {
 
                     int aux = chumbawambaTubthumping[j];
@@ -62,22 +64,21 @@ public class Tema7ej18 {
                 }
             }
         }
+        return chumbawambaTubthumping;
 
     }
 
     public static void ordenarCosas(int[] chumbawamba, int[] tubthumping) {
-        
-        for (int i = 0; i < chumbawamba.length - 1; i++) { 
-            for (int j = 0; j < chumbawamba.length - 1 - i; j++) {  
 
-              
+        for (int i = 0; i < chumbawamba.length; i++) {
+            for (int j = 0; j < chumbawamba.length - 1; j++) {
+
                 if (chumbawamba[j] > chumbawamba[j + 1]) {
                     int aux = chumbawamba[j];
                     chumbawamba[j] = chumbawamba[j + 1];
                     chumbawamba[j + 1] = aux;
                 }
 
-            
                 if (tubthumping[j] > tubthumping[j + 1]) {
                     int aux2 = tubthumping[j];
                     tubthumping[j] = tubthumping[j + 1];
@@ -101,7 +102,7 @@ public class Tema7ej18 {
         crearCosas(CHUMBAWAMBA, TUBTHUMPING);
         ordenarCosas(CHUMBAWAMBA, TUBTHUMPING);
         juntarCosas(CHUMBAWAMBA, TUBTHUMPING, CHUMBAWAMBATUBTHUMPING);
-        mostrarCosas(CHUMBAWAMBA, TUBTHUMPING);
+        mostrarCosas(CHUMBAWAMBA, TUBTHUMPING, CHUMBAWAMBATUBTHUMPING);
 
     }
 }

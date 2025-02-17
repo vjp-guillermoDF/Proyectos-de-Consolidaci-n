@@ -22,7 +22,7 @@ public class Tema7ej16 {
 
     public static void peorAsignatura(int[][] tablaVacia, String[] alumnos, String[] asignaturas) {
         int suma;
-        int[] media = new int[asignaturas.length];
+        int media;
         int min = 10;
 
         for (int j = 0; j < tablaVacia[0].length; j++) {
@@ -31,10 +31,10 @@ public class Tema7ej16 {
                 suma += tablaVacia[i][j];
 
             }
-            media[j] = suma / tablaVacia.length;
+            media = suma / tablaVacia.length;
 
-            if (media[j] < min) {
-                min = media[j];
+            if (media < min) {
+                min = media;
 
                 System.out.println("La asignatura con la media más baja es: " + asignaturas[j] + " con " + min + ".\n");
 
@@ -43,8 +43,8 @@ public class Tema7ej16 {
     }
 
     public static void peorAlumno(int[][] tablaVacia, String[] alumnos, String[] asignaturas) {
-        int suspensos[] = new int[alumnos.length];
-        int contador = 0;
+        int suspensos;
+        int contador;
         int max = 0;
         int peorIndice = 0;
         for (int i = 0; i < tablaVacia.length; i++) {
@@ -56,10 +56,10 @@ public class Tema7ej16 {
                 }
 
             }
-            suspensos[i] = contador;
+            suspensos = contador;
 
-            if (suspensos[i] > max) {
-                max = suspensos[i];
+            if (suspensos > max) {
+                max = suspensos;
                 peorIndice = i;
             }
         }
@@ -72,7 +72,7 @@ public class Tema7ej16 {
 
     public static void mejorAlumno(int[][] tablaVacia, String[] alumnos, String[] asignaturas) {
         int suma;
-        int[] media = new int[alumnos.length];
+        int media;
         int max = 0;
         int mejor = 0;
 
@@ -82,10 +82,10 @@ public class Tema7ej16 {
                 suma += tablaVacia[i][j];
 
             }
-            media[i] = suma / tablaVacia[i].length;
+            media = suma / tablaVacia[i].length;
 
-            if (media[i] > max) {
-                max = media[i];
+            if (media > max) {
+                max = media;
                 mejor = i;
 
             }
@@ -106,9 +106,6 @@ public class Tema7ej16 {
     }
 
     public static void llenarNotas(int[][] tablaVacia, String[] alumnos, String[] asignaturas) {
-        alumnos = ALUMNOS;
-        asignaturas = ASIGNATURAS;
-        tablaVacia = NOTAS;
 
         String[] datos = {"Lengua", "Mates", "Historia", "Fisica"};
         String[] nombres = {"Elena Nito", "Ines Perado", "Consuelo O' Sinell", "Armando J. Leo", "Justin Case", "Segundo Toro de la Tarde"};
