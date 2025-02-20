@@ -15,7 +15,7 @@ public class Tema8ej2 {
     public static final int[] amanteBandido = new int[pedirNumero()];
 
     /**
-     * @param args the command line arguments
+     * @param amanteBandido
      */
     public static void MiguelBose(int[] amanteBandido) {
         System.out.println("He aqui una ristra de numeros entre uno y seis puestos al tuntun: ");
@@ -37,7 +37,7 @@ public class Tema8ej2 {
     }
 
     public static int pedirNumero() {
-        boolean unoadiez = true;
+        boolean unoadiez;
         int numero = 0;
         System.out.println("Dale una longitud entre 1 y 10;");
         do {

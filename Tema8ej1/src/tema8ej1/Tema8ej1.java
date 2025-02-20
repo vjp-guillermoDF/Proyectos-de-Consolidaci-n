@@ -14,9 +14,9 @@ public class Tema8ej1 {
 
     private static final Asignaturas[] tablaAsignaturas = new Asignaturas[6];
 
-    public static int notaMedia(Asignaturas asignaturas[]) {
-        int suma = 0;
-        int media;
+    public static float notaMedia(Asignaturas asignaturas[]) {
+        float suma = 0.0f;
+        float media;
         for (int i = 0; i < asignaturas.length; i++) {
 
             suma += asignaturas[i].getNota();
@@ -29,9 +29,10 @@ public class Tema8ej1 {
     }
 
     public static void crearTablaNota(Asignaturas asignaturas[]) {
-        Scanner entrada = new Scanner(System.in);
+
         String[] nombres = {"Programacion", "Lenguaje de Marcas", "Bases de Datos", "Entornos de Desarrollo", "Sistemas Informaticos", "IPE"};
         for (int i = 0; i < asignaturas.length; i++) {
+
             System.out.println("Introduce la nota de " + nombres[i] + ":");
             asignaturas[i] = new Asignaturas(nombres[i], pedirEscaner());
 
@@ -39,10 +40,10 @@ public class Tema8ej1 {
 
     }
 
-    public static int pedirEscaner() {
+    public static float pedirEscaner() {
         Scanner entrada = new Scanner(System.in);
 
-        return entrada.nextInt();
+        return entrada.nextFloat();
     }
 
     /**
@@ -52,6 +53,7 @@ public class Tema8ej1 {
         // TODO code application logic here
         crearTablaNota(tablaAsignaturas);
         System.out.println("La nota media es " + notaMedia(tablaAsignaturas));
+
     }
 
 }

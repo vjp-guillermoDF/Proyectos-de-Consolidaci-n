@@ -12,16 +12,16 @@ public class Asignaturas {
 
     private String nombre;
 
-    private int nota;
+    private float nota;
 
-    public Asignaturas(String nombre, int nota) {
+    public Asignaturas(String nombre, float nota) {
         this.nombre = nombre;
         this.nota = nota;
     }
 
     public Asignaturas() {
         this.nombre = "";
-        this.nota = 0;
+        this.nota = 0.0f;
     }
 
     public String getNombre() {
@@ -32,7 +32,7 @@ public class Asignaturas {
         this.nombre = nombre;
     }
 
-    public int getNota() {
+    public float getNota() {
         return nota;
     }
 

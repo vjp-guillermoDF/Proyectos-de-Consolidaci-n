@@ -100,7 +100,7 @@ public class Tema7ej18 {
     public static void main(String[] args) {
         // TODO code application logic here
         crearCosas(CHUMBAWAMBA, TUBTHUMPING);
-        ordenarCosas(CHUMBAWAMBA, TUBTHUMPING);
+        ordenarCosas(CHUMBAWAMBA, TUBTHUMPING); //Este método sobra
         juntarCosas(CHUMBAWAMBA, TUBTHUMPING, CHUMBAWAMBATUBTHUMPING);
         mostrarCosas(CHUMBAWAMBA, TUBTHUMPING, CHUMBAWAMBATUBTHUMPING);
 
