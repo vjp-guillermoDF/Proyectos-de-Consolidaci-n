@@ -66,30 +66,81 @@ public class TestsAM {
                         opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
                         respuestaCorrecta = 'a';
                         break;
-                    case 4: BAAABACCBABB
-                        
+                    case 4:
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
+
                         break;
                     case 5:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 6:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 7:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 8:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
+
                         break;
                     case 9:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
+
                         break;
                     case 10:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
+
                         break;
                     case 11:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
+
                         break;
                     case 12:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 13:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 14:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
                     case 15:
+
+                        pregunta = "De los documentos que debe llevar cuando circule con su ciclomotor, ¿lee esta permitido llevar fotocopias en lugar del original?";
+                        opciones = new String[]{"a) Sí, siempre y cuando las fotocopias esten debidamente autentificadas", "b) Si, excepto del permiso de conducir que debera ser siempre original", "c) No"};
+                        respuestaCorrecta = 'a';
                         break;
 
                     default:
