@@ -57,32 +57,23 @@ public class Tema8ej7 {
     }
 
     public static void diasMasCalurosos(Dia[] tablaDias) {
-
-        Dia[] temp = new Dia[tablaDias.length];
-
+        int tempMax = tablaDias[0].getTemperatura();
         System.out.println("Los dias mas calurosos del mes han sido:\n");
+
+        for (int i = 0; i < tablaDias.length - 1; i++) {
+
+            if (tablaDias[i].getTemperatura() > tempMax) {
+
+                tempMax = tablaDias[i].getTemperatura();
+
+            }
+        }
         for (int i = 0; i < tablaDias.length; i++) {
-            temp[i] = tablaDias[i];
-            for (int j = 0; j < tablaDias.length - 1; j++) {
-                if (tablaDias[j].getTemperatura() < tablaDias[j + 1].getTemperatura()) {
-
-                    Dia aux = temp[j];
-
-                    temp[j] = temp[j + 1];
-
-                    temp[j + 1] = aux;
-
-                }
-
-            }
-
-        }
-        int tempMax = temp[0].getTemperatura();
-        for (int i = 0; i < temp.length; i++) {
-            if (temp[i].getTemperatura() == tempMax) { // Imprime solo los días con la temperatura máxima
-                System.out.println(temp[i].getNombreDia() + " " + (i + 1) + " con una temperatura de " + temp[i].getTemperatura() + "º.");
+            if (tablaDias[i].getTemperatura() == tempMax) {
+                System.out.println(tablaDias[i].getNombreDia() + " " + (i + 1) + " con una temperatura de " + tablaDias[i].getTemperatura() + "º.");
             }
         }
+
     }
 
     public static void menu() {
