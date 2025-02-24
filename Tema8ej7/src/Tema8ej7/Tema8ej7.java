@@ -51,8 +51,10 @@ public class Tema8ej7 {
 
             suma += tablaDias[i].getTemperatura();
         }
+        
+        double media = Math.floor((suma / tablaDias.length) * 100) / 100;
 
-        System.out.println("La temperatura media del mes es de " + suma / tablaDias.length + "º.");
+        System.out.println("La temperatura media del mes es de " + media + "º.");
 
     }
 

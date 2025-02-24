@@ -16,13 +16,17 @@ public class Tema8ej6 {
 
     public static void mostrarSueldos(Empleado[] listaEmpleado) {
         float sueldo;
+        int horaExtra;
+        double sueldoExtra;
         for (int i = 0; i < listaEmpleado.length; i++) {
             sueldo = listaEmpleado[i].getTarifa() * listaEmpleado[i].getHorasTrabajadas();
 
             if (listaEmpleado[i].getHorasTrabajadas() <= 40) {
                 System.out.println(listaEmpleado[i].getNombre() + " ha trabajado " + listaEmpleado[i].getHorasTrabajadas() + " horas esta semana y cobra " + listaEmpleado[i].getTarifa() + " euros a la hora, por tanto le corresponden " + sueldo + " euros.");
             } else if (listaEmpleado[i].getHorasTrabajadas() > 40) {
-                sueldo += (listaEmpleado[i].getHorasTrabajadas() - 40) * 1.5;
+                horaExtra = listaEmpleado[i].getHorasTrabajadas() - 40;
+                sueldoExtra = horaExtra * 1.5;
+                sueldo += sueldoExtra;
                 System.out.println(listaEmpleado[i].getNombre() + " ha trabajado " + listaEmpleado[i].getHorasTrabajadas() + " horas esta semana y cobra " + listaEmpleado[i].getTarifa() + " euros a la hora, por tanto le corresponden " + sueldo + " euros.");
 
             }
