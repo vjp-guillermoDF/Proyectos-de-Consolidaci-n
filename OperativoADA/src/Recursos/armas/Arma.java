@@ -32,7 +32,8 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
         this.diametro = 0;
 
     }
-                                        //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public String getIdentificador() {
         return identificador;
     }
@@ -74,12 +75,12 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
         if (enemigo == null) { //Si el enemigo es igual a null, es decir, si no hay enemigo, se muestra un mensaje.
             System.out.println("No hay enemigo al que apuntar.");
         } else { //De lo contrario, se muestra el ID del arma y se muestra un mensaje que incluye el nombre del enemigo, sus cooordenadas y el daño del arma.
-            System.out.println("El arma con ID [" + generarID() + "] esta apuntando al enemigo: [" + enemigo.getNombre() + "].");
+            System.out.println("El arma con ID [" + identificador + "] esta apuntando al enemigo: [" + enemigo.getNombre() + "].");
             System.out.println("\nCoordenadas del enemigo: ([" + enemigo.getCoordenadaX() + "],[" + enemigo.getCoordenadaY() + "]).");
             System.out.println("\nEl daño potencial de este disparo es: [" + daño + "].");
             if (diametro < 5) { //Si el valor diámetro es menor a 5, se muestra un mensaje.
                 System.out.println("\nDiametro de bala pequeño: {" + getDiametro() + "] mm. El disparo tiene una probabilidad de acierto baja.\n");
-            } else if (diametro >= 5 && diametro < 15) { //Pero si es igual o mayor a 5, pero menor a 15, se muestra otro.
+            } else if (diametro < 15) { //Pero si es igual o mayor a 5, pero menor a 15, se muestra otro.
                 System.out.println("\nDiametro de bala normal: [" + getDiametro() + "] mm. El disparo tiene una probabilidad de acierto media.\n");
             } else { //De lo contrario (es decir, si es mayor que 15), se mostrará otro mensaje.
                 System.out.println("\nDiametro de bala grande: [" + getDiametro() + "] mm. El disparo sera mas preciso.\n");

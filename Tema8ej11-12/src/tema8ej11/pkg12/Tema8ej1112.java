@@ -17,7 +17,7 @@ public class Tema8ej1112 {
      */
     public static void mostrarPrecio(Mueble[] muebles) {
         for (Mueble i : muebles) {
-            System.out.println("El precio de " + i + " es " + i.getPrecio() + " euros.");
+            System.out.println("El precio de " + i.getDescripcion() + " es " + i.getPrecio() + " euros.");
         }
     }
 
@@ -40,11 +40,6 @@ public class Tema8ej1112 {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        Mueble taburete = new Mueble(25, "delicioso");
-        Mueble sofa = new Mueble(35, "riconudo");
-        Mueble beanbag = new Mueble();
-        Mueble mesa = new Mueble();
-        
         crearLista(MUEBLES);
         mostrarLista(MUEBLES);
         mostrarPrecio(MUEBLES);

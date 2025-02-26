@@ -8,9 +8,7 @@ import General.Constantes;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
-import Recursos.armas.Bala;
 import Recursos.personajes.Cyborg;
-import Recursos.personajes.Personajes;
 import Recursos.personajes.Policia;
 import java.util.Scanner;
 
@@ -20,7 +18,7 @@ import java.util.Scanner;
  */
 public class MenuPrincipal {
 
-    public static Personajes jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20));
+    public static Policia jugador;
     //Variable global jugador, que almacena al Personaje de subclase Policía LunaCastillo, con sus atributos inicializados y un objeto ArmaLargoAlcance con velocidad, daño y diámetro inicializados. Este objeto ha sido creado e inicializado directamente en el constructor del personaje.
 
     public static void submenuComisaria() {
@@ -228,28 +226,28 @@ public class MenuPrincipal {
         Arma armaLiberacion = new ArmaCortoAlcance(10, 6);  //Arma de subclase ArmaCortoAlcance "ArmaLiberacion" creada en el anterior ejercicio para simular el arma terrorista, aunque no se usa.
         Arma armaLiberacion1 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Kai Patel, creada con diez de daño y doce de diámetro.
         Arma armaLiberacion2 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Siren, creada con diez de daño y doce de diámetro.
-        Personajes Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
-        Personajes Siren = new Cyborg("Logistica", "Francia", "???", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
-        Personajes LunaCastillo = jugador;  //Personaje de subclase Policía LunaCastillo, almacenado en la variable global jugador.
+        Cyborg Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
+        Cyborg Siren = new Cyborg("Logistica", "Francia", "???", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
+        jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20));  //Personaje de subclase Policía jugador, asignado a la variable global jugador.
 
-        Kai.getArma().apuntar(LunaCastillo);    //Llamamos al método apuntar desde el getter del arma de Kai, y le damos por parámetro al personaje LunaCastillo.
-        for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar al método disparar tres veces a Luna Castillo.
-            Kai.getArma().disparar(LunaCastillo);
+        Kai.getArma().apuntar(jugador);    //Llamamos al método apuntar desde el getter del arma de Kai, y le damos por parámetro al personaje jugador.
+        for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar al método disparar tres veces a jugador.
+            Kai.getArma().disparar(jugador);
         }
 
-        ((Policia) LunaCastillo).esquivar();    //Usamos el polimorfismo para hacerle casting a LunaCastillo de Personajes a Policía e implementar los métodos "esquivar" y "defender" que la subclase Policía implementa de la interfaz Jugable.
-        ((Policia) LunaCastillo).defender();
+        jugador.esquivar();
+        jugador.defender();
 
-        LunaCastillo.getArma().apuntar(Kai);    //Llamamos al método apuntar desde el getter del arma de LunaCastillo, y le damos por parámetro al personaje Kai.
+        jugador.getArma().apuntar(Kai);    //Llamamos al método apuntar desde el getter del arma de LunaCastillo, y le damos por parámetro al personaje Kai.
         for (int i = 0; i < 10; i++) {  //Usamos un bucle for para llamar 10 veces al método disparar desde el getter del arma para LunaCastillo y le damos por parámetro al personaje Kai.
-            LunaCastillo.getArma().disparar(Kai);
+            jugador.getArma().disparar(Kai);
         }
-        LunaCastillo.getArma().apuntar(Siren);      //Llamamos al método apuntar desde el getter del arma de LunaCastillo, y le damos por parámetro al personaje Siren.
+        jugador.getArma().apuntar(Siren);      //Llamamos al método apuntar desde el getter del arma de LunaCastillo, y le damos por parámetro al personaje Siren.
         for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar 3 veces al método disparar desde el getter del arma para LunaCastillo y le damos por parámetro al personaje Siren.
-            LunaCastillo.getArma().disparar(Siren);
+            jugador.getArma().disparar(Siren);
         }
-        ((Cyborg) Siren).esquivar();     //Usamos el polimorfismo para hacerle casting a Siren de Personajes a Cyborg e implementar los métodos "esquivar" y "defender" que la subclase Policía implementa de la interfaz Jugable.
-        ((Cyborg) Siren).defender();
+        Siren.esquivar();
+        Siren.defender();
 
     }
 }
