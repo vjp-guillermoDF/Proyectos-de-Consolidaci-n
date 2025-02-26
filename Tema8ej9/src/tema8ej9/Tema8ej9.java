@@ -4,7 +4,6 @@
  */
 package tema8ej9;
 
-import java.awt.BorderLayout;
 import java.util.Scanner;
 
 /**
@@ -86,9 +85,8 @@ public class Tema8ej9 {
         for (Alumno i : listaAlumnos) {
             double sumaNotas = 0;
             int numAsignaturas = i.getNota().length;
-
-            for (Asignatura asignatura : i.getNota()) {
-                sumaNotas += asignatura.getNota();
+            for (Asignatura j : i.getNota()) {
+                sumaNotas += j.getNota();
 
             }
 
@@ -129,11 +127,10 @@ public class Tema8ej9 {
     }
 
     public static void pedirNota(Alumno[] listaAlumnos) {
-        for (Alumno alumno : listaAlumnos) {
-
-            for (Asignatura asignatura : alumno.getNota()) {
-                System.out.print("Introduzca las notas de " + alumno.getNombreAl() + " para la asignatura " + asignatura.getNombreAs() + ": ");
-                asignatura.setNota(escaner());
+        for (Alumno i : listaAlumnos) {
+            for (Asignatura j : i.getNota()) {
+                System.out.print("Introduzca las notas de " + i.getNombreAl() + " para la asignatura " + j.getNombreAs() + ": ");
+                j.setNota(escaner());
             }
         }
     }
