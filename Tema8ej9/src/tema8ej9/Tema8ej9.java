@@ -189,7 +189,7 @@ public class Tema8ej9 {
 
             } catch (Exception e) {
 
-                System.out.println("QUE NO PONGAS LETRAS.");
+                System.out.println("QUE NO PONGAS LETRAS." + e);
                 entrada.nextLine();
 
             }

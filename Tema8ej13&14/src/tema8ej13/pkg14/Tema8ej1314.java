@@ -16,14 +16,17 @@ public class Tema8ej1314 {
     public static Scanner entrada = new Scanner(System.in);
 
     public static void buscarAlumno(Alumno[] alumnos) {
+        String nombre = pedirNombre();
 
         for (Alumno i : alumnos) {
+            if (i != null) {
 
-            if (pedirNombre().equalsIgnoreCase(i.getNombre())) {
-                System.out.println("El alumno " + i.getNombre() + " existe en el universo.");
+                if (nombre.equalsIgnoreCase(i.getNombre())) {
+                    System.out.println("El alumno " + i.getNombre() + " existe en el universo.");
+                }
             }
-        }
 
+        }
     }
 
     public static void suspensos(Alumno[] alumnos) {
@@ -31,32 +34,35 @@ public class Tema8ej1314 {
         int contador = 0;
 
         for (Alumno i : alumnos) {
-            if (i.getNotaMedia() < 5) {
-                contador++;
-                System.out.println(i.toString() + " y por ende, se ha convertido en uno con la deshonra.");
-                System.out.println("El numero de suspensos aumenta a " + contador + ".");
+            if (i != null) {
+
+                if (i.getNotaMedia() < 5) {
+                    contador++;
+                    System.out.println(i.toString() + " y por ende, se ha convertido en uno con la deshonra.");
+                    System.out.println("El numero de suspensos aumenta a " + contador + ".");
+
+                }
 
             }
 
         }
-
     }
 
     public static void notaMedia(Alumno[] alumnos) {
 
-        int notaDada = 0;
-
-        pedirNotaCualquiera(notaDada);
+        int notaDada = pedirNotaCualquiera();
 
         for (Alumno i : alumnos) {
-            if (i.getNotaMedia() < notaDada) {
-                System.out.println(i.toString() + " por encima de " + notaDada + ".");
-            } else {
-                System.out.println(i.toString() + " por debajo de " + notaDada + " y por ende, es una DESHONRA para su linaje. Sera desterrado a Francia. Donde coexistira con los franceses.");
+            if (i != null) {
+                if (i.getNotaMedia() > notaDada) {
+                    System.out.println(i.toString() + " por encima de " + notaDada + ".");
+                } else {
+                    System.out.println(i.toString() + " por debajo de " + notaDada + " y por ende, es una DESHONRA para su linaje. Sera desterrado a Francia. Donde coexistira con los franceses.");
+                }
+
             }
 
         }
-
     }
 
     public static void mostrarAlumnos(Alumno[] alumnos) {
@@ -73,19 +79,23 @@ public class Tema8ej1314 {
 
     public static void rellenarPosicion(Alumno[] alumnos) {
 
-        for (int i = 0; i < alumnos.length; i++) {
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("Elija una posicion para registrar un alumno o pulse 0 para salir del registro: ");
+            int posicion = entrada.nextInt();
 
-            System.out.println("Elija una posicion para registrar un alumno: ");
-            i = entrada.nextInt();
-
-            if (alumnos[i] == null) {
-                alumnos[i] = new Alumno(pedirNombre(), pedirEdad(), pedirNotaMedia());
+            if (posicion == 0) {
+                System.out.println("Finalizado el registro de alumnos.");
+                salir = true;
+            } else if (posicion < 0 || posicion >= alumnos.length) {
+                System.out.println("Posición fuera de rango. TOLAI.");
+            } else if (alumnos[posicion] == null) {
+                alumnos[posicion] = new Alumno(pedirNombre(), pedirEdad(), pedirNotaMedia());
+                System.out.println("Alumno registrado en la posicion " + posicion + ".");
             } else {
-                System.out.println("Esa posicion ya esta llena.");
+                System.out.println("Esa posicion ya está llena. MAMELUCO.");
             }
-
         }
-
     }
 
     public static int escaner(int numero) {
@@ -110,10 +120,10 @@ public class Tema8ej1314 {
         return entrada.nextFloat();
     }
 
-    public static int pedirNotaCualquiera(int nota) {
+    public static int pedirNotaCualquiera() {
         System.out.println("Introduzca una nota: ");
-        nota = entrada.nextInt();
-        return nota;
+        return entrada.nextInt();
+
     }
 
     public static void menu(Alumno[] alumnos) {
@@ -161,7 +171,7 @@ public class Tema8ej1314 {
 
             } catch (Exception e) {
                 cerrar = false;
-                System.out.println("QUE NO PONGAS LETRAS");
+                System.out.println("QUE NO PONGAS LETRAS" + e);
                 entrada.nextLine();
             }
         } while (!cerrar);
