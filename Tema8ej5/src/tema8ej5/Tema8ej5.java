@@ -8,30 +8,31 @@ import java.util.Arrays;
 
 /**
  *
- * @author alumno
+ * @author Don Guillermo Domínguez de la Fuente I de España y Portugal
  */
 public class Tema8ej5 {
-    
+
     public static final int[] ARRAYENTEROS = new int[10];
-    
+
     public static void ordenarArray(int[] arrayEnteros) {
-        
+
         Arrays.sort(arrayEnteros);
-        
+
     }
-    
+
     public static void mostrarArray(int[] arrayEnteros) {
-        
+
         System.out.println(Arrays.toString(arrayEnteros));
-        
+
     }
-    
+
     public static void llenarArray(int[] arrayEnteros) {
-        
-        int rellenacion = 9;
-        
-        Arrays.fill(arrayEnteros, 0);
-        
+
+        for (int i = 0; i < arrayEnteros.length; i++) {
+
+            arrayEnteros[i] = 9 - i;
+
+        }
     }
 
     /**
@@ -39,12 +40,12 @@ public class Tema8ej5 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
         llenarArray(ARRAYENTEROS);
         mostrarArray(ARRAYENTEROS);
         ordenarArray(ARRAYENTEROS);
         mostrarArray(ARRAYENTEROS);
-        
+
     }
-    
+
 }

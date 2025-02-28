@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author alumno
+ * @author Don Guillermo Domínguez de la Fuente I de España y Portugal
  */
 public class Tema8ej3 {
     
