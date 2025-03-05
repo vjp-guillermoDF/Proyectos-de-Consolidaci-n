@@ -36,7 +36,8 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
         this.permisoArma = "";
         this.rango = "";
     }
-                                     //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public int getNumeroPlaca() {
         return numeroPlaca;
     }
@@ -82,6 +83,28 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
     @Override
     public void atacar(Personajes enemigo) { //El método atacar, heredado de la interfaz Jugable.
         System.out.println("Policia atacando...");
+
+        if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
+            System.out.println("El enemigo ya está abatido.\n");
+        } else { //De lo contrario, la condición else se ejecuta, dentro de la cual existe otro condicional if
+            System.out.println("Policía: " + getNombre() + " se prepara para atacar.\n");
+            getArma();
+            if (getArma() == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
+                System.out.println("Policía: " + getNombre() + " no tiene arma asignada.\n");
+            } else if (getArma().obtenerNumeroBalas() < 3) { //Condicional if para el caso en que haya menos de tres balas en el cargador
+                System.out.println("El arma del policia: " + getNombre() + " no tiene balas suficientes.\n");
+                getArma().cargarArma();
+            }
+
+            getArma().apuntar(enemigo);
+
+            for (int i = 0; i < 3 && enemigo.getVida() > 0; i++) { //Dentro del bucle for añadimos la condicion de que la vida del enemigo esté por encima de cero, así se detendrá si este muere antes del tercer disparo
+                getArma().disparar(enemigo);
+                getArma().eliminarBala();
+
+            }
+        }
+
     }
 
     @Override
@@ -91,6 +114,7 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
         int coordenadaXnew = (coordenadaXold + movimiento); //Almacenamos el valor de las coordenadas nuevas en una variable que suma el número calculado a las anteriores.
         if (movimiento != 0) {  //Si el valor movimiento no es cero, se llama al método actualizarPosicion, el cual llama a los dos setters coordenadaX y coordenadaY en sus parámetros.
             actualizarPosicion(coordenadaXnew, getCoordenadaY()); //Actualizamos con la nueva información.
+            System.out.println("El policía esquiva...\n");
             System.out.println("Policia: [" + getNombre() + "] se mueve en X de [" + coordenadaXold + "] a [" + coordenadaXnew + "]."); //Mostramos la nueva información.
 
         } else {

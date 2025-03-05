@@ -20,16 +20,20 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
 
     private int diametro;
 
+    private Bala[] cargador;
+
     public Arma(int daño, int diametro) { //Constructor parametrizado.
         this.identificador = generarID(); //Este atributo se inicializa siempre llamando al método generarID(), por lo que no se mete en los parámetros.
         this.daño = daño;
         this.diametro = diametro;
+        this.cargador = new Bala[10];
     }
 
     public Arma() { //Constructor por defecto.
         this.identificador = generarID(); //Se inicializa por defecto llamando al método generarID().
         this.daño = 0;
         this.diametro = 0;
+        this.cargador = new Bala[10];
 
     }
     //Getters, setters y toString().
@@ -58,9 +62,17 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
         this.diametro = diametro;
     }
 
+    public Bala[] getCargador() {
+        return cargador;
+    }
+
+    public void setCargador(Bala[] cargador) {
+        this.cargador = cargador;
+    }
+
     @Override
     public String toString() {
-        return "Arma{" + "identificador=" + identificador + ", da\u00f1o=" + daño + ", diametro=" + diametro + '}';
+        return "Arma{" + "identificador = " + identificador + ", da\u00f1o = " + daño + ", diametro = " + diametro + ", cargador = " + cargador.length + ", numero de balas = " + obtenerNumeroBalas() + '}';
     }
 
     public static String generarID() { //Método que utiliza UUID para generar un ID al azar y lo devuelve.
@@ -90,18 +102,43 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
 
     @Override
     public void cargarArma() {
-        System.out.println("Cargando arma...");
+        System.out.println("Cargando arma...\n");
+
+        for (int i = 0; i < cargador.length; i++) {
+            cargador[i] = new Bala(); // Se asigna un nuevo objeto Bala en cada posición para recargarla
+        }
+        System.out.println("El arma está cargada.\n");
     }
 
     @Override
-    public int obtenerNumeroBlas() {
-        System.out.println("Obteniendo numero de balas...");
-        return 0;
+    public int obtenerNumeroBalas() {
+        System.out.println("Obteniendo numero de balas...\n");
+        int contador = 0;
+        for (Bala i : cargador) {
+            if (i != null) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
     @Override
     public void eliminarBala() {
-        System.out.println("Eliminando bala del arma...");
-    }
+        boolean balaEliminada = false; //Creamos una variable de control inicializada en false
+        boolean cargadorVacio = true; //Otra variable de control para comprobar que el cargador está vacío
+        System.out.println("Eliminando bala del arma...\n");
 
+        for (int i = cargador.length - 1; i >= 0; i--) {//Recorremos el array al revés
+            if (cargador[i] != null && !balaEliminada) {//Las condiciones son que el objeto del cargador no sea null y que la variable de control esté en false
+                cargador[i] = null;
+                cargadorVacio = false;
+                balaEliminada = true;//Al cambiar la variable a true, el bucle for se detiene.
+
+            }
+
+        }
+        if (cargadorVacio) {
+            System.out.println("¡Ojo! El cargador está vacío.");
+        }
+    }
 }

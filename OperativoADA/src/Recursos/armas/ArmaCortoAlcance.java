@@ -20,7 +20,7 @@ public class ArmaCortoAlcance extends Arma { //La subclase hereda de Arma.
     }
 
     public ArmaCortoAlcance() { //Constructor por defecto.
-        super(15, 0); //También se inicializa por defecto, pero llamamos al súper constructor parametrizado. Podríamos haber diseñado uno con un solo parámetro para el daño, como alternativa.
+        setDaño(15); //También se inicializa por defecto, para esto llamamos al setter.
         this.alcance = 0;
     }
                                 //Getters, setters y toString().
@@ -41,7 +41,7 @@ public class ArmaCortoAlcance extends Arma { //La subclase hereda de Arma.
     public void disparar(Personajes enemigo) { //Método disparar heredado de la superclase.
         if (enemigo.getVida() > getDaño()) {    //Si la vida supera al daño, en el setter se le resta el daño a la vida, llamando al getter
             enemigo.setVida(enemigo.getVida() - getDaño());
-            System.out.println("[" + enemigo.getNombre() + "] | Vida restante: [" + enemigo.getVida() + "].");  //Se muestra el mensaje correspondiente con el nombre y la vida restante del personaje.
+            System.out.println("[" + enemigo.getNombre() + "] | Vida restante: [" + enemigo.getVida() + "].\n");  //Se muestra el mensaje correspondiente con el nombre y la vida restante del personaje.
             System.out.println("Alcance del disparo realizado: [" + alcance + "] metros.\n"); //Se muestra el alcance del disparo.
 
         } else {    //De lo contrario, es decir, si la vida restante es inferior al daño, la vida se pone en cero usando el setter para que no pueda dar valores negativos.

@@ -28,7 +28,8 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
         this.habilidad = "";
         this.paisDeOrigen = "";
     }
-                                     //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public String getHabilidad() {
         return habilidad;
     }
@@ -53,6 +54,27 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
     @Override
     public void atacar(Personajes enemigo) {    //El método atacar, heredado de la interfaz Jugable.
         System.out.println("Cyborg atacando...");
+
+        if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
+            System.out.println("El enemigo ya está abatido");
+        } else { //De lo contrario, la condición else se ejecuta, dentro de la cual existe otro condicional if
+            System.out.println("Cyborg: " + getNombre() + " se prepara para atacar.");
+            getArma();
+            if (getArma() == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
+                System.out.println("Cyborg: " + getNombre() + " no tiene arma asignada.");
+            } else if (getArma().obtenerNumeroBalas() == 0) { //Condicional if para el caso en que no haya balas en el cargador
+                System.out.println("El arma del cyborg: " + getNombre() + " está vacía.");
+                getArma().cargarArma();
+            }
+
+            getArma().apuntar(enemigo);
+            if (enemigo.getVida() > 0) { //Aquí no usamos for sino un if, ya que solamente existe una condición
+
+                getArma().disparar(enemigo);
+                getArma().eliminarBala();
+
+            }
+        }
     }
 
     @Override
@@ -62,6 +84,7 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
         int coordenadaYnew = (coordenadaYold + movimiento); //Almacenamos el valor de las coordenadas nuevas en una variable que suma el número calculado a las anteriores.
         if (movimiento != 0) {  //Si el valor movimiento no es cero, se llama al método actualizarPosicion, el cual llama a los dos setters coordenadaX y coordenadaY en sus parámetros.
             actualizarPosicion(getCoordenadaX(), coordenadaYnew);   //Actualizamos con la nueva información.
+            System.out.println("El cyborg esquiva...\n");
             System.out.println("Cyborg: [" + getNombre() + "] se mueve en Y de [" + coordenadaYold + "] a [" + coordenadaYnew + "].\n");    //Mostramos la nueva información.
 
         } else {

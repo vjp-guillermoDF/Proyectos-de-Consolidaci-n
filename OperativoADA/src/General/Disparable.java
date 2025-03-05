@@ -16,7 +16,7 @@ public interface Disparable {   //Interfaz Disparable.
 
     public void cargarArma();
 
-    public int obtenerNumeroBlas();
+    public int obtenerNumeroBalas();
 
     public void eliminarBala();
 

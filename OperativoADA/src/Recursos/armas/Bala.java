@@ -11,6 +11,7 @@ package Recursos.armas;
 public class Bala {
 
     private int diametro;   //Atributo privado de la clase.
+    
 
     public Bala(int diametro) { //Constructor parametrizado.
         this.diametro = diametro;

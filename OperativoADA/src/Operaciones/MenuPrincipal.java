@@ -5,6 +5,7 @@
 package Operaciones;
 
 import General.Constantes;
+import General.DescifrarMensajes;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
@@ -221,21 +222,23 @@ public class MenuPrincipal {
     }
 
     public static void main(String[] args) {
-        //menuPrincipal(); Dejamos el menú como comentario para que no estorbe a la hora de probar la simulación.
+        //menuPrincipal();
 
         Arma armaLiberacion = new ArmaCortoAlcance(10, 6);  //Arma de subclase ArmaCortoAlcance "ArmaLiberacion" creada en el anterior ejercicio para simular el arma terrorista, aunque no se usa.
         Arma armaLiberacion1 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Kai Patel, creada con diez de daño y doce de diámetro.
         Arma armaLiberacion2 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Siren, creada con diez de daño y doce de diámetro.
         Cyborg Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
         Cyborg Siren = new Cyborg("Logistica", "Francia", "???", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
-        jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20));  //Personaje de subclase Policía jugador, asignado a la variable global jugador.
+        jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20)); //Personaje de subclase Policía LunaCastillo, almacenado en la variable global jugador.
 
-        Kai.getArma().apuntar(jugador);    //Llamamos al método apuntar desde el getter del arma de Kai, y le damos por parámetro al personaje jugador.
-        for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar al método disparar tres veces a jugador.
+        /* Dejamos la simulación anterior como comentario para esta entrega 
+        
+        Kai.getArma().apuntar(jugador);    //Llamamos al método apuntar desde el getter del arma de Kai, y le damos por parámetro al personaje LunaCastillo.
+        for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar al método disparar tres veces a Luna Castillo.
             Kai.getArma().disparar(jugador);
         }
 
-        jugador.esquivar();
+        jugador.esquivar();    
         jugador.defender();
 
         jugador.getArma().apuntar(Kai);    //Llamamos al método apuntar desde el getter del arma de LunaCastillo, y le damos por parámetro al personaje Kai.
@@ -246,8 +249,23 @@ public class MenuPrincipal {
         for (int i = 0; i < 3; i++) {   //Usamos un bucle for para llamar 3 veces al método disparar desde el getter del arma para LunaCastillo y le damos por parámetro al personaje Siren.
             jugador.getArma().disparar(Siren);
         }
+        Siren.esquivar();     
+        Siren.defender();
+         */
+        Kai.atacar(jugador); //Implementamos los métodos tal como se nos pide en el enunciado.
+        jugador.esquivar();
+        jugador.defender();
+
+        for (int i = 0; i < 4; i++) {
+            jugador.atacar(Kai);
+        }
+
+        jugador.atacar(Siren);
         Siren.esquivar();
         Siren.defender();
-
+        
+        System.out.println(DescifrarMensajes.descifrar());
+        
+       
     }
 }
