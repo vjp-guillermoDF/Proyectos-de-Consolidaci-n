@@ -22,7 +22,6 @@ public class DescifrarMensajes {
 
     public static final String MENSAJE5 = "Tzñt. Xmni gi otex jtlt gtwt, ¿wógwx v*** ei atm vifjltwi, Eiztg?";
 
-
     public static String descifrar() {
 
         Scanner entrada = new Scanner(System.in);
@@ -35,6 +34,8 @@ public class DescifrarMensajes {
 
         int desplazamiento = entrada.nextInt();
 
+        System.out.println("Descifrando mensaje...");
+
         String resultado = "";
         String alfabeto = "abcdefghijklmnñopqrstuvwxyz";
 
@@ -45,7 +46,7 @@ public class DescifrarMensajes {
 
             int index = alfabeto.indexOf(letra);
 
-            if (index != -1) { // Usamos esta variable para ver si la letra está en el alfabeto
+            if (index != -1) { //Usamos esta variable para ver si la letra está en el alfabeto
                 int nuevoIndex = (index + desplazamiento) % alfabeto.length();
                 char nuevaLetra = alfabeto.charAt(nuevoIndex);
 
@@ -59,6 +60,10 @@ public class DescifrarMensajes {
         }
 
         return resultado;
+    }
+    
+    public static void main(String[] args){ //Creamos método main para clase DescifrarMensajes y ejecutamos el método aquí
+        descifrar(); 
     }
 
 }
