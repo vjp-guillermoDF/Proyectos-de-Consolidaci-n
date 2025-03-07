@@ -225,10 +225,10 @@ public class MenuPrincipal {
         //menuPrincipal();
 
         Arma armaLiberacion = new ArmaCortoAlcance(10, 6);  //Arma de subclase ArmaCortoAlcance "ArmaLiberacion" creada en el anterior ejercicio para simular el arma terrorista, aunque no se usa.
-        Arma armaLiberacion1 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Kai Patel, creada con diez de daño y doce de diámetro.
-        Arma armaLiberacion2 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Siren, creada con diez de daño y doce de diámetro.
-        Cyborg Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
-        Cyborg Siren = new Cyborg("Logistica", "Francia", "???", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
+        Arma armaLiberacion1 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Kai Patel, creada con diez de alcance y doce de diámetro.
+        Arma armaLiberacion2 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Siren, creada con diez de alcance y doce de diámetro.
+        Cyborg Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel (Nexus)", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
+        Cyborg Siren = new Cyborg("Logistica", "Francia", "??? (Siren)", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
         Cyborg Logan = new Cyborg("Explosivos y Armas", "Francia", "Logan", 'V', 5, 5, new ArmaCortoAlcance()); //Creamos al personaje Logan tal como vimos en los mensajes cifrados, le asignamos un arma por defecto
         jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20)); //Personaje de subclase Policía LunaCastillo, almacenado en la variable global jugador.
 
@@ -266,6 +266,7 @@ public class MenuPrincipal {
         Siren.esquivar();
         Siren.defender();
         
+        //LA CLASE DESCIFRAR MENSAJES TIENE SU PROPIO MAIN, POR ESO NO LA LLAMAMOS AQUÍ
         
        
     }

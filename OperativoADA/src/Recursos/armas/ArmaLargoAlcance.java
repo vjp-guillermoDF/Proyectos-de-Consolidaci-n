@@ -15,7 +15,7 @@ public class ArmaLargoAlcance extends Arma {    //La subclase hereda de Arma.
     private double velocidad;    //Atributo privado de la clase.
 
     public ArmaLargoAlcance(double velocidad, int daño, int diametro) {  //Constructor parametrizado.
-        super(10, diametro);    //El daño del arma de corto alcance se inicializa siempre en 15 por lo que lo hacemos en el súper constructor parametrizado.
+        super(10, diametro);    //El daño del arma de largo alcance se inicializa siempre en 10 por lo que lo hacemos en el súper constructor parametrizado.
         this.velocidad = velocidad;
     }
 
