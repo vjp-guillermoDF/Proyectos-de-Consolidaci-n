@@ -111,33 +111,39 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
     }
 
     @Override
-    public int obtenerNumeroBalas() {
-        System.out.println("Obteniendo numero de balas...\n");
-        int contador = 0;
-        for (Bala i : cargador) {
-            if (i != null) {
+    public int obtenerNumeroBalas() {   //Método para devolver el número de balas, de la interfaz Disparable
+        System.out.println("Obteniendo número de balas...\n");
+        int contador = 0;   //Contador inicializado en cero
+        int i = 0; // Variable i que representa el índice para recorrer el array
+
+        while (i < cargador.length) { // Recorremos el array mientras no lleguemos al final
+            if (cargador[i] != null) {  //Por cada bala que encontremos (not null), se aumenta el cargador en uno
                 contador++;
             }
+            i++; // Incrementamos el índice en cada iteración. Esto OPTIMIZA LA UTILIZACIÓN DE RECURSOS ya que el array no seguirá recorriéndose aunque ya no queden Balas
         }
-        return contador;
+
+        return contador; //Se devuelve el contador
     }
 
     @Override
     public void eliminarBala() {
-        boolean balaEliminada = false; //Creamos una variable de control inicializada en false
-        boolean cargadorVacio = true; //Otra variable de control para comprobar que el cargador está vacío
+        boolean balaEliminada = false; // Variable de control que utilizaremos para eliminar solo una bala
+        boolean cargadorVacio = true; // Variable de control que utilizaremos para verificar si el cargador está vacío
         System.out.println("Eliminando bala del arma...\n");
 
-        for (int i = cargador.length - 1; i >= 0; i--) {//Recorremos el array al revés
-            if (cargador[i] != null && !balaEliminada) {//Las condiciones son que el objeto del cargador no sea null y que la variable de control esté en false
+        int i = cargador.length - 1; // Iniciamos desde la última posición
+
+        while (i >= 0 && !balaEliminada) { // While que usa como condiciones que i sea mayor o igual a 0 (para recorrerlo al revés) y que balaEliminada siga en false
+            if (cargador[i] != null) { // Si encontramos una bala (not null), la eliminamos (null)
                 cargador[i] = null;
-                cargadorVacio = false;
-                balaEliminada = true;//Al cambiar la variable a true, el bucle for se detiene.
-
+                cargadorVacio = false; //cargadorVacío cambia a false
+                balaEliminada = true; // Salimos del bucle porque ya eliminamos una bala
             }
-
+            i--; // Decrementamos el índice para seguir recorriendo
         }
-        if (cargadorVacio) {
+
+        if (cargadorVacio) { //Si las condiciones del while no se cumplen (es decir, el cargador no está vacío), cargadorVacío sigue en true, mostrando este mensaje
             System.out.println("¡Ojo! El cargador está vacío.");
         }
     }

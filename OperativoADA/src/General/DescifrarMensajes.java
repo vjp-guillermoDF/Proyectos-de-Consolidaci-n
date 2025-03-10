@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author guill
  */
-public class DescifrarMensajes {
+public class DescifrarMensajes {    //Guardamos los mensjes como constantes públicas... Esto no es necesario, pero así los tenemos a mano
 
     public static final String MENSAJE1 = "Tzñt. ¿Xmnág ebmnim eim oxaívñeim wx xmvtjx? Gxvxmbntfim tmxzñltlgim wx nxgxl ñgt oít wx mtebwt lájbwt";
 
@@ -36,34 +36,34 @@ public class DescifrarMensajes {
 
         System.out.println("Descifrando mensaje...");
 
-        String resultado = "";
-        String alfabeto = "abcdefghijklmnñopqrstuvwxyz";
+        String resultado = "";  //String vacío para almacenar el código descifrado
+        String alfabeto = "abcdefghijklmnñopqrstuvwxyz";    //String auxiliar con las letras del alfabeto
 
         for (int i = 0; i < mensaje.length(); i++) {
             char letra = mensaje.charAt(i);
-            boolean esMayuscula = Character.isUpperCase(letra);
-            letra = Character.toLowerCase(letra);
+            boolean esMayuscula = Character.isUpperCase(letra); //Esta variable booleana, así tal como está implementada, devuelve automáticamente true si una letra es mayúscula
+            letra = Character.toLowerCase(letra); //Convierte las letras a minúscula
 
-            int index = alfabeto.indexOf(letra);
+            int index = alfabeto.indexOf(letra);    //Creamos un índice que implementa indexOf de la clase String, para guardar las letras del alfabeto
 
             if (index != -1) { //Usamos esta variable para ver si la letra está en el alfabeto
-                int nuevoIndex = (index + desplazamiento) % alfabeto.length();
-                char nuevaLetra = alfabeto.charAt(nuevoIndex);
+                int nuevoIndex = (index + desplazamiento) % alfabeto.length(); //Cambia el lugar de las letras del mensaje en función del desplazamiento
+                char nuevaLetra = alfabeto.charAt(nuevoIndex); //Usa charAt para transformar las letras en una nueva variable nuevaLetra
 
-                if (esMayuscula) {
+                if (esMayuscula) {  //Este if hace que si se cumple el booleano esMayuscula en la variable letra, se aplique también en NuevaLetra
                     nuevaLetra = Character.toUpperCase(nuevaLetra);
                 }
-                resultado += nuevaLetra;
+                resultado += nuevaLetra;    //Va llenando el resultado
             } else {
-                resultado += letra; // Mantener caracteres especiales y espacios sin cambios
+                resultado += letra; //Mantener caracteres especiales y espacios sin cambios
             }
         }
 
         return resultado;
     }
-    
-    public static void main(String[] args){ //Creamos método main para clase DescifrarMensajes y ejecutamos el método aquí
-        descifrar(); 
+
+    public static void main(String[] args) { //Creamos método main para clase DescifrarMensajes y ejecutamos el método aquí mediante impresión
+        System.out.println(descifrar());
     }
 
 }

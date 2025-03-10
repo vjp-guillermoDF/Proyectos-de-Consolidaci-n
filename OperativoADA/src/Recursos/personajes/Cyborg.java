@@ -53,7 +53,6 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
 
     @Override
     public void atacar(Personajes enemigo) {    //El método atacar, heredado de la interfaz Jugable.
-        System.out.println("Cyborg atacando...");
 
         if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
             System.out.println("El enemigo ya está abatido");
@@ -101,7 +100,7 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
         } else {    //De lo contrario (es decir, si la suma es mayor a 100), actualizamos la vida en el setter a 100, puesto que 100 debe ser el máximo.
             setVida(100);
         }
-        System.out.println("Cyborg: [" + getNombre() + "] con escudo calculado de [" + escudo + "] | Vida: [" + getVida() + "].");  //Imprimimos la información.
+        System.out.println("Cyborg: [" + getNombre() + "] crea un escudo de ["+ escudo +"] | Vida: ["+ getVida() +"].");  //Imprimimos la información.
     }
 
 }

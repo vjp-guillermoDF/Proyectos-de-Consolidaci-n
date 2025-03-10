@@ -82,7 +82,6 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
 
     @Override
     public void atacar(Personajes enemigo) { //El método atacar, heredado de la interfaz Jugable.
-        System.out.println("Policia atacando...");
 
         if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
             System.out.println("El enemigo ya está abatido.\n");
@@ -131,7 +130,7 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
         } else { //De lo contrario (es decir, si la suma es mayor a 100), actualizamos la vida en el setter a 100, puesto que 100 debe ser el máximo.
             setVida(100);
         }
-        System.out.println("\nPolicia: [" + getNombre() + "] con escudo calculado de [" + escudo + "] | Vida: [" + getVida() + "].\n"); //Imprimimos la información.
+        System.out.println("\nPolicia: [" + getNombre() + "] crea escudo calculado de [" + escudo + "] | Vida: [" + getVida() + "].\n"); //Imprimimos la información.
     }
 
 }
