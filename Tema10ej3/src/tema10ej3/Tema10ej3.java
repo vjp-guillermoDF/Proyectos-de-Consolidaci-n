@@ -18,23 +18,30 @@ public class Tema10ej3 {
 
         ArrayList<Integer> num2y4 = new ArrayList();
 
-        for (int i = lista.size() - 1; i >= 0; i --) {
-            
+        if (lista.indexOf(lista.getLast()) % 2 != 0) {
+            for (int i = lista.size() - 1; i >= 0; i -= 2) {
+
                 num2y4.add(lista.get(i));
-            
-            System.out.println(num2y4);
 
-        }
+                System.out.println(num2y4);
 
-        for (int i = 0; i < num2y4.size(); i++) {
-            for (int j = 0; j < lista.size(); j++) {
-                if (j % 2 != 0) {
-                    lista.set(j, num2y4.get(i));
-                }
             }
 
+        } else {
+            for (int i = lista.size() - 2; i >= 0; i -= 2) {
+
+                num2y4.add(lista.get(i));
+
+                System.out.println(num2y4);
+
+            }
         }
 
+        int indexNum2y4 = 0; // Para recorrer num2y4 secuencialmente
+        for (int i = 1; i < lista.size() && indexNum2y4 < num2y4.size(); i += 2) {
+            lista.set(i, num2y4.get(indexNum2y4));
+            indexNum2y4++; // Avanzar en num2y4
+        }
         //lista.set(1, num2y4.get(1));
         //lista.set(3, num2y4.get(0));
         return lista.toString();
