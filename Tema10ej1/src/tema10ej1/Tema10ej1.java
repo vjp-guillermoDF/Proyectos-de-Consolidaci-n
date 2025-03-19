@@ -14,9 +14,9 @@ import java.util.Scanner;
 public class Tema10ej1 {
 
     public static void mostrarLista(ArrayList<String> lista) {
-        
+
         if (lista.isEmpty()) {
-            System.out.println("La lista esta vacia.");
+            System.out.println("\nLa lista esta vacia.");
         } else {
 
             for (int i = 0; i < lista.size(); i++) {
@@ -34,22 +34,22 @@ public class Tema10ej1 {
         String respuesta = "";
         int i = 0;
 
-        System.out.println("Creando lista de nombres.");
+        System.out.println("Creando lista de nombres.\n");
 
         while (!cerrar) {
 
-            System.out.println("¿Desea introducir un nombre?");
+            System.out.println("¿Desea introducir un nombre?\n");
             respuesta = entrada.next();
             if (respuesta.equalsIgnoreCase("Si")) {
-                System.out.println("Introduzca nombre: ");
+                System.out.println("Introduzca nombre: \n");
                 lista.add(i, entrada.next());
-                System.out.println("Nombre " + lista.get(i) + " añadido.");
+                System.out.println("\nNombre " + lista.get(i) + " añadido.\n");
                 i++;
 
             } else if (respuesta.equalsIgnoreCase("No")) {
                 cerrar = true;
             } else {
-                System.out.println("Opcion no permitida. Por favor, escriba si o no.");
+                System.out.println("\nOpcion no permitida. Por favor, escriba si o no.\n");
             }
 
         }
