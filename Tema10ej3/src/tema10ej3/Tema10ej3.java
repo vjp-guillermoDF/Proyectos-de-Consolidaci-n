@@ -16,15 +16,28 @@ public class Tema10ej3 {
 
     public static String intercambiar2y4(ArrayList<Integer> lista) {
 
-        int[] num2y4 = new int[2];
+        ArrayList<Integer> num2y4 = new ArrayList();
 
-        num2y4[0] = lista.get(1);
-        num2y4[1] = lista.get(3);
+        for (int i = lista.size() - 1; i >= 0; i --) {
+            
+                num2y4.add(lista.get(i));
+            
+            System.out.println(num2y4);
 
-        lista.set(1, num2y4[1]);
-        lista.set(3, num2y4[0]);
+        }
 
-        return "La posicion " + lista.indexOf(lista.get(1)) + " y la posicion " + lista.indexOf(lista.get(3)) + " son " + lista.get(1) + " y " + lista.get(3) + " respectivamente.";
+        for (int i = 0; i < num2y4.size(); i++) {
+            for (int j = 0; j < lista.size(); j++) {
+                if (j % 2 != 0) {
+                    lista.set(j, num2y4.get(i));
+                }
+            }
+
+        }
+
+        //lista.set(1, num2y4.get(1));
+        //lista.set(3, num2y4.get(0));
+        return lista.toString();
 
     }
 
@@ -61,26 +74,28 @@ public class Tema10ej3 {
         System.out.println("Creando lista de nombres.\n");
 
         while (!cerrar) {
+            try {
 
-            System.out.println("¿Desea introducir un numero?\n");
-            respuesta = entrada.next();
-            if (respuesta.equalsIgnoreCase("Si")) {
-                System.out.println("Introduzca numero: \n");
-                try {
+                System.out.println("¿Desea introducir un numero?\n");
+                respuesta = entrada.next();
+                if (respuesta.equalsIgnoreCase("Si")) {
+                    System.out.println("Introduzca numero: \n");
+
                     lista.add(i, entrada.nextInt());
                     System.out.println("\nNumero " + lista.get(i) + " añadido.\n");
                     i++;
 
-                } catch (InputMismatchException e) {
-                    System.out.println("Debe introducir un numero.");
-                }
-            } else if (respuesta.equalsIgnoreCase("No")) {
-                cerrar = true;
-            } if (!respuesta.equalsIgnoreCase("No") || !respuesta.equalsIgnoreCase("Si")) {
-                System.out.println("\nOpcion no permitida. Por favor, escriba si o no.\n");
-            }
+                } else if (respuesta.equalsIgnoreCase("No")) {
+                    cerrar = true;
 
+                } else {
+                    System.out.println("\nOpcion no permitida. Por favor, escriba si o no.\n");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Debe introducir un numero.");
+            }
         }
+
     }
 
     /**
