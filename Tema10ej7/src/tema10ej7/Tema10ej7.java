@@ -49,11 +49,11 @@ public class Tema10ej7 {
                 if (currentTemp > maxTemp) {
                     maxTemp = currentTemp;
                     diaSemana = días[j];
-                    maxTemps = maxTemp + " del " + diaSemana + " del dia " + diaMes + ". ";
+                    maxTemps = maxTemp + " del " + diaSemana + " dia " + diaMes + " de la semana " + (i + 1) + ". ";
 
                 } else if (currentTemp == maxTemp) {
                     diaSemana = días[j];
-                    maxTemps += maxTemp + " del " + diaSemana + " del dia " + diaMes + ". ";
+                    maxTemps += maxTemp + " del " + diaSemana + " dia " + diaMes + " de la semana " + (i + 1) + ". ";
 
                 }
                 diaMes++;
