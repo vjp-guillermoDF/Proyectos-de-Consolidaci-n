@@ -14,6 +14,25 @@ import java.util.Scanner;
  */
 public class Tema10ej7 {
 
+    public static void mediaTemperaturas(ArrayList<ArrayList<Integer>> lista) {
+        int tempMax = 0;
+        int tempMedia = 0;
+        int dias = 0;
+
+        for (int i = 0; i < lista.size(); i++) {
+
+            for (int j = 0; j < lista.get(i).size(); j++) {
+
+                tempMax += lista.get(i).get(j);
+                dias++;
+            }
+
+        }
+        tempMedia = tempMax / dias;
+
+        System.out.println("La temperatura media del mes es " + tempMedia + ".");
+    }
+
     public static void diasMasCalurosos(ArrayList<ArrayList<Integer>> lista, String[] días) {
 
         int maxTemp = Integer.MIN_VALUE;
@@ -23,7 +42,7 @@ public class Tema10ej7 {
 
         for (int i = 0; i < lista.size(); i++) {
 
-            for (int j = 1; j < lista.get(i).size(); j++) {
+            for (int j = 0; j < lista.get(i).size(); j++) {
 
                 int currentTemp = lista.get(i).get(j);
 
@@ -42,7 +61,7 @@ public class Tema10ej7 {
 
         }
 
-        System.out.println("Las temperaturas mas altas son: " + maxTemps + diaMes);
+        System.out.println("Las temperaturas mas altas son: " + maxTemps + ".");
 
     }
 
@@ -101,7 +120,7 @@ public class Tema10ej7 {
                         break;
 
                     case 3:
-
+                        mediaTemperaturas(lista);
                         break;
 
                     case 4:
