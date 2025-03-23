@@ -4,6 +4,8 @@
  */
 package tema10ej9;
 
+import java.util.Scanner;
+
 /**
  *
  * @author alumno
@@ -18,7 +20,12 @@ public class Dia {
         this.nombreDia = nombreDia;
         this.temperatura = temperatura;
     }
-
+    
+    public Dia(String nombreDia){
+        this.nombreDia = nombreDia;
+        this.temperatura = pedirTemperatura();
+    }
+            
     public Dia() {
         this.nombreDia = "";
         this.temperatura = 0;
@@ -38,6 +45,16 @@ public class Dia {
 
     public void setTemperatura(int temperatura) {
         this.temperatura = temperatura;
+    }
+
+
+
+    public int pedirTemperatura() {
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Introduzca la temperatura del dia: ");
+        setTemperatura(entrada.nextInt());
+        return this.temperatura;
+
     }
 
     @Override

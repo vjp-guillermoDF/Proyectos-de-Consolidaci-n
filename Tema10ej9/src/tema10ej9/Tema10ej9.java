@@ -6,6 +6,7 @@ package tema10ej9;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -14,36 +15,35 @@ import java.util.Scanner;
  */
 public class Tema10ej9 {
 
-    public static void mediaTemperaturas(ArrayList<ArrayList<Dia>> lista) {
+    public static void mediaTemperaturas(ArrayList<Dia> lista) {
         int tempMax = 0;
         int tempMedia = 0;
-        int dias = 0;
 
         for (int i = 0; i < lista.size(); i++) {
 
-            for (int j = 0; j < lista.get(i).size(); j++) {
-
-                dias++;
-            }
+            tempMax += lista.get(i).getTemperatura();
 
         }
-        tempMedia = tempMax / dias;
+        tempMedia = tempMax / lista.size();
 
         System.out.println("La temperatura media del mes es " + tempMedia + ".");
     }
 
-    public static void diasMasCalurosos(ArrayList<ArrayList<Dia>> lista, String[] días) {
-
+    public static void diasMasCalurosos(ArrayList<Dia> lista, String[] días) {
         int maxTemp = Integer.MIN_VALUE;
         String maxTemps = "";
         String diaSemana = "";
-        int diaMes = 1;
 
         for (int i = 0; i < lista.size(); i++) {
 
-            for (int j = 0; j < lista.get(i).size(); j++) {
+            int currentTemp = lista.get(i).getTemperatura();
 
-                diaMes++;
+            if (currentTemp > maxTemp) {
+                maxTemp = currentTemp;
+                maxTemps = maxTemp + " del " + lista.get(i).getNombreDia() + " dia " + (i + 1) + ". ";
+
+            } else if (currentTemp == maxTemp) {
+                maxTemps += maxTemp + " del " + lista.get(i).getNombreDia() + " dia " + (i + 1) + ". ";
             }
 
         }
@@ -52,39 +52,32 @@ public class Tema10ej9 {
 
     }
 
-    public static void mostrarTemperaturas(ArrayList<ArrayList<Dia>> lista) {
-        System.out.println(lista.toString());
+    public static void mostrarTemperaturas(ArrayList<Dia> lista, String[] días) {
+        int indice = 0;
+        for (Dia i : lista) {
+
+            System.out.println("Dia " + (indice + 1) + " " + i.getNombreDia() + " y temperatura " + i.getTemperatura() + ".");
+            indice++;
+        }
+
     }
 
-    public static void llenarTemperaturas(ArrayList<ArrayList<Dia>> lista, String[] días) {
+    public static void llenarTemperaturas(ArrayList<Dia> lista, String[] días) {
         Scanner entrada = new Scanner(System.in);
+        Random rand = new Random();
+        int indiceInicio = rand.nextInt(días.length);
 
-        int temperatura = 0;
+        for (int i = 0; i < 31; i++) {
+            int indiceDia = (indiceInicio + i) % días.length;
+            String diaSemana = días[indiceDia];
+            System.out.println("Día " + diaSemana + " " + (i + 1) + " del mes:");
+            lista.add(new Dia(diaSemana));
 
-        int i = 0;
-        int j = 0;
-
-        while (i < 4) {
-
-            lista.add(new ArrayList<Dia>());
-            i++;
         }
 
-        while (j < lista.size()) {
-            int k = 0;
-            while (k < días.length) {
-
-                System.out.println("Introduzca la temperatura para el " + días[k] + " de la semana " + (j + 1) + ".");
-
-                lista.get(j).add(new Dia());
-                k++;
-
-            }
-            j++;
-        }
     }
 
-    public static void menu(ArrayList<ArrayList<Dia>> lista, String[] días) {
+    public static void menu(ArrayList<Dia> lista, String[] días) {
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
         do {
@@ -103,7 +96,8 @@ public class Tema10ej9 {
                         break;
 
                     case 2:
-                        mostrarTemperaturas(lista);
+                        mostrarTemperaturas(lista, días);
+
                         break;
 
                     case 3:
@@ -138,7 +132,7 @@ public class Tema10ej9 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ArrayList<ArrayList<Dia>> lista = new ArrayList<ArrayList<Dia>>();
+        ArrayList<Dia> lista = new ArrayList();
         String[] días = new String[]{"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
         menu(lista, días);
     }
