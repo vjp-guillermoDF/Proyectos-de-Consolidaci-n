@@ -67,22 +67,26 @@ public class Tema10ej4 {
         boolean cerrar = false;
         System.out.println("Introduzca un número mayor que cero para añadirlo a la lista.");
         System.out.println("Introduzca un número negativo para salir de la lista.\n");
-        while (!cerrar) {
+        do {
+            try {
+                numero = entrada.nextInt();
+                if (numero > 0) {
+                    lista.add(i, numero);
+                    System.out.println("\nNúmero " + numero + " añadido en la posicion " + i + " de la lista.\n");
+                    i++;
+                } else if (numero == 0) {
+                    System.out.println("El numero debe ser mayor que cero.");
 
-            numero = entrada.nextInt();
-            if (numero > 0) {
-                lista.add(i, numero);
-                System.out.println("\nNúmero " + numero + " añadido en la posicion " + i + " de la lista.\n");
-                i++;
-            } else if (numero == 0) {
-                System.out.println("El numero debe ser mayor que cero.");
+                } else {
+                    cerrar = true;
+                }
 
-            } else {
-                cerrar = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe introducir un numero.");
+                entrada.next();
             }
 
-        }
-
+        } while (!cerrar);
     }
 
     /**

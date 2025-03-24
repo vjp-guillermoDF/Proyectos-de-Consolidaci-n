@@ -5,6 +5,7 @@
 package tema10ej2;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -66,7 +67,7 @@ public class Tema10ej2 {
             for (int i = 0; i < lista.size(); i++) {
 
                 System.out.println("\n" + i + ")" + lista.get(i));
-             
+
             }
 
         }
@@ -80,19 +81,23 @@ public class Tema10ej2 {
         boolean cerrar = false;
         System.out.println("Introduzca un número para añadirlo a la lista.");
         System.out.println("Introduzca un número negativo para salir de la lista.\n");
-        while (!cerrar) {
+        do {
+            try {
+                numero = entrada.nextInt();
+                if (numero >= 0) {
+                    lista.add(i, numero);
+                    System.out.println("\nNúmero " + numero + " añadido en la posicion " + i + " de la lista.\n");
+                    i++;
+                } else {
+                    cerrar = true;
+                }
 
-            numero = entrada.nextInt();
-            if (numero >= 0) {
-                lista.add(i, numero);
-                System.out.println("\nNúmero " + numero + " añadido en la posicion " + i + " de la lista.\n");
-                i++;
-            } else {
-                cerrar = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Debe introducir un numero.");
+                entrada.next();
             }
 
-        }
-
+        } while (!cerrar);
     }
 
     /**

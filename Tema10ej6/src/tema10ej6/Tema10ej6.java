@@ -96,7 +96,7 @@ public class Tema10ej6 {
 
                     lista.add(ventas);
                     i++;
-                }else{
+                } else {
                     System.out.println("El numero debe ser mayor que cero.");
                 }
             } catch (InputMismatchException e) {
@@ -110,7 +110,7 @@ public class Tema10ej6 {
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
         do {
-            
+
             System.out.println("1 para llenar las ventas del año.");
             System.out.println("2 para mostrar las ventas.");
             System.out.println(".satnev sal rartsom arap 3");
@@ -118,7 +118,7 @@ public class Tema10ej6 {
             System.out.println("5 para mostrar las ventas de los meses con la letra 'a' (Sí, has leído bien)");
             System.out.println("6 para mostrar el mes con más ventas.");
             System.out.println("7 para salir del sistema.");
-            
+
             try {
 
                 switch (entrada.nextInt()) {
@@ -157,6 +157,7 @@ public class Tema10ej6 {
             } catch (InputMismatchException e) {
 
                 System.out.println("Introduzca un numero.");
+                entrada.next();
 
             }
 
