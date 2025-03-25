@@ -17,49 +17,49 @@ public class Tema10ej12 {
     /**
      * @param args the command line arguments
      */
-    
-    public static void iterarLista(ArrayList<String> lista){
-        Iterator <String> it = lista.iterator();
-        
-        while(it.hasNext()){
+    public static void iterarLista(ArrayList<String> lista) {
+        Iterator<String> it = lista.iterator();
+        int i = 0;
+        while (it.hasNext()) {
             String aux = it.next();
-            System.out.println(aux);
+            System.out.println(i + ") " + aux);
+            i++;
         }
-        
-        
+
     }
-    
-    public static void llenarLista(ArrayList<String> lista){
+
+    public static void llenarLista(ArrayList<String> lista) {
         Scanner entrada = new Scanner(System.in);
         String respuesta = "";
         int i = 0;
         boolean cerrar = false;
-        
+
         System.out.println("Comenzamos a llenar la lista.");
-        do{
+        do {
             lista.add(entrada.next());
             System.out.println("Nombre añadido en la posicion " + i + ".");
+
             System.out.println("¿Desea continuar?");
             respuesta = entrada.next();
-            
-            if(!respuesta.equalsIgnoreCase("Si") || !respuesta.equalsIgnoreCase("No")){
+
+            if (!respuesta.equalsIgnoreCase("Si") || !respuesta.equalsIgnoreCase("No")) {
                 System.out.println("La respuesta debe ser sí o no.");
-            }else if (!respuesta.equalsIgnoreCase("No")){
+                entrada.next();
+            } else if (!respuesta.equalsIgnoreCase("No")) {
                 cerrar = true;
             }
-            
+
             i++;
-        }while(!cerrar);
-        
+        } while (!cerrar);
+
     }
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
         ArrayList<String> lista = new ArrayList();
         llenarLista(lista);
         iterarLista(lista);
-        
-        
+
     }
-    
+
 }
