@@ -31,22 +31,27 @@ public class Tema10ej12 {
     public static void llenarLista(ArrayList<String> lista) {
         Scanner entrada = new Scanner(System.in);
         String respuesta = "";
+        String nombre = "";
         int i = 0;
         boolean cerrar = false;
 
         System.out.println("Comenzamos a llenar la lista.");
-        do {
-            lista.add(entrada.next());
-            System.out.println("Nombre añadido en la posicion " + i + ".");
+        nombre = entrada.next();
 
+        lista.add(nombre);
+        System.out.println("Nombre añadido en la posicion " + i + ".");
+        do {
             System.out.println("¿Desea continuar?");
             respuesta = entrada.next();
 
-            if (!respuesta.equalsIgnoreCase("Si") || !respuesta.equalsIgnoreCase("No")) {
-                System.out.println("La respuesta debe ser sí o no.");
-                entrada.next();
-            } else if (!respuesta.equalsIgnoreCase("No")) {
+            if (respuesta.equalsIgnoreCase("Si")) {
+                System.out.println("Introduzca otro nombre:");
+                lista.add(entrada.next());
+                System.out.println("Nombre añadido en la posicion " + i + ".");
+            } else if (respuesta.equalsIgnoreCase("No")) {
                 cerrar = true;
+            } else {
+                System.out.println("La respuesta debe ser si o no.");
             }
 
             i++;
