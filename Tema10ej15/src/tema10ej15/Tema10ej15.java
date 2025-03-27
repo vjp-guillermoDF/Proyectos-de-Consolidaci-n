@@ -6,6 +6,7 @@ package tema10ej15;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -13,11 +14,59 @@ import java.util.Scanner;
  * @author alumno
  */
 public class Tema10ej15 {
-    
-    public static void registrarEmpresa(ArrayList<Empresa> lista){
-        
-        
-        
+
+    public static void menorAmayorSueldo(ArrayList<Empresa> lista) {
+        int maxSueldo = lista.get(0).getEmpleados().getFirst().getSueldo();
+
+    }
+
+    public static void mastrarAmplaadas(ArrayList<Empresa> lista) {
+        Iterator<Empresa> it = lista.iterator();
+
+        while (it.hasNext()) {
+            Empresa aux = it.next();
+            int i = 0;
+            while (i < aux.getEmpleados().size()) {
+                if (aux.getEmpleados().get(i).getNombre().contains("A") || aux.getEmpleados().get(i).getNombre().contains("a")) {
+                    System.out.println(aux.getEmpleados().get(i).toString());
+
+                }
+                i++;
+            }
+
+        }
+
+    }
+
+    public static void mostrarEmpresas(ArrayList<Empresa> lista) {
+        Iterator<Empresa> it = lista.iterator();
+
+        while (it.hasNext()) {
+            Empresa aux = it.next();
+            System.out.println(aux.toString());
+
+        }
+
+    }
+
+    public static void registrarEmpresa(ArrayList<Empresa> lista) {
+        Scanner entrada = new Scanner(System.in);
+        boolean cerrar = false;
+        do {
+
+            System.out.println("Registrando empresa...");
+            lista.add(new Empresa());
+            System.out.println("Empresa " + lista.getLast().getNombreEmpresa() + " registrado con exito.");
+            System.out.println("¿Desea continuar?");
+            String respuesta = entrada.next();
+            if (respuesta.equalsIgnoreCase("No")) {
+                System.out.println("Saliendo del registro de empresas.");
+                cerrar = true;
+            } else if (!respuesta.equalsIgnoreCase("No") || !respuesta.equalsIgnoreCase("Si")) {
+                System.out.println("La respuesta debe ser si o no.");
+            }
+
+        } while (!cerrar);
     }
 
     public static void menu(ArrayList<Empresa> lista) {
@@ -37,9 +86,10 @@ public class Tema10ej15 {
                         registrarEmpresa(lista);
                         break;
                     case 2:
-
+                        mostrarEmpresas(lista);
                         break;
                     case 3:
+                        mastrarAmplaadas(lista);
                         break;
                     case 4:
                         break;

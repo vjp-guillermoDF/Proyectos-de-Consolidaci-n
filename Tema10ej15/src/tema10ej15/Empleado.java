@@ -44,7 +44,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "nombre=" + nombre + ", sueldo=" + sueldo + '}';
+        return "Nombre de empleado: " + nombre + ". Sueldo: " + sueldo + ".";
     }
 
     public String pedirNombre() {

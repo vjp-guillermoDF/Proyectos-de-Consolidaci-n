@@ -24,7 +24,7 @@ public class Empresa {
 
     public Empresa() {
         this.nombreEmpresa = pedirNombreEmpresa();
-        this.empleados = new ArrayList();
+        this.empleados = pedirEmpleados();
     }
 
     public String getNombreEmpresa() {
@@ -45,7 +45,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{" + "nombreEmpresa=" + nombreEmpresa + ", empleados=" + empleados + '}';
+        return "Nombre de empresa: " + nombreEmpresa + ". Lista de empleados: " + empleados.toString();
     }
 
     public String pedirNombreEmpresa() {
@@ -53,6 +53,31 @@ public class Empresa {
         System.out.println("Introduzca el nombre de la empresa: ");
         setNombreEmpresa(entrada.next());
         return nombreEmpresa;
+    }
+
+    public ArrayList<Empleado> pedirEmpleados() {
+        Scanner entrada = new Scanner(System.in);
+        boolean cerrar = false;
+        setEmpleados(new ArrayList());
+
+        do {
+
+            System.out.println("Registrando empleado...");
+            empleados.add(new Empleado());
+            System.out.println("Empleado " + empleados.getLast().getNombre() + " registrado con exito.");
+            System.out.println("¿Desea continuar?");
+            String respuesta = entrada.next();
+            if (respuesta.equalsIgnoreCase("No")) {
+                System.out.println("Saliendo del registro de empleados.");
+                cerrar = true;
+            } else if (!respuesta.equalsIgnoreCase("No") || !respuesta.equalsIgnoreCase("Si")) {
+                System.out.println("La respuesta debe ser si o no.");
+            }
+
+        } while (!cerrar);
+
+        return empleados;
+
     }
 
 }
