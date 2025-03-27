@@ -60,18 +60,21 @@ public class Empresa {
         boolean cerrar = false;
         setEmpleados(new ArrayList());
 
+        System.out.println("Registrando empleado...");
+        empleados.add(new Empleado());
+        System.out.println("Empleado " + empleados.getLast().getNombre() + " registrado con exito.");
         do {
-
-            System.out.println("Registrando empleado...");
-            empleados.add(new Empleado());
-            System.out.println("Empleado " + empleados.getLast().getNombre() + " registrado con exito.");
             System.out.println("¿Desea continuar?");
             String respuesta = entrada.next();
             if (respuesta.equalsIgnoreCase("No")) {
                 System.out.println("Saliendo del registro de empleados.");
                 cerrar = true;
-            } else if (!respuesta.equalsIgnoreCase("No") || !respuesta.equalsIgnoreCase("Si")) {
+            } else if (!respuesta.equalsIgnoreCase("No") && !respuesta.equalsIgnoreCase("Si")) {
                 System.out.println("La respuesta debe ser si o no.");
+
+            } else if (respuesta.equalsIgnoreCase("Si")) {
+                System.out.println("Registrando empleado...");
+                empleados.add(new Empleado());
             }
 
         } while (!cerrar);

@@ -5,6 +5,7 @@
 package tema10ej15;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -16,7 +17,17 @@ import java.util.Scanner;
 public class Tema10ej15 {
 
     public static void menorAmayorSueldo(ArrayList<Empresa> lista) {
-        int maxSueldo = lista.get(0).getEmpleados().getFirst().getSueldo();
+        ArrayList<Empleado> listaux = new ArrayList();
+        System.out.println("Lista de empleados ordenados por sueldo de menor a mayor.");
+        for (Empresa i : lista) {
+            listaux.addAll(i.getEmpleados());
+        }
+        listaux.sort(Comparator.comparingInt(Empleado::getSueldo));
+
+        for (Empleado j : listaux) {
+            System.out.println(j.toString());
+
+        }
 
     }
 
@@ -52,18 +63,23 @@ public class Tema10ej15 {
     public static void registrarEmpresa(ArrayList<Empresa> lista) {
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
+
+        System.out.println("Registrando empresa...");
+        lista.add(new Empresa());
+        System.out.println("Empresa " + lista.getLast().getNombreEmpresa() + " registrado con exito.");
         do {
 
-            System.out.println("Registrando empresa...");
-            lista.add(new Empresa());
-            System.out.println("Empresa " + lista.getLast().getNombreEmpresa() + " registrado con exito.");
             System.out.println("¿Desea continuar?");
             String respuesta = entrada.next();
             if (respuesta.equalsIgnoreCase("No")) {
                 System.out.println("Saliendo del registro de empresas.");
                 cerrar = true;
-            } else if (!respuesta.equalsIgnoreCase("No") || !respuesta.equalsIgnoreCase("Si")) {
+            } else if (!respuesta.equalsIgnoreCase("No") && !respuesta.equalsIgnoreCase("Si")) {
                 System.out.println("La respuesta debe ser si o no.");
+
+            } else if (respuesta.equalsIgnoreCase("Si")) {
+                System.out.println("Registrando empresa...");
+                lista.add(new Empresa());
             }
 
         } while (!cerrar);
@@ -92,9 +108,11 @@ public class Tema10ej15 {
                         mastrarAmplaadas(lista);
                         break;
                     case 4:
+                        menorAmayorSueldo(lista);
                         break;
                     case 5:
                         System.out.println("Saliendo del sistema.");
+                        cerrar = true;
                         break;
                     default:
                         System.out.println("Opcion no permitida.");
