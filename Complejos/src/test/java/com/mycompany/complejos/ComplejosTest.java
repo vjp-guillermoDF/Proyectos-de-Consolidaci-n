@@ -4,10 +4,6 @@
  */
 package com.mycompany.complejos;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,144 +12,131 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author alumno
  */
 public class ComplejosTest {
-    
-    public ComplejosTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     /**
      * Test of partereal method, of class Complejos.
      */
     @Test
-    public void testPartereal() {
-        System.out.println("partereal");
-        Complejos instance = null;
-        float expResult = 0.0F;
-        float result = instance.partereal();
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testPartereal() {
+        //fail("Not yet implemented");
+
+        // Crear un objeto complejo
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        float esperado = 3.0F;
+        float obtenido = C1.partereal();
+
+        assertEquals(esperado, obtenido, 0);
+
     }
 
     /**
      * Test of parteimaginaria method, of class Complejos.
      */
     @Test
-    public void testParteimaginaria() {
-        System.out.println("parteimaginaria");
-        Complejos instance = null;
-        float expResult = 0.0F;
-        float result = instance.parteimaginaria();
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testParteimaginaria() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        float esperado = 4.0F;
+        float obtenido = C1.parteimaginaria();
+
+        assertEquals(esperado, obtenido, 0);
+
     }
 
     /**
      * Test of imaginariopuro method, of class Complejos.
      */
     @Test
-    public void testImaginariopuro() {
-        System.out.println("imaginariopuro");
-        Complejos instance = null;
-        boolean expResult = false;
-        boolean result = instance.imaginariopuro();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testImaginariopuro() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        boolean esperado = false;
+        boolean obtenido = C1.imaginariopuro();
+
+        assertEquals(esperado, obtenido);
+
     }
 
     /**
      * Test of realpuro method, of class Complejos.
      */
     @Test
-    public void testRealpuro() {
-        System.out.println("realpuro");
-        Complejos instance = null;
-        boolean expResult = false;
-        boolean result = instance.realpuro();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testRealpuro() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        boolean esperado = false;
+        boolean obtenido = C1.realpuro();
+
+        assertEquals(esperado, obtenido);
+
     }
 
-    /**
-     * Test of Escribircomlejo method, of class Complejos.
-     */
     @Test
-    public void testEscribircomlejo() {
-        System.out.println("Escribircomlejo");
-        Complejos instance = null;
-        instance.Escribircomlejo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testEscribircomplejo() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        String esperado = "3+4i";
+        String obtenido = C1.Escribircomlejo();
+
+        assertEquals(esperado, obtenido);
+
     }
 
-    /**
-     * Test of modulo method, of class Complejos.
-     */
     @Test
-    public void testModulo() {
-        System.out.println("modulo");
-        Complejos instance = null;
-        float expResult = 0.0F;
-        float result = instance.modulo();
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testModulo() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        float esperado = 5.0F;
+        float obtenido = C1.modulo();
+
+        assertEquals(esperado, obtenido, 0);
+
     }
 
-    /**
-     * Test of fase method, of class Complejos.
-     */
     @Test
-    public void testFase() {
-        System.out.println("fase");
-        Complejos instance = null;
-        float expResult = 0.0F;
-        float result = instance.fase();
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testFase() {
+        //fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        //Valor esperado y valor obtenido
+        float esperado = 0.9272F;
+        float obtenido = C1.fase();
+
+        assertEquals(esperado, obtenido, 0);
+
     }
 
-    /**
-     * Test of conjugado method, of class Complejos.
-     */
     @Test
-    public void testConjugado() {
-        System.out.println("conjugado");
-        Complejos instance = null;
-        instance.conjugado();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testConjugado() {
+        //	fail("Not yet implemented");
+
+        Complejos C1 = new Complejos(3, 4);
+
+        C1.conjugado();
+
+        float esperado = -4;
+        float obtenido = C1.parteimaginaria();
+
+        assertEquals(esperado, obtenido, 0);
+
     }
 
-    /**
-     * Test of main method, of class Complejos.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Complejos.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

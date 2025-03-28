@@ -35,14 +35,14 @@ public class Complejos {
         return (this.real == 0);
     }
 
-    public void Escribircomlejo() {
-
-        if (this.real >= 0) 
+    public String Escribircomlejo() {
+        if (this.real >= 0) {
             System.out.println(this.imaginario + "+" + this.real + "i");
-        else 
+            return (this.imaginario + "+" + this.real + "i");
+        } else {
             System.out.println(this.imaginario + "" + this.real + "i");
-        
-
+            return (this.imaginario + "" + this.real + "i");
+        }
     }
 
     public float modulo() {
