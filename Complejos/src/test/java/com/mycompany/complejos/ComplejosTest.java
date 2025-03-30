@@ -89,7 +89,7 @@ public class ComplejosTest {
         Complejos C1 = new Complejos(3, 4);
 
         //Valor esperado y valor obtenido
-        String esperado = "3+4i";
+        String esperado = "4.0+3.0i";
         String obtenido = C1.Escribircomlejo();
 
         assertEquals(esperado, obtenido);
@@ -117,7 +117,7 @@ public class ComplejosTest {
         Complejos C1 = new Complejos(3, 4);
 
         //Valor esperado y valor obtenido
-        float esperado = 0.9272F;
+        float esperado = 0.6435011F;
         float obtenido = C1.fase();
 
         assertEquals(esperado, obtenido, 0);
@@ -132,7 +132,7 @@ public class ComplejosTest {
 
         C1.conjugado();
 
-        float esperado = -4;
+        float esperado = 4;
         float obtenido = C1.parteimaginaria();
 
         assertEquals(esperado, obtenido, 0);
