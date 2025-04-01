@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author alumno
+ * @author Don Guillermo Domínguez de la Fuente I de España y Portugal
  */
 public class Tema10ej14 {
 
@@ -19,27 +19,27 @@ public class Tema10ej14 {
         int i = 0;
         float minMedia = 10.0f;
         String peoresMedias = "";
-        while (i < nombreAs.length) {
-            int j = 0;
-            float mediaux = 0;
-            while (j < lista.size()) {
+        while (i < nombreAs.length) { //Primero recorremos la lista de asignaturas
+            int j = 0;                  //Iniciamos el índice j
+            float mediaux = 0;          //Iniciamos el auxiliar en cero
+            while (j < lista.size()) {              //Recorremos la lista en segundo lugar en el bucle anidado
 
-                mediaux += lista.get(j).getAsignaturas().get(i).getNota() / lista.size();
+                mediaux += lista.get(j).getAsignaturas().get(i).getNota() / lista.size();   //Por cada vez, calculamos la media sumando las notas y dividiéndolas entre el tamaño de la lista
 
-                if (mediaux < minMedia) {
+                if (mediaux < minMedia) {       //Si la media auxiliar es menor que diez, cambiamos los valores
                     minMedia = mediaux;
-                    peoresMedias = nombreAs[i] + " con media de " + minMedia + ".";
+                    peoresMedias = nombreAs[i] + " con media de " + minMedia + ".";     //Sumamos el valor al String de peores medias
                 } else if (mediaux == minMedia) {
-                    peoresMedias += nombreAs[i] + " con media de " + mediaux + ".";
+                    peoresMedias += nombreAs[i] + " con media de " + mediaux + ".";     //Si hay dos medias iguales, estas se sumarán al String
                 }
 
                 j++;
             }
-            System.out.println("La media de la asignatura " + nombreAs[i] + " es " + mediaux);
+            System.out.println("La media de la asignatura " + nombreAs[i] + " es " + mediaux);  //LÍNEA DE PRUEBAS
             i++;
         }
 
-        System.out.println("La peor o peores asignaturas son " + peoresMedias);
+        System.out.println("La peor o peores asignaturas son " + peoresMedias); //En peoresMedias se almacenan todas las notas medias más bajas, sean una o varias
 
     }
 

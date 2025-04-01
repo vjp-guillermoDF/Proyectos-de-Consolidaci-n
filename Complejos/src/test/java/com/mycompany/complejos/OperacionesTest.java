@@ -27,12 +27,13 @@ public class OperacionesTest {
     @org.junit.jupiter.api.Test
     public void testSuma() {
         System.out.println("suma");
-        Complejos a = null;
-        Complejos b = null;
+        Complejos a = new Complejos(3,4);
+        Complejos b = new Complejos(3,4);
         Operaciones instance = new Operaciones();
-        Complejos expResult = null;
+        Complejos expResult = new Complejos (6,8);
         Complejos result = instance.suma(a, b);
-        assertEquals(expResult, result);
+        assertEquals(expResult.partereal(), result.partereal());
+         assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
