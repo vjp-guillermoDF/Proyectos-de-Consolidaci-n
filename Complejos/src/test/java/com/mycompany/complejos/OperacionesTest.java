@@ -16,24 +16,23 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author guill
  */
 public class OperacionesTest {
-    
+
     public OperacionesTest() {
     }
 
-    
     /**
      * Test of suma method, of class Operaciones.
      */
     @org.junit.jupiter.api.Test
     public void testSuma() {
         System.out.println("suma");
-        Complejos a = new Complejos(3,4);
-        Complejos b = new Complejos(3,4);
+        Complejos a = new Complejos(3, 4);
+        Complejos b = new Complejos(3, 4);
         Operaciones instance = new Operaciones();
-        Complejos expResult = new Complejos (6,8);
+        Complejos expResult = new Complejos(6, 8);
         Complejos result = instance.suma(a, b);
         assertEquals(expResult.partereal(), result.partereal());
-         assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
+        assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -44,12 +43,13 @@ public class OperacionesTest {
     @org.junit.jupiter.api.Test
     public void testResta() {
         System.out.println("resta");
-        Complejos a = null;
-        Complejos b = null;
+        Complejos a = new Complejos(3, 4);
+        Complejos b = new Complejos(3, 4);
         Operaciones instance = new Operaciones();
-        Complejos expResult = null;
+        Complejos expResult = new Complejos(0, 0);
         Complejos result = instance.resta(a, b);
-        assertEquals(expResult, result);
+        assertEquals(expResult.partereal(), result.partereal());
+        assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -60,12 +60,13 @@ public class OperacionesTest {
     @org.junit.jupiter.api.Test
     public void testMultiplicar() {
         System.out.println("multiplicar");
-        Complejos a = null;
-        Complejos b = null;
+        Complejos a = new Complejos(3, 4);
+        Complejos b = new Complejos(3, 4);
         Operaciones instance = new Operaciones();
-        Complejos expResult = null;
+        Complejos expResult = new Complejos(25, 24);
         Complejos result = instance.multiplicar(a, b);
-        assertEquals(expResult, result);
+        assertEquals(expResult.partereal(), result.partereal());
+        assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -76,14 +77,16 @@ public class OperacionesTest {
     @org.junit.jupiter.api.Test
     public void testDividir() {
         System.out.println("dividir");
-        Complejos a = null;
-        Complejos b = null;
+        Complejos a = new Complejos(3, 4);
+        Complejos b = new Complejos(3, 4);
         Operaciones instance = new Operaciones();
-        Complejos expResult = null;
+        Complejos expResult = new Complejos(0, 1);
         Complejos result = instance.dividir(a, b);
-        assertEquals(expResult, result);
+        assertEquals(expResult.partereal(), result.partereal());
+        assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
+
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
+
 }

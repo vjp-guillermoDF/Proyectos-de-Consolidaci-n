@@ -37,8 +37,8 @@ public class Operaciones {
         float r;
         float im;
 
-        r = a.partereal() * b.partereal() - a.parteimaginaria() * b.parteimaginaria();
-        im = a.partereal() * b.parteimaginaria() - b.partereal() * a.parteimaginaria();
+        r = a.partereal() * b.partereal() + a.parteimaginaria() * b.parteimaginaria();
+        im = a.partereal() * b.parteimaginaria() + b.partereal() * a.parteimaginaria();
 
         Complejos c = new Complejos(r, im);
 
