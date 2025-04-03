@@ -77,10 +77,10 @@ public class OperacionesTest {
     @org.junit.jupiter.api.Test
     public void testDividir() {
         System.out.println("dividir");
-        Complejos a = new Complejos(3, 4);
-        Complejos b = new Complejos(3, 4);
+        Complejos a = new Complejos(10, 20);
+        Complejos b = new Complejos(20, 10);
         Operaciones instance = new Operaciones();
-        Complejos expResult = new Complejos(0, 1);
+        Complejos expResult = new Complejos(0.8f, 0.6f);
         Complejos result = instance.dividir(a, b);
         assertEquals(expResult.partereal(), result.partereal());
         assertEquals(expResult.parteimaginaria(), result.parteimaginaria());
@@ -89,4 +89,6 @@ public class OperacionesTest {
         //fail("The test case is a prototype.");
     }
 
+    
+    
 }

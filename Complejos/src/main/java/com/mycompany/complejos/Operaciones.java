@@ -9,7 +9,7 @@ package com.mycompany.complejos;
  * @author alumno
  */
 public class Operaciones {
-    
+
     public Complejos suma(Complejos a, Complejos b) {
         float r;
         float im;
@@ -51,7 +51,7 @@ public class Operaciones {
         float d = b.partereal() * b.partereal() + b.parteimaginaria() * b.parteimaginaria();
 
         r = a.partereal() * b.partereal() + a.parteimaginaria() * b.parteimaginaria();
-        im = a.partereal() * b.parteimaginaria() - b.partereal() * a.parteimaginaria();
+        im = a.parteimaginaria() * b.partereal() - a.partereal() * b.parteimaginaria(); // Corrección aquí
         r = r / d;
         im = im / d;
 
@@ -59,5 +59,5 @@ public class Operaciones {
 
         return c;
     }
-    
+
 }
