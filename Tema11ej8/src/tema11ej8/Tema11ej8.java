@@ -14,11 +14,46 @@ import java.util.Scanner;
  * @author alumno
  */
 public class Tema11ej8 {
-    
-    public static void anadirSede(){
-        
+
+    private static void ordenarSedes(ArrayList<Ciudad> ciudades) {
+        ArrayList<Sede> listaux = new ArrayList();
+        Iterator it = ciudades.iterator();
+        while (it.hasNext()) {
+            Ciudad aux = (Ciudad) it.next();
+
+            if (!aux.getSedes().isEmpty()) {
+                Iterator it2 = aux.getSedes().keySet().iterator();
+                while (it2.hasNext()) {
+                    String clave = (String) it2.next();
+                    listaux.add(aux.getSedes().get(clave));
+                }
+
+            }
+        }
+
+        listaux.sort((sede1, sede2) -> Float.compare(sede1.getIngresoAnual(), sede2.getIngresoAnual()));
+        System.out.println("Sedes ordenadas de menor a mayor en funcion de sus ingresos anuales: " + listaux.toString());
+
     }
-    
+
+    public static void anadirSede(ArrayList<Ciudad> ciudades) {
+        Scanner entrada = new Scanner(System.in);
+        Iterator it = ciudades.iterator();
+        boolean enc = false;
+        System.out.println("Introduzca el nombre de la ciudad en la que quiera anadir sede: ");
+        String respuesta = entrada.next();
+
+        while (!enc && it.hasNext()) {
+            Ciudad aux = (Ciudad) it.next();
+            if (respuesta.equalsIgnoreCase(aux.getNombre())) {
+
+                aux.setSedes(aux.introducirSedes());
+
+                enc = true;
+            }
+        }
+
+    }
 
     public static void buscarSede(ArrayList<Ciudad> ciudades) {
         Scanner entrada = new Scanner(System.in);
@@ -139,10 +174,10 @@ public class Tema11ej8 {
                         break;
 
                     case 5:
-
+                        anadirSede(ciudades);
                         break;
                     case 6:
-
+                        ordenarSedes(ciudades);
                         break;
 
                     case 7:

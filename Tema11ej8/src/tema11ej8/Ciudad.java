@@ -58,7 +58,6 @@ public class Ciudad {
     public HashMap<String, Sede> introducirSedes() {
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        setSedes(new HashMap());
         Sede aux = new Sede();
         aux.pedirNombre();
         aux.pedirIngresos();
