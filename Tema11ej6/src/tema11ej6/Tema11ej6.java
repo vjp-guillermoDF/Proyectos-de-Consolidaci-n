@@ -5,9 +5,6 @@
 package tema11ej6;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -41,6 +38,7 @@ public class Tema11ej6 {
         }
 
         listaux.sort((donacion1, donacion2) -> Integer.compare(donacion1.getCantidad(), donacion2.getCantidad()));
+        
 
         System.out.println("De menor a mayor: " + listaux.toString());
     }
