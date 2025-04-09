@@ -68,7 +68,7 @@ public class Tema11ej8 {
             if (!aux.getSedes().isEmpty()) {
                 Iterator it2 = aux.getSedes().keySet().iterator();
 
-                while (it2.hasNext()) {
+                while (!enc && it2.hasNext()) {
                     String clave = (String) it2.next();
                     Sede aux2 = aux.getSedes().get(clave);
 

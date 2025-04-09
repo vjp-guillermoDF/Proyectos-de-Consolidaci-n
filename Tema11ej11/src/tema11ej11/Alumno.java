@@ -85,9 +85,14 @@ public class Alumno implements Comparable<Alumno> {
 
     @Override
     public int compareTo(Alumno otro) {
-        return Integer.compare(this.expediente, otro.getExpediente());
+
+        if (this.expediente > otro.getExpediente()) {
+            return 1;
+        } else if (this.expediente < otro.getExpediente()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
-    
-    
 
 }
