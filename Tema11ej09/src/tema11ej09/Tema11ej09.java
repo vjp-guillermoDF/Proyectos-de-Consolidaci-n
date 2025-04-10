@@ -17,13 +17,31 @@ import java.util.TreeMap;
  */
 public class Tema11ej09 {
 
-    public static void repetirSorteo(Map<LocalDate, Sorteo> sorteos) {
-        boolean enc = false;
+    public static void sorteoMesActual(Map<LocalDate, Sorteo> sorteos) {
+
         Iterator it = sorteos.keySet().iterator();
+        while (it.hasNext()) {
+            LocalDate clave = (LocalDate) it.next();
+            Sorteo aux = sorteos.get(clave);
+
+            if (clave.getMonth() == LocalDate.now().getMonth()) {
+                System.out.println(aux.toString());
+
+            } else{
+                System.out.println("No hay sorteos para el mes actual.");
+            }
+
+        }
+    }
+
+    public static void repetirSorteo(Map<LocalDate, Sorteo> sorteos) {
+
         Sorteo aux = new Sorteo();
         aux.introducirGanadores();
 
         sorteos.replace(aux.getSorteo(), aux);
+        
+        System.out.println(aux.toString() + " Registrado con exito.");
 
     }
 
@@ -31,6 +49,7 @@ public class Tema11ej09 {
 
         Sorteo aux = new Sorteo();
         aux.introducirGanadores();
+        aux.asignarFechaPorUsuario();
 
         sorteos.put(aux.getSorteo(), aux);
 
@@ -66,6 +85,7 @@ public class Tema11ej09 {
                         break;
 
                     case 3:
+                        sorteoMesActual(sorteos);
                         break;
 
                     case 4:
