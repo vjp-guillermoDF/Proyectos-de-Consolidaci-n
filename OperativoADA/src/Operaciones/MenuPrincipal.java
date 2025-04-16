@@ -5,9 +5,11 @@
 package Operaciones;
 
 import General.Constantes;
+import General.DescifrarMensajes;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
+import Recursos.lugares.Almacen;
 import Recursos.lugares.Comisaria;
 import Recursos.personajes.Cyborg;
 import Recursos.personajes.Policia;
@@ -23,6 +25,8 @@ public class MenuPrincipal {
     public static Policia jugador;
     //Variable global jugador, que almacena al Personaje de subclase Policía LunaCastillo, con sus atributos inicializados y un objeto ArmaLargoAlcance con velocidad, daño y diámetro inicializados. Este objeto ha sido creado e inicializado directamente en el constructor del personaje.
     public static Comisaria comisaria;
+    public static Arma armaJugador;
+    public static Almacen almacen;
 
     public static void submenuComisaria() {
         boolean cerrar = false;
@@ -42,7 +46,7 @@ public class MenuPrincipal {
                         comisaria.mostrarPolicias();
                         break;
                     case 4:
-
+                        comisaria.modificarPolicia();
                         break;
                     case 5:
                         comisaria.eliminarPolicia();
@@ -51,7 +55,7 @@ public class MenuPrincipal {
                         comisaria.buscarPolicias();
                         break;
                     case 7:
-
+                        System.out.println(DescifrarMensajes.descifrar());
                         break;
                     case 8:
 
@@ -85,28 +89,27 @@ public class MenuPrincipal {
     public static void submenuAlmacen() {
         boolean cerrar = false;
         int var2 = 0;
-        System.out.println("Pulse 1 para elegir arma. \nPulse 2 para crear arma. \nPulse 3 para mostrar las armas existentes. \nPulse 4 para modificar las armas. \nPulse 5 para eliminar alguna de las armas. \nPulse 6 para registrar un arma. \nPulse 7 para mostrar el registro de armas. \nPulse 8 para regresar al menu principal.");
         do {
+            System.out.println("Pulse 1 para elegir arma. \nPulse 2 para crear arma. \nPulse 3 para mostrar las armas existentes. \nPulse 4 para modificar las armas. \nPulse 5 para eliminar alguna de las armas. \nPulse 6 para registrar un arma. \nPulse 7 para mostrar el registro de armas. \nPulse 8 para regresar al menu principal.");
+
             try {
 
                 switch (llamarEscaner(var2)) {
                     case 1:
-
-                        System.out.println("Elija arma");
-
+                        almacen.elegirArma();
                         break;
                     case 2:
-
+                        almacen.crearArma();
                         break;
                     case 3:
-
+                        almacen.mostrarArmas();
                         break;
 
                     case 4:
-
+                        almacen.modificarArma();
                         break;
                     case 5:
-
+                        almacen.eliminarArma();
                         break;
                     case 6:
 
@@ -136,9 +139,10 @@ public class MenuPrincipal {
     public static void menuPrincipal() {
         boolean cerrar = false;
         int var = 0;
-        System.out.println("Pulse 1 para entrar al almacen. \nPulse 2 para entrar en comisaria. \nPulse 3 para intervenir en el refugio. \nPulse 4 para salir del menu.");
 
         do {
+            System.out.println("Pulse 1 para entrar al almacen. \nPulse 2 para entrar en comisaria. \nPulse 3 para intervenir en el refugio. \nPulse 4 para salir del menu.");
+
             try {
                 switch (llamarEscaner(var)) {
                     case 1:
@@ -194,7 +198,7 @@ public class MenuPrincipal {
                     }
 
                 }
-            } catch (Exception e) {  
+            } catch (Exception e) {
                 cerrarBucle = false;
                 System.out.println("Debe introducir un numero.");
             }
@@ -219,6 +223,7 @@ public class MenuPrincipal {
         Cyborg Logan = new Cyborg("Explosivos y Armas", "Francia", "Logan", 'V', 5, 5, new ArmaCortoAlcance()); //Creamos al personaje Logan tal como vimos en los mensajes cifrados, le asignamos un arma por defecto
         jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20)); //Personaje de subclase Policía LunaCastillo, almacenado en la variable global jugador.
         comisaria = new Comisaria();
+        almacen = new Almacen();
 
         menuPrincipal();
 

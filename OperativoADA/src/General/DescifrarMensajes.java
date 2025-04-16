@@ -62,8 +62,5 @@ public class DescifrarMensajes {    //Guardamos los mensjes como constantes públ
         return resultado;
     }
 
-    public static void main(String[] args) { //Creamos método main para clase DescifrarMensajes y ejecutamos el método aquí mediante impresión
-        System.out.println(descifrar());
-    }
 
 }
