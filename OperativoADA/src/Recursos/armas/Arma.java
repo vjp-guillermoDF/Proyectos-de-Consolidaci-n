@@ -114,9 +114,9 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
     public int obtenerNumeroBalas() {   //Método para devolver el número de balas, de la interfaz Disparable
         System.out.println("Obteniendo número de balas...\n");
         int contador = 0;   //Contador inicializado en cero
-        int i = 0; // Variable i que representa el índice para recorrer el array
+        int i; // Variable i que representa el índice para recorrer el array
 
-        while (i < cargador.length) { // Recorremos el array mientras no lleguemos al final
+       for (i = 0; i < cargador.length; i++ ) { // Recorremos el array mientras no lleguemos al final
             if (cargador[i] != null) {  //Por cada bala que encontremos (not null), se aumenta el cargador en uno
                 contador++;
             }
@@ -129,7 +129,6 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
     @Override
     public void eliminarBala() {
         boolean balaEliminada = false; // Variable de control que utilizaremos para eliminar solo una bala
-        boolean cargadorVacio = true; // Variable de control que utilizaremos para verificar si el cargador está vacío
         System.out.println("Eliminando bala del arma...\n");
 
         int i = cargador.length - 1; // Iniciamos desde la última posición
@@ -137,13 +136,12 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
         while (i >= 0 && !balaEliminada) { // While que usa como condiciones que i sea mayor o igual a 0 (para recorrerlo al revés) y que balaEliminada siga en false
             if (cargador[i] != null) { // Si encontramos una bala (not null), la eliminamos (null)
                 cargador[i] = null;
-                cargadorVacio = false; //cargadorVacío cambia a false
                 balaEliminada = true; // Salimos del bucle porque ya eliminamos una bala
             }
             i--; // Decrementamos el índice para seguir recorriendo
         }
 
-        if (cargadorVacio) { //Si las condiciones del while no se cumplen (es decir, el cargador no está vacío), cargadorVacío sigue en true, mostrando este mensaje
+        if (!balaEliminada) { //Si las condiciones del while no se cumplen (es decir, el cargador no está vacío), balaEliminada sigue en false
             System.out.println("¡Ojo! El cargador está vacío.");
         }
     }

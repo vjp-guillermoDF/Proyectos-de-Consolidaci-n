@@ -8,8 +8,10 @@ import General.Constantes;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
+import Recursos.lugares.Comisaria;
 import Recursos.personajes.Cyborg;
 import Recursos.personajes.Policia;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -20,74 +22,68 @@ public class MenuPrincipal {
 
     public static Policia jugador;
     //Variable global jugador, que almacena al Personaje de subclase Policía LunaCastillo, con sus atributos inicializados y un objeto ArmaLargoAlcance con velocidad, daño y diámetro inicializados. Este objeto ha sido creado e inicializado directamente en el constructor del personaje.
+    public static Comisaria comisaria;
 
     public static void submenuComisaria() {
-        boolean repetirMenu;
-        System.out.println("Pulse 1 para elegir policia. \nPulse 2 para crear policia. \nPulse 3 para mostrar los policias existentes. \nPulse 4 para modificar policias existentes. \nPulse 5 para eliminar alguno de los policias. \nPulse 6 para ubicar un personaje en el plano. \nPulse 7 para descifrar mensaje. \nPulse 8 para acceder a los pasatiempos. \nPulse 9 para registrar policias. \nPulse 10 para mostrar el registro de policias. \nPulse 11 para regresar al menu principal");
+        boolean cerrar = false;
         int var3 = 0;
         do {
+            System.out.println("Pulse 1 para elegir policia. \nPulse 2 para crear policia. \nPulse 3 para mostrar los policias existentes. \nPulse 4 para modificar policias existentes. \nPulse 5 para eliminar alguno de los policias. \nPulse 6 para ubicar un personaje en el plano. \nPulse 7 para descifrar mensaje. \nPulse 8 para acceder a los pasatiempos. \nPulse 9 para registrar policias. \nPulse 10 para mostrar el registro de policias. \nPulse 11 para regresar al menu principal");
+
             try {
                 switch (llamarEscaner(var3)) {
                     case 1:
-                        repetirMenu = false;
-
+                        comisaria.elegirPolicia();
                         break;
                     case 2:
-                        repetirMenu = false;
+                        comisaria.crearPolicia();
                         break;
                     case 3:
-                        repetirMenu = false;
-
+                        comisaria.mostrarPolicias();
                         break;
                     case 4:
-                        repetirMenu = false;
 
                         break;
                     case 5:
-                        repetirMenu = false;
-
+                        comisaria.eliminarPolicia();
                         break;
                     case 6:
-                        repetirMenu = false;
+                        comisaria.buscarPolicias();
                         break;
                     case 7:
-                        repetirMenu = false;
 
                         break;
                     case 8:
-                        repetirMenu = false;
 
                         break;
                     case 9:
-                        repetirMenu = false;
 
                         break;
                     case 10:
-                        repetirMenu = false;
 
                         break;
                     case 11:
-                        repetirMenu = false;
+                        cerrar = true;
                         System.out.println("Regresando al menu principal");
                         menuPrincipal();
                         break;
 
                     default:
                         System.out.println("El numero introducido debe ser entre 1 y 11.");
-                        repetirMenu = true;
+
                         break;
                 }
-            } catch (Exception e) {
-                repetirMenu = true;
+            } catch (InputMismatchException e) {
+
                 System.out.println("ERROR. Debe introducir un numero, y debe ser entre 1 y 11.");
 
             }
 
-        } while (repetirMenu);
+        } while (!cerrar);
     }
 
     public static void submenuAlmacen() {
-        boolean repetirMenu;
+        boolean cerrar = false;
         int var2 = 0;
         System.out.println("Pulse 1 para elegir arma. \nPulse 2 para crear arma. \nPulse 3 para mostrar las armas existentes. \nPulse 4 para modificar las armas. \nPulse 5 para eliminar alguna de las armas. \nPulse 6 para registrar un arma. \nPulse 7 para mostrar el registro de armas. \nPulse 8 para regresar al menu principal.");
         do {
@@ -95,56 +91,50 @@ public class MenuPrincipal {
 
                 switch (llamarEscaner(var2)) {
                     case 1:
-                        repetirMenu = false;
+
                         System.out.println("Elija arma");
 
                         break;
                     case 2:
-                        repetirMenu = false;
 
                         break;
                     case 3:
-                        repetirMenu = false;
 
                         break;
 
                     case 4:
-                        repetirMenu = false;
 
                         break;
                     case 5:
-                        repetirMenu = false;
 
                         break;
                     case 6:
-                        repetirMenu = false;
 
                         break;
                     case 7:
-                        repetirMenu = false;
 
                         break;
                     case 8:
-                        repetirMenu = false;
+                        cerrar = true;
                         System.out.println("Regresando al menu principal");
                         menuPrincipal();
                         break;
                     default:
                         System.out.println("El numero introducido debe ser entre 1 y 8.");
-                        repetirMenu = true;
+
                         break;
                 }
             } catch (Exception e) {
-                repetirMenu = true;
+
                 System.out.println("ERROR. Debe introducir un numero, y debe ser entre el 1  y el 8.");
 
             }
 
-        } while (repetirMenu);
+        } while (!cerrar);
     }
 
     public static void menuPrincipal() {
-        boolean repetirMenu;
+        boolean cerrar = false;
         int var = 0;
         System.out.println("Pulse 1 para entrar al almacen. \nPulse 2 para entrar en comisaria. \nPulse 3 para intervenir en el refugio. \nPulse 4 para salir del menu.");
 
@@ -152,39 +142,38 @@ public class MenuPrincipal {
             try {
                 switch (llamarEscaner(var)) {
                     case 1:
-                        repetirMenu = false;
+
                         pedirPassword();
                         break;
                     case 2:
-                        repetirMenu = false;
+
                         submenuComisaria();
                         break;
                     case 3:
-                        repetirMenu = false;
+
                         break;
                     case 4:
-                        repetirMenu = false;
+                        cerrar = true;
                         System.out.println("Sistema finalizado");
                         break;
                     default:
                         System.out.println("El numero introducido debe ser entre 1 y 4.");
-                        repetirMenu = true;
+
                         break;
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("ERROR. Debe introducir un numero.");
-                repetirMenu = true;
 
             }
 
-        } while (repetirMenu);
+        } while (!cerrar);
 
     }
 
     public static void pedirPassword() {
         int intentos = 3;
         int numero = 0;
-        boolean cerrarBucle = true;
+        boolean cerrarBucle = false;
         Constantes contrasena = new Constantes();
         System.out.println("Introduzca la contrasena. Tiene " + intentos + " intentos.");
         do {
@@ -196,7 +185,7 @@ public class MenuPrincipal {
                     submenuAlmacen();
 
                 } else {
-                    cerrarBucle = false;
+
                     intentos--;
                     System.out.println("Contrasena incorrecta. Te quedan " + intentos + " intentos.");
                     if (intentos == 0) {
@@ -205,7 +194,7 @@ public class MenuPrincipal {
                     }
 
                 }
-            } catch (Exception e) {
+            } catch (Exception e) {  
                 cerrarBucle = false;
                 System.out.println("Debe introducir un numero.");
             }
@@ -221,7 +210,6 @@ public class MenuPrincipal {
     }
 
     public static void main(String[] args) {
-        //menuPrincipal();
 
         Arma armaLiberacion = new ArmaCortoAlcance(10, 6);  //Arma de subclase ArmaCortoAlcance "ArmaLiberacion" creada en el anterior ejercicio para simular el arma terrorista, aunque no se usa.
         Arma armaLiberacion1 = new ArmaCortoAlcance(10, 12);    //Arma de subclase ArmaCortoAlcance de Kai Patel, creada con diez de alcance y doce de diámetro.
@@ -230,6 +218,9 @@ public class MenuPrincipal {
         Cyborg Siren = new Cyborg("Logistica", "Francia", "??? (Siren)", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
         Cyborg Logan = new Cyborg("Explosivos y Armas", "Francia", "Logan", 'V', 5, 5, new ArmaCortoAlcance()); //Creamos al personaje Logan tal como vimos en los mensajes cifrados, le asignamos un arma por defecto
         jugador = new Policia("Operaciones", "Armas Largo Alcance", "Comisaria", "Luna Castillo", 'L', 8, 6, new ArmaLargoAlcance(2000, 10, 20)); //Personaje de subclase Policía LunaCastillo, almacenado en la variable global jugador.
+        comisaria = new Comisaria();
+
+        menuPrincipal();
 
         /* Dejamos la simulación anterior como comentario para esta entrega 
         
@@ -251,8 +242,7 @@ public class MenuPrincipal {
         }
         Siren.esquivar();     
         Siren.defender();
-         */
-        
+         
         Kai.atacar(jugador); //Implementamos los métodos tal como se nos pide en el enunciado.
         jugador.esquivar();
         jugador.defender();
@@ -260,13 +250,12 @@ public class MenuPrincipal {
         for (int i = 0; i < 4; i++) {
             jugador.atacar(Kai);
         }
- 
+
         jugador.atacar(Siren);
         Siren.esquivar();
         Siren.defender();
-        
-        //LA CLASE DESCIFRAR MENSAJES TIENE SU PROPIO MAIN, POR ESO NO LA LLAMAMOS AQUÍ
-        
-       
+
+        LA CLASE DESCIFRAR MENSAJES TIENE SU PROPIO MAIN, POR ESO NO LA LLAMAMOS AQUÍ
+         */
     }
 }

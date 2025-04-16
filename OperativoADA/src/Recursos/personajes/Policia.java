@@ -83,25 +83,30 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
     @Override
     public void atacar(Personajes enemigo) { //El método atacar, heredado de la interfaz Jugable.
 
-        if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
+        Arma armaPolicia = getArma();
+
+        if (enemigo.getVida() <= 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
             System.out.println("El enemigo ya está abatido.\n");
         } else { //De lo contrario, la condición else se ejecuta, dentro de la cual existe otro condicional if
             System.out.println("Policía: " + getNombre() + " se prepara para atacar.\n");
-            getArma();
-            if (getArma() == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
+
+            if (armaPolicia == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
                 System.out.println("Policía: " + getNombre() + " no tiene arma asignada.\n");
-            } else if (getArma().obtenerNumeroBalas() < 3) { //Condicional if para el caso en que haya menos de tres balas en el cargador
+            } else if (armaPolicia.obtenerNumeroBalas() < 3) { //Condicional if para el caso en que haya menos de tres balas en el cargador
                 System.out.println("El arma del policia: " + getNombre() + " no tiene balas suficientes.\n");
                 getArma().cargarArma();
             }
 
-            getArma().apuntar(enemigo);
+            armaPolicia.apuntar(enemigo);
 
-            for (int i = 0; i < 3 && enemigo.getVida() > 0; i++) { //Dentro del bucle for añadimos la condicion de que la vida del enemigo esté por encima de cero, así se detendrá si este muere antes del tercer disparo
-                getArma().disparar(enemigo);
-                getArma().eliminarBala();
+            int i = 0;
 
+            while (i < 3 && enemigo.getVida() > 0) { //Dentro del bucle for añadimos la condicion de que la vida del enemigo esté por encima de cero, así se detendrá si este muere antes del tercer disparo
+                armaPolicia.disparar(enemigo);
+                armaPolicia.eliminarBala();
+                i++;
             }
+
         }
 
     }

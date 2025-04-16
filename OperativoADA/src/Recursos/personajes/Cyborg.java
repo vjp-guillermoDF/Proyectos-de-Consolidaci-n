@@ -54,23 +54,25 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
     @Override
     public void atacar(Personajes enemigo) {    //El método atacar, heredado de la interfaz Jugable.
 
-        if (enemigo.getVida() == 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
+        Arma armaCyborg = getArma();
+
+        if (enemigo.getVida() <= 0) { //Usamos el condicional para el caso en que la vida del enemigo ya esté en cero
             System.out.println("El enemigo ya está abatido");
         } else { //De lo contrario, la condición else se ejecuta, dentro de la cual existe otro condicional if
             System.out.println("Cyborg: " + getNombre() + " se prepara para atacar.");
-            getArma();
-            if (getArma() == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
+
+            if (armaCyborg == null) { //Usamos el condicional para el caso en que el arma del personaje sea en null
                 System.out.println("Cyborg: " + getNombre() + " no tiene arma asignada.");
-            } else if (getArma().obtenerNumeroBalas() == 0) { //Condicional if para el caso en que no haya balas en el cargador
+            } else if (armaCyborg.obtenerNumeroBalas() == 0) { //Condicional if para el caso en que no haya balas en el cargador
                 System.out.println("El arma del cyborg: " + getNombre() + " está vacía.");
-                getArma().cargarArma();
+                armaCyborg.cargarArma();
             }
 
             getArma().apuntar(enemigo);
             if (enemigo.getVida() > 0) { //Aquí no usamos for sino un if, ya que solamente existe una condición
 
-                getArma().disparar(enemigo);
-                getArma().eliminarBala();
+                armaCyborg.disparar(enemigo);
+                armaCyborg.eliminarBala();
 
             }
         }
@@ -100,7 +102,7 @@ public class Cyborg extends Personajes implements Jugable { //La subclase hereda
         } else {    //De lo contrario (es decir, si la suma es mayor a 100), actualizamos la vida en el setter a 100, puesto que 100 debe ser el máximo.
             setVida(100);
         }
-        System.out.println("Cyborg: [" + getNombre() + "] crea un escudo de ["+ escudo +"] | Vida: ["+ getVida() +"].");  //Imprimimos la información.
+        System.out.println("Cyborg: [" + getNombre() + "] crea un escudo de [" + escudo + "] | Vida: [" + getVida() + "].");  //Imprimimos la información.
     }
 
 }

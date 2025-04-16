@@ -42,7 +42,7 @@ public class Personajes { //Atributos privados de la clase.
         this.identificador = generarID(); //Se inicializa por defecto llamando al método generarID().
         this.nombre = "";
         this.vida = 100; //Se inicializa por defecto en 100.
-        this.marca = 0;
+        this.marca = ' ';
         this.coordenadaX = 0;
         this.coordenadaY = 0;
         this.arma = new ArmaCortoAlcance(); //Se inicializa por defecto como ArmaCortoAlcance.
@@ -73,7 +73,7 @@ public class Personajes { //Atributos privados de la clase.
         return vida;
     }
 
-    public int getMarca() {
+    public char getMarca() {
         return marca;
     }
 
