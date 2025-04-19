@@ -6,6 +6,7 @@ package Recursos.lugares;
 
 import General.Constantes;
 import Operaciones.MenuPrincipal;
+import static Operaciones.MenuPrincipal.jugador;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
@@ -44,42 +45,44 @@ public class Comisaria {
         return "Comisaria{" + "policias=" + policias + '}';
     }
 
-    public void elegirPolicia() {
-
+    public Policia elegirPolicia() {
+        Policia policiaBuscado = MenuPrincipal.jugador;       //Inicializamos el policía que vamos a buscar.
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
         if (!policias.isEmpty()) {
-
+            System.out.println(Constantes.AZUL + "[*] [*] [*] Seleccionando policia... [*] [*] [*]" + Constantes.BORRAR);
             System.out.println("Escribe el nº de placa del policia: ");
             try {
                 int respuesta = entrada.nextInt();
                 Iterator it = policias.iterator();
 
                 while (!enc && it.hasNext()) {
+                    Policia policia = (Policia) it.next();
 
-                    Policia aux = (Policia) it.next();
-
-                    if (respuesta == aux.getNumeroPlaca()) {
+                    if (respuesta == policia.getNumeroPlaca()) {
+                        policiaBuscado = policia;
                         System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
-                        MenuPrincipal.jugador = aux;
-                        System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + aux.getNombre() + "." + Constantes.BORRAR);
+                        System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + policiaBuscado.getNombre() + "." + Constantes.BORRAR);
                         enc = true;
+
                     }
 
                     if (!enc) {
-                        System.out.println("Policia no encontrado.");
+                        System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
                     }
 
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("ERROR. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+
             }
 
         } else {
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
 
         }
+        return policiaBuscado;
     }
 
     public void eliminarPolicia() {
@@ -106,14 +109,13 @@ public class Comisaria {
                         enc = true;
                     }
 
-                    if (!enc) {
-                        System.out.println("Policia no encontrado.");
-                    }
-
+                }
+                if (!enc) {
+                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("ERROR. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
 
         } else {
@@ -169,20 +171,19 @@ public class Comisaria {
                                 System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
                                 break;
                             default:
-                                System.out.println("Opcion no permitida");
+                                System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
                         }
 
                         enc = true;
                     }
 
-                    if (!enc) {
-                        System.out.println("Policia no encontrado.");
-                    }
-
+                }
+                if (!enc) {
+                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("ERROR. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
 
         } else {
@@ -191,10 +192,10 @@ public class Comisaria {
         }
     }
 
-    public void buscarPolicias() {
+    public Policia buscarPolicias() {
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
-
+        Policia policiaBuscado = null;
         if (!policias.isEmpty()) {
 
             System.out.println("Escribe el nº de placa del policia: ");
@@ -204,16 +205,16 @@ public class Comisaria {
 
                 while (!enc && it.hasNext()) {
 
-                    Policia aux = (Policia) it.next();
-                    Arma armaux = aux.getArma();
+                    policiaBuscado = (Policia) it.next();
+                    Arma armaux = policiaBuscado.getArma();
 
-                    if (respuesta == aux.getNumeroPlaca()) {
+                    if (respuesta == policiaBuscado.getNumeroPlaca()) {
                         System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
 
                         System.out.println("* * * * * POLICÍA * * * * *");
-                        System.out.println(aux.getNombre() + " | " + aux.getVida());
-                        System.out.println("Id: " + aux.getIdentificador());
-                        if (aux.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
+                        System.out.println(policiaBuscado.getNombre() + " | " + policiaBuscado.getVida());
+                        System.out.println("Id: " + policiaBuscado.getIdentificador());
+                        if (policiaBuscado.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
                             System.out.println("Arma: Arma de corto alcance - ID: " + armaux.getIdentificador());
                         } else {
                             System.out.println("Arma: Arma de largo alcance - ID: " + armaux.getIdentificador());
@@ -236,32 +237,37 @@ public class Comisaria {
                         } else if (armaux instanceof ArmaLargoAlcance) {
                             System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaux).getVelocidad());
                         }
-                        System.out.println("Marca: " + aux.getMarca());
-                        System.out.println("Coordenada X: " + aux.getCoordenadaX());
-                        System.out.println("Coordenada Y: " + aux.getCoordenadaY());
-                        System.out.println("Nº de placa: " + aux.getNumeroPlaca());
-                        System.out.println("Rango: " + aux.getRango());
-                        System.out.println("Permiso de armas: " + aux.getPermisoArma());
-                        System.out.println("Dpto: " + aux.getDepartamento());
+                        System.out.println("Marca: " + policiaBuscado.getMarca());
+                        System.out.println("Coordenada X: " + policiaBuscado.getCoordenadaX());
+                        System.out.println("Coordenada Y: " + policiaBuscado.getCoordenadaY());
+                        System.out.println("Nº de placa: " + policiaBuscado.getNumeroPlaca());
+                        System.out.println("Rango: " + policiaBuscado.getRango());
+                        System.out.println("Permiso de armas: " + policiaBuscado.getPermisoArma());
+                        System.out.println("Dpto: " + policiaBuscado.getDepartamento());
                         System.out.println("* * * * * * * * * * * * * *");
                         System.out.println("");
 
                         enc = true;
-                    }
 
-                    if (!enc) {
-                        System.out.println("Policia no encontrado.");
                     }
 
                 }
 
+                if (!enc) {
+                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
+
+                }
+
             } catch (InputMismatchException e) {
-                System.out.println("ERROR. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
         } else {
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
 
         }
+
+        return policiaBuscado;
+
     }
 
     public void mostrarPolicias() {
@@ -276,11 +282,13 @@ public class Comisaria {
                 System.out.println("* * * * * POLICÍA * * * * *");
                 System.out.println(aux.getNombre() + " | " + aux.getVida());
                 System.out.println("Id: " + aux.getIdentificador());
+
                 if (aux.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
                     System.out.println("Arma: Arma de corto alcance - ID: " + armaux.getIdentificador());
                 } else {
                     System.out.println("Arma: Arma de largo alcance - ID: " + armaux.getIdentificador());
                 }
+
                 System.out.println("Daño: " + armaux.getDaño());
                 System.out.println("Diámetro bala: " + armaux.getDiametro());
                 System.out.println("Tamaño del cargador: " + armaux.getCargador().length);
@@ -299,6 +307,7 @@ public class Comisaria {
                 } else if (armaux instanceof ArmaLargoAlcance) {
                     System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaux).getVelocidad());
                 }
+
                 System.out.println("Marca: " + aux.getMarca());
                 System.out.println("Coordenada X: " + aux.getCoordenadaX());
                 System.out.println("Coordenada Y: " + aux.getCoordenadaY());
@@ -326,11 +335,7 @@ public class Comisaria {
         nuevoPolicia.setDepartamento(pedirDepartamento());
         nuevoPolicia.setPermisoArma(pedirPermisoArma());
 
-        if (nuevoPolicia.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Por coherencia, el arma le es asignada al policía en función de su permiso
-            nuevoPolicia.setArma(new ArmaCortoAlcance());
-        } else {            //La razón por la que añado else es porque al llegar aquí, se ha implementado el método pedirPermisoArma y por tanto solo hay dos opciones posibles en el getter
-            nuevoPolicia.setArma(new ArmaLargoAlcance());
-        }
+        nuevoPolicia.setArma(new ArmaCortoAlcance());
 
         nuevoPolicia.setRango(pedirRango());
         nuevoPolicia.setMarca(nuevoPolicia.getNombre().charAt(0));
@@ -386,10 +391,10 @@ public class Comisaria {
                         cerrar = true;
                         break;
                     default:
-                        System.out.println("Error. Las tres opciones posibles son 'Inteligencia', 'Operaciones' o 'Investigacion'.");
+                        System.out.println(Constantes.AMARILLO + "Las tres opciones posibles son 'Inteligencia', 'Operaciones' o 'Investigacion'." + Constantes.BORRAR);
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error. Las tres opciones posibles son 'Inteligencia', 'Operaciones' o 'Investigacion'.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -405,13 +410,12 @@ public class Comisaria {
         Scanner entrada = new Scanner(System.in);
         do {
             try {
-                System.out.println("Introduzca el permiso de armas: Escriba 1 para Corto Alcance, 2 para Largo Alcance: ");
+                System.out.println("Introduzca el permiso de armas: Escriba 1 para Corto Alcance, 2 para Largo Alcance.");
                 int respuesta = entrada.nextInt();
 
                 switch (respuesta) {
                     case 1:
                         permiso = "Corto Alcance";
-
                         cerrar = true;
                         break;
                     case 2:
@@ -419,12 +423,12 @@ public class Comisaria {
                         cerrar = true;
                         break;
                     default:
-                        System.out.println("Error. Las opciones posibles son: 1 para Corto Alcance o 2 para Largo Alcance.");
+                        System.out.println(Constantes.AMARILLO + "Las opciones posibles son: 1 para Corto Alcance o 2 para Largo Alcance." + Constantes.BORRAR);
                         break;
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("Error. Las opciones posibles son: 1 para Corto Alcance o 2 para Largo Alcance.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -458,10 +462,10 @@ public class Comisaria {
                         cerrar = true;
                         break;
                     default:
-                        System.out.println("Error. Las posibles opciones son: 1 para Agente. 2 para Inspector. 3 para Comisario.");
+                        System.out.println(Constantes.AMARILLO + "Las posibles opciones son: 1 para Agente. 2 para Inspector. 3 para Comisario." + Constantes.BORRAR);
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error. Las posibles opciones son: 1 para Agente. 2 para Inspector. 3 para Comisario.");
+                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }

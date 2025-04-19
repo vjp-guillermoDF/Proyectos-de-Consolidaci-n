@@ -45,37 +45,38 @@ public class Almacen {
         return "Almacen{" + "armas=" + armas + '}';
     }
 
-    public void elegirArma() {
+    public Arma elegirArma() {
 
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
+        Arma armaBuscada = MenuPrincipal.jugador.getArma(); 
 
-        if (armas.isEmpty()) {
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
-        } else {
+        System.out.println(Constantes.CELESTE + "[*] [*] [*] Seleccionando arma... [*] [*] [*]" + Constantes.BORRAR);
+        System.out.println("Escribe el identificador del arma: ");
+        String respuesta = entrada.next();
+        Iterator it = armas.keySet().iterator();
 
-            System.out.println("Escribe el identificador del arma: ");
-            String respuesta = entrada.next();
-            Iterator it = armas.keySet().iterator();
-
-            while (!enc && it.hasNext()) {
-                String clave = (String) it.next();
-                Arma aux = armas.get(clave);
-
-                if (respuesta.equalsIgnoreCase(aux.getIdentificador())) {
-                    System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
-                    MenuPrincipal.jugador.setArma(aux);
-                    System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Tu jugador lleva el arma con el identificador " + aux.getIdentificador() + Constantes.BORRAR);
-                    enc = true;
-
-                }
+        while (!enc && it.hasNext()) {
+            String clave = (String) it.next();
+            Arma arma = armas.get(clave);
+            String id = arma.getIdentificador();
+            if (respuesta.equalsIgnoreCase(id)) {
+                System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
+                
+                armaBuscada = arma;
+                System.out.println(Constantes.FONDO_VERDE + "¡Hecho! Tu jugador lleva el arma con identificador " + id + "." + Constantes.BORRAR);
+                enc = true;
 
             }
 
-            if (!enc) {
-                System.out.println("Arma no encontrada");
-            }
         }
+
+        if (!enc) {
+            System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
+
+        }
+
+        return armaBuscada;
     }
 
     public void eliminarArma() {
@@ -105,14 +106,15 @@ public class Almacen {
             }
 
             if (!enc) {
-                System.out.println("Arma no encontrada");
+                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
             }
         }
     }
 
-    public void buscarArma() {
+    public Arma buscarArma() {
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
+        Arma armaBuscada = null;
 
         if (armas.isEmpty()) {
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
@@ -124,27 +126,27 @@ public class Almacen {
 
             while (!enc && it.hasNext()) {
                 String clave = (String) it.next();
-                Arma aux = armas.get(clave);
+                armaBuscada = armas.get(clave);
 
-                if (respuesta.equalsIgnoreCase(aux.getIdentificador())) {
+                if (respuesta.equalsIgnoreCase(armaBuscada.getIdentificador())) {
                     enc = true;
                     System.out.println("[v] Arma encontrada");
 
-                    if (aux instanceof ArmaCortoAlcance) {
-                        System.out.println("Arma de corto alcance - ID:" + aux.getIdentificador());
-                    } else if (aux instanceof ArmaLargoAlcance) {
-                        System.out.println("Arma de largo alcance - ID:" + aux.getIdentificador());
+                    if (armaBuscada instanceof ArmaCortoAlcance) {
+                        System.out.println("Arma de corto alcance - ID:" + armaBuscada.getIdentificador());
+                    } else if (armaBuscada instanceof ArmaLargoAlcance) {
+                        System.out.println("Arma de largo alcance - ID:" + armaBuscada.getIdentificador());
                     }
 
-                    System.out.println("Daño: " + aux.getDaño());
-                    System.out.println("Diámetro bala: " + aux.getDiametro());
-                    System.out.println("Tamaño cargador: " + aux.getCargador().length);
+                    System.out.println("Daño: " + armaBuscada.getDaño());
+                    System.out.println("Diámetro bala: " + armaBuscada.getDiametro());
+                    System.out.println("Tamaño cargador: " + armaBuscada.getCargador().length);
 
                     int contador = 0;
                     int i;
 
-                    for (i = 0; i < aux.getCargador().length; i++) {
-                        if (aux.getCargador()[i] != null) {
+                    for (i = 0; i < armaBuscada.getCargador().length; i++) {
+                        if (armaBuscada.getCargador()[i] != null) {
                             contador++;
                         }
                         i++;
@@ -152,19 +154,21 @@ public class Almacen {
 
                     System.out.println("Nº balas: " + contador);
 
-                    if (aux instanceof ArmaCortoAlcance) {
-                        System.out.println("Alcance:" + ((ArmaCortoAlcance) aux).getAlcance());
-                    } else if (aux instanceof ArmaLargoAlcance) {
-                        System.out.println("Velocidad: " + ((ArmaLargoAlcance) aux).getVelocidad());
+                    if (armaBuscada instanceof ArmaCortoAlcance) {
+                        System.out.println("Alcance:" + ((ArmaCortoAlcance) armaBuscada).getAlcance());
+                    } else if (armaBuscada instanceof ArmaLargoAlcance) {
+                        System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaBuscada).getVelocidad());
                     }
 
                 }
-                if (!enc) {
-                    System.out.println("Arma no encontrada");
-                }
 
             }
+
+            if (!enc) {
+                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
+            }
         }
+        return armaBuscada;
     }
 
     public void modificarArma() {
@@ -174,7 +178,6 @@ public class Almacen {
         if (armas.isEmpty()) {
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
         } else {
-
             System.out.println("Escribe el identificador del arma: ");
             String respuesta = entrada.next();
             Iterator it = armas.keySet().iterator();
@@ -194,10 +197,10 @@ public class Almacen {
                     }
 
                 }
-                if (!enc) {
-                    System.out.println("Arma no encontrada");
-                }
 
+            }
+            if (!enc) {
+                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
             }
         }
 
@@ -205,6 +208,7 @@ public class Almacen {
 
     public void modificarArmaLargoAlcance(Arma arma) {
         Scanner entrada = new Scanner(System.in);
+        System.out.println(Constantes.CELESTE + "[*] [*] [*] Modificando arma... [*] [*] [*]" + Constantes.BORRAR);
         System.out.println("¿Qué atributo quieres modificar?");
         System.out.println("[1] Numero de balas del cartucho");
         System.out.println("[2] Diametro de bala");
@@ -228,16 +232,17 @@ public class Almacen {
 
                     break;
                 default:
-                    System.out.println("Opcion no permitida");
+                    System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error. Debes introducir un numero.");
+            System.out.println(Constantes.ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
         }
     }
 
     public void modificarArmaCortoAlcance(Arma arma) {
         Scanner entrada = new Scanner(System.in);
+        System.out.println(Constantes.CELESTE + "[*] [*] [*] Modificando arma... [*] [*] [*]" + Constantes.BORRAR);
         System.out.println("¿Qué atributo quieres modificar?");
         System.out.println("[1] Numero de balas del cartucho");
         System.out.println("[2] Diametro de bala");
@@ -261,11 +266,11 @@ public class Almacen {
 
                     break;
                 default:
-                    System.out.println("Opcion no permitida");
+                    System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error. Debes introducir un numero.");
+            System.out.println(Constantes.ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
         }
     }
 
@@ -344,11 +349,11 @@ public class Almacen {
 
                     break;
                 default:
-                    System.out.println("No se pueden crear armas del tipo seleccionado.");
+                    System.out.println(Constantes.AMARILLO + "No se pueden crear armas del tipo seleccionado." + Constantes.BORRAR);
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error. Se debe introducir un numero.");
+            System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
         }
 
     }
@@ -364,7 +369,9 @@ public class Almacen {
                 cargador = new Bala[entrada.nextInt()];
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println("Error. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
+
             }
         } while (!cerrar);
 
@@ -383,7 +390,9 @@ public class Almacen {
                 diametro = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println("Error. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
+
             }
         } while (!cerrar);
         return diametro;
@@ -401,7 +410,9 @@ public class Almacen {
                 alcance = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println("Error. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
+
             }
         } while (!cerrar);
         return alcance;
@@ -419,7 +430,9 @@ public class Almacen {
                 velocidad = entrada.nextDouble();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println("Error. Debe introducir un numero.");
+                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
+
             }
         } while (!cerrar);
 
