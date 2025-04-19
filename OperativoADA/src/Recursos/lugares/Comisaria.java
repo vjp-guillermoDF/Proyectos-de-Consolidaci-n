@@ -6,7 +6,6 @@ package Recursos.lugares;
 
 import General.Constantes;
 import Operaciones.MenuPrincipal;
-import static Operaciones.MenuPrincipal.jugador;
 import Recursos.armas.Arma;
 import Recursos.armas.ArmaCortoAlcance;
 import Recursos.armas.ArmaLargoAlcance;
@@ -45,215 +44,122 @@ public class Comisaria {
         return "Comisaria{" + "policias=" + policias + '}';
     }
 
-    public Policia elegirPolicia() {
-        Policia policiaBuscado = MenuPrincipal.jugador;       //Inicializamos el policía que vamos a buscar.
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
-        if (!policias.isEmpty()) {
-            System.out.println(Constantes.AZUL + "[*] [*] [*] Seleccionando policia... [*] [*] [*]" + Constantes.BORRAR);
-            System.out.println("Escribe el nº de placa del policia: ");
-            try {
-                int respuesta = entrada.nextInt();
-                Iterator it = policias.iterator();
+    public Policia elegirPolicia() {        //Método para elegir un policía, devolverlo y asignárselo al jugador principal
+        Policia policiaBuscado = MenuPrincipal.jugador;         //Inicializamos el policía que vamos a buscar con el jugador
 
-                while (!enc && it.hasNext()) {
-                    Policia policia = (Policia) it.next();
+        if (!policias.isEmpty()) {      //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
 
-                    if (respuesta == policia.getNumeroPlaca()) {
-                        policiaBuscado = policia;
-                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
-                        System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + policiaBuscado.getNombre() + "." + Constantes.BORRAR);
-                        enc = true;
+            Policia aux = buscarPolicias();
 
-                    }
+            if (aux != null) {      //Si buscarPolicias() nos devuelve un objeto y no un null, el policía que inicializamos al principio se sobreescribe con este. De lo contrario, nada sucederá y el propio método buscar nos dirá que el policía no ha sido encontrado
+                policiaBuscado = aux;
 
-                    if (!enc) {
-                        System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
-                    }
-
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + policiaBuscado.getNombre() + "." + Constantes.BORRAR);
 
             }
 
-        } else {
+        } else {     //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
 
         }
-        return policiaBuscado;
+        return policiaBuscado;      //Devolvemos el policía que inicializamos al principio. Si no encontramos ninguno, seguirá siendo el jugador.
     }
 
-    public void eliminarPolicia() {
+    public void eliminarPolicia() {     //Método para eliminar un arma del mapa
 
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
-
-        if (!policias.isEmpty()) {
+        if (!policias.isEmpty()) {   //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
 
             System.out.println(Constantes.FONDO_ROJO + "[*] [*] [*] Eliminando policia... [*] [*] [*] " + Constantes.BORRAR);
-            System.out.println("Escribe el nº de placa del policia: ");
-            try {
-                int respuesta = entrada.nextInt();
-                Iterator it = policias.iterator();
 
-                while (!enc && it.hasNext()) {
+            Policia aux = buscarPolicias();
 
-                    Policia aux = (Policia) it.next();
+            if (aux != null) {  //Si buscarPolicias() nos devuelve un objeto y no un null, lo eliminamos de la lista. De lo contrario, nada sucederá y el propio método buscar nos dirá que el policía no ha sido encontrado
+                policias.remove(aux);
 
-                    if (respuesta == aux.getNumeroPlaca()) {
-                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
-                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia eliminado." + Constantes.BORRAR);
-                        policias.remove(aux);
-                        enc = true;
-                    }
-
-                }
-                if (!enc) {
-                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
-                }
-
-            } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_VERDE + "[v] Policia eliminado." + Constantes.BORRAR);
             }
 
-        } else {
+        } else {        //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
 
         }
     }
 
-    public void modificarPolicia() {
+    public void modificarPolicia() {        //Método para modificar un policía de la lista
 
         Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
 
-        if (!policias.isEmpty()) {
+        if (!policias.isEmpty()) {    //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
 
-            System.out.println("Escribe el nº de placa del policia: ");
-            try {
-                int respuesta = entrada.nextInt();
-                Iterator it = policias.iterator();
+            Policia aux = buscarPolicias();
 
-                while (!enc && it.hasNext()) {
+            if (aux != null) {  //Si el objeto devuelto no es nulo, se inicia el menú de modificación 
 
-                    Policia aux = (Policia) it.next();
+                System.out.println(Constantes.AZUL + "[*] [*] [*] Modificando policia... [*] [*] [*] " + Constantes.BORRAR);
 
-                    if (respuesta == aux.getNumeroPlaca()) {
-                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
-                        System.out.println(Constantes.AZUL + "[*] [*] [*] Modificando policia... [*] [*] [*] " + Constantes.BORRAR);
+                System.out.println("¿Que atributo quieres modificar?");
+                System.out.println("[1] Nombre");
+                System.out.println("[2] Departamento");
+                System.out.println("[3] Permiso de armas");
+                System.out.println("[4] Rango");
 
-                        System.out.println("¿Que atributo quieres modificar?");
-                        System.out.println("[1] Nombre");
-                        System.out.println("[2] Departamento");
-                        System.out.println("[3] Permiso de armas");
-                        System.out.println("[4] Rango");
+                switch (entrada.nextInt()) {        //Se inicia el menú con las opciones de modificación
+                    case 1:
+                        aux.setNombre(pedirNombre());   //Llamamos al setter del policía almacenado en aux, ahora devuelto desde buscarPolicia()
+                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
+                        break;
 
-                        switch (entrada.nextInt()) {
-                            case 1:
-                                aux.setNombre(pedirNombre());
-                                System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
-                                break;
+                    case 2:
+                        aux.setDepartamento(pedirDepartamento());
+                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
+                        break;
 
-                            case 2:
-                                aux.setDepartamento(pedirDepartamento());
-                                System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
-                                break;
+                    case 3:
+                        aux.setPermisoArma(pedirPermisoArma());
+                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
+                        break;
 
-                            case 3:
-                                aux.setPermisoArma(pedirPermisoArma());
-                                System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
-                                break;
-
-                            case 4:
-                                aux.setRango(pedirRango());
-                                System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
-                                break;
-                            default:
-                                System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
-                        }
-
-                        enc = true;
-                    }
-
-                }
-                if (!enc) {
-                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
+                    case 4:
+                        aux.setRango(pedirRango());
+                        System.out.println(Constantes.FONDO_VERDE + "[v] Policia modidificado" + Constantes.BORRAR);
+                        break;
+                    default:
+                        System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
                 }
 
-            } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+            } else {    //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
+                System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
+
             }
-
-        } else {
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
-
         }
+
     }
 
-    public Policia buscarPolicias() {
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
-        Policia policiaBuscado = null;
-        if (!policias.isEmpty()) {
+    public Policia buscarPolicias() {       //Método para buscar un policía y devolverlo. Este método se utilizará para ejecutar los demás de esta clase
+        Scanner entrada = new Scanner(System.in);       //Inicializamos el escáner
+        boolean enc = false;        //Variable booleana para detener la búsqueda cuando encontremos el objeto que necesitamos
+        Policia policiaBuscado = null;      //Inicializamos el policía que vamos a buscar en null
+        if (!policias.isEmpty()) {      //Si el Array no está vacío, iniciamos la búsqueda
 
             System.out.println("Escribe el nº de placa del policia: ");
             try {
-                int respuesta = entrada.nextInt();
-                Iterator it = policias.iterator();
+                int respuesta = entrada.nextInt();      //Buscamos un número de placa a través del escáner
+                Iterator it = policias.iterator();  //Creamos un iterador que utilizaremos para recorrer el Array
 
-                while (!enc && it.hasNext()) {
+                while (!enc && it.hasNext()) {      //Las condiciones son que enc permanezca en falso y que siga habiendo objetos en el iterador
 
-                    policiaBuscado = (Policia) it.next();
-                    Arma armaux = policiaBuscado.getArma();
+                    Policia actual = (Policia) it.next();   //Inicializamos una variable auxiliar para almacenar en ella el policía actual en la lista
 
-                    if (respuesta == policiaBuscado.getNumeroPlaca()) {
+                    if (respuesta == actual.getNumeroPlaca()) {     //Si el número buscado coincide con el número de placa del policía actual en la lista, este sobreescribe al policíaBuscado (que estaba en null)
+                        policiaBuscado = actual;
                         System.out.println(Constantes.FONDO_VERDE + "[v] Policia encontrado." + Constantes.BORRAR);
-
-                        System.out.println("* * * * * POLICÍA * * * * *");
-                        System.out.println(policiaBuscado.getNombre() + " | " + policiaBuscado.getVida());
-                        System.out.println("Id: " + policiaBuscado.getIdentificador());
-                        if (policiaBuscado.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
-                            System.out.println("Arma: Arma de corto alcance - ID: " + armaux.getIdentificador());
-                        } else {
-                            System.out.println("Arma: Arma de largo alcance - ID: " + armaux.getIdentificador());
-                        }
-                        System.out.println("Daño: " + armaux.getDaño());
-                        System.out.println("Diámetro bala: " + armaux.getDiametro());
-                        System.out.println("Tamaño del cargador: " + armaux.getCargador().length);
-                        int contador = 0;
-
-                        for (int i = 0; i < armaux.getCargador().length; i++) { // Recorremos el array mientras no lleguemos al final
-                            if (armaux.getCargador()[i] != null) {  //Por cada bala que encontremos (not null), se aumenta el cargador en uno
-                                contador++;
-                            }
-                            i++; // Incrementamos el índice en cada iteración. Esto OPTIMIZA LA UTILIZACIÓN DE RECURSOS ya que el array no seguirá recorriéndose aunque ya no queden Balas
-                        }
-                        System.out.println("Número de balas: " + contador);
-                        if (armaux instanceof ArmaCortoAlcance) {
-
-                            System.out.println("Alcance: " + (((ArmaCortoAlcance) armaux).getAlcance()));
-                        } else if (armaux instanceof ArmaLargoAlcance) {
-                            System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaux).getVelocidad());
-                        }
-                        System.out.println("Marca: " + policiaBuscado.getMarca());
-                        System.out.println("Coordenada X: " + policiaBuscado.getCoordenadaX());
-                        System.out.println("Coordenada Y: " + policiaBuscado.getCoordenadaY());
-                        System.out.println("Nº de placa: " + policiaBuscado.getNumeroPlaca());
-                        System.out.println("Rango: " + policiaBuscado.getRango());
-                        System.out.println("Permiso de armas: " + policiaBuscado.getPermisoArma());
-                        System.out.println("Dpto: " + policiaBuscado.getDepartamento());
-                        System.out.println("* * * * * * * * * * * * * *");
-                        System.out.println("");
-
-                        enc = true;
+                        enc = true;     //Enc cambia a true y el bucle se cierra
 
                     }
 
                 }
 
-                if (!enc) {
+                if (!enc) {     //Si llegamos al final de la lista sin encontrar el objeto, enc nunca cambiará a true y este mensaje aparecerá.
                     System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
 
                 }
@@ -261,31 +167,32 @@ public class Comisaria {
             } catch (InputMismatchException e) {
                 System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
-        } else {
+        } else {       //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
 
         }
 
-        return policiaBuscado;
+        return policiaBuscado;      //El objeto devuelto seguirá en null si no se ha encontrado nada, o será el que tenga el número de placa buscado
 
     }
 
-    public void mostrarPolicias() {
-        Iterator it = policias.iterator();
+    public void mostrarPolicias() {     //Método para ir mostrando todos los policías de la lista
+
         System.out.println(Constantes.AZUL + "[*] [*] [*] Mostrando policias... [*] [*] [*] " + Constantes.BORRAR);
 
-        if (!policias.isEmpty()) {
-            while (it.hasNext()) {
+        if (!policias.isEmpty()) {      //Lo primero es asegurar que el Array no esté vacío
+            Iterator it = policias.iterator();      //Creamos el iterador que usaremos para recorrer el Array
+            while (it.hasNext()) {      //La condición es que haya más objetos en el Array
 
-                Policia aux = (Policia) it.next();
-                Arma armaux = aux.getArma();
-                System.out.println("* * * * * POLICÍA * * * * *");
+                Policia aux = (Policia) it.next();      //Inicializamos una variable auxiliar en la que almacenamos el siguiente objeto del Array, casteado a objeto Policía
+                Arma armaux = aux.getArma();        //Almacenamos el arma de la variable auxiliar que pertenece a la superclase Arma. Más tarde usaremos el polimorfismo en función de lo que necesitemos mostrar
+                System.out.println("* * * * * POLICÍA * * * * *");      //Comenzamos a imprimir los datos en un formato adecuado a como se nos pidió en el supuesto
                 System.out.println(aux.getNombre() + " | " + aux.getVida());
                 System.out.println("Id: " + aux.getIdentificador());
 
-                if (aux.getPermisoArma().equalsIgnoreCase("Corto Alcance")) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
+                if (armaux instanceof ArmaCortoAlcance) { //Imprimimos un mensaje u otro en función del tipo de arma asignada
                     System.out.println("Arma: Arma de corto alcance - ID: " + armaux.getIdentificador());
-                } else {
+                } else if (armaux instanceof ArmaLargoAlcance) {
                     System.out.println("Arma: Arma de largo alcance - ID: " + armaux.getIdentificador());
                 }
 
@@ -301,14 +208,14 @@ public class Comisaria {
                     i++; // Incrementamos el índice en cada iteración. Esto OPTIMIZA LA UTILIZACIÓN DE RECURSOS ya que el array no seguirá recorriéndose aunque ya no queden Balas
                 }
                 System.out.println("Número de balas: " + contador);
-                if (armaux instanceof ArmaCortoAlcance) {
+                if (armaux instanceof ArmaCortoAlcance) {       //En función de si el arma es de un tipo u otro, utilizamos el polimofrismo para mostrar el atributo particular de cada tipo de arma (alcance o velocidad)
 
                     System.out.println("Alcance: " + (((ArmaCortoAlcance) armaux).getAlcance()));
                 } else if (armaux instanceof ArmaLargoAlcance) {
                     System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaux).getVelocidad());
                 }
 
-                System.out.println("Marca: " + aux.getMarca());
+                System.out.println("Marca: " + aux.getMarca());     //Imprimimos el resto de datos
                 System.out.println("Coordenada X: " + aux.getCoordenadaX());
                 System.out.println("Coordenada Y: " + aux.getCoordenadaY());
                 System.out.println("Nº de placa: " + aux.getNumeroPlaca());
@@ -319,45 +226,41 @@ public class Comisaria {
                 System.out.println("");
 
             }
-        } else {
+        } else {        //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
         }
 
     }
 
-    public void crearPolicia() {
+    public void crearPolicia() {        //Método para crear un objeto Policía y añadirlo al Array
 
-        Constantes ubicaciones = new Constantes();
-        Policia nuevoPolicia = new Policia();
+        Constantes ubicaciones = new Constantes();      //Creamos una variable de tipo Constantes de la que usaremos las ubicaciones
+        Policia nuevoPolicia = new Policia();       //Creamos un policía usando el constructor por defecto
 
-        nuevoPolicia.setNombre(pedirNombre());
+        nuevoPolicia.setNombre(pedirNombre());                  //Usamos el setter para ir asignando los valores a través de los métodos que usamos para pedir dichos valores
 
         nuevoPolicia.setDepartamento(pedirDepartamento());
         nuevoPolicia.setPermisoArma(pedirPermisoArma());
-
-        nuevoPolicia.setArma(new ArmaCortoAlcance());
-
         nuevoPolicia.setRango(pedirRango());
-        nuevoPolicia.setMarca(nuevoPolicia.getNombre().charAt(0));
+        nuevoPolicia.setArma(new ArmaCortoAlcance());           //Tal como se nos pide en el enunciado, le asignamos un arma de corto alcance
+        nuevoPolicia.setMarca(nuevoPolicia.getNombre().charAt(0));                  //Usamos la primera posición charAt(0) del nombre para asignar el alias del policía
 
-        nuevoPolicia.setCoordenadaX(ubicaciones.getUBICACION_COMISARIA_FILA());
+        nuevoPolicia.setCoordenadaX(ubicaciones.getUBICACION_COMISARIA_FILA());     //Usamos las variables almacenadas en el objeto de tipo Constantes para asignarlas en las coordenadas del policía
         nuevoPolicia.setCoordenadaY(ubicaciones.getUBICACION_COMISARIA_COLUMNA());
 
-        this.policias.add(nuevoPolicia);
+        this.policias.add(nuevoPolicia);        //Finalmente, añadimos al policía al Array
 
-        if (this.policias.contains(nuevoPolicia)) {
-            System.out.println(Constantes.AZUL + "[*] [*] [*] Creando policia... [*] [*] [*] " + Constantes.BORRAR);
-            System.out.println("Nombre: " + nuevoPolicia.getNombre());
-            System.out.println("Departamento (Inteligencia, Operaciones o Investigacion): " + nuevoPolicia.getDepartamento());
-            System.out.println("Permiso de armas (Corto alcance o Largo Alcance): " + nuevoPolicia.getPermisoArma());
-            System.out.println("Rango (Agente, Inspector/a, Comisario/a): " + nuevoPolicia.getRango());
-            System.out.println(Constantes.FONDO_VERDE + "[v]" + "Policia integrado en la unidad." + Constantes.BORRAR);
-            System.out.println("");
-        }
+        System.out.println(Constantes.AZUL + "[*] [*] [*] Creando policia... [*] [*] [*] " + Constantes.BORRAR);    //Imprimimos los datos del policía
+        System.out.println("Nombre: " + nuevoPolicia.getNombre());
+        System.out.println("Departamento (Inteligencia, Operaciones o Investigacion): " + nuevoPolicia.getDepartamento());
+        System.out.println("Permiso de armas (Corto alcance o Largo Alcance): " + nuevoPolicia.getPermisoArma());
+        System.out.println("Rango (Agente, Inspector/a, Comisario/a): " + nuevoPolicia.getRango());
+        System.out.println(Constantes.FONDO_VERDE + "[v]" + "Policia integrado en la unidad." + Constantes.BORRAR);
+        System.out.println("");
 
     }
 
-    public static String pedirNombre() {
+    public static String pedirNombre() {        //Método String que devuelve un nombre introducido por escáner
         Scanner entrada = new Scanner(System.in);
         System.out.println("Introduzca el nombre del policia: ");
         String nombre = entrada.next();
@@ -365,12 +268,11 @@ public class Comisaria {
 
     }
 
-    public static String pedirDepartamento() {
-        String departamento = "";
-
+    public static String pedirDepartamento() {   //Método String que devuelve un String modificado a través de un menú
+        String departamento = "";       //El String se inicializa vacío, en función de las opciones que elijamos cambiará a una u otra palabra
         boolean cerrar = false;
-        int respuesta;
         Scanner entrada = new Scanner(System.in);
+        int respuesta;
 
         do {
             try {
@@ -400,17 +302,17 @@ public class Comisaria {
             }
         } while (!cerrar);
 
-        return departamento;
+        return departamento;        //Devolvemos el String alterado
 
     }
 
-    public static String pedirPermisoArma() {
-        String permiso = "";
+    public static String pedirPermisoArma() {        //Método String que devuelve un String modificado a través de un menú
+        String permiso = "";            //El String se inicializa vacío, en función de las opciones que elijamos cambiará a una u otra palabra
         boolean cerrar = false;
         Scanner entrada = new Scanner(System.in);
         do {
             try {
-                System.out.println("Introduzca el permiso de armas: Escriba 1 para Corto Alcance, 2 para Largo Alcance.");
+                System.out.println("Introduzca el permiso de armas: Escriba 1 para Corto Alcance. 2 para Largo Alcance.");
                 int respuesta = entrada.nextInt();
 
                 switch (respuesta) {
@@ -434,14 +336,15 @@ public class Comisaria {
             }
 
         } while (!cerrar);
-        return permiso;
+        return permiso;     //Devolvemos el String alterado
 
     }
 
-    public static String pedirRango() {
-        Scanner entrada = new Scanner(System.in);
+    public static String pedirRango() {           //Método String que devuelve un String modificado a través de un menú
+        String rango = "";                             //El String se inicializa vacío, en función de las opciones que elijamos cambiará a una u otra palabra
         boolean cerrar = false;
-        String rango = "";
+        Scanner entrada = new Scanner(System.in);
+
         do {
             try {
                 System.out.println("Introduzca el rango: 1 para Agente. 2 para Inspector. 3 para Comisario.");
@@ -472,6 +375,6 @@ public class Comisaria {
 
         } while (!cerrar);
 
-        return rango;
+        return rango;        //Devolvemos el String alterado
     }
 }

@@ -30,14 +30,14 @@ public class Constantes {
     public static final String FONDO_CELESTE = "\033[46m";
     public static final String FONDO_GRIS = "\033[47m";
 
-    private final int PASSWORD = 1234;
-    private final int UBICACION_COMISARIA_FILA = 5;
+    private final int PASSWORD = 1234;      //Contraseña para el almacén
+    private final int UBICACION_COMISARIA_FILA = 5;     //Atributos creados para las coordenadas de los policías que creemos en el menú de la Comisaría
     private final int UBICACION_COMISARIA_COLUMNA = 8;
 
-    public Constantes() {
+    public Constantes() {       //Constructor por defecto. Dado que los atributos de esta clase son constantes, no podemos (ni tampoco necesitamos) implementar un constructor parametrizado
     }
 
-    public int getPASSWORD() {
+    public int getPASSWORD() {      //Getters. Los setters no existen puesto que no podemos alterar los valores de las constantes
         return PASSWORD;
     }
 
@@ -51,6 +51,11 @@ public class Constantes {
 
     public int getPassword() {
         return PASSWORD;
+    }
+
+    @Override
+    public String toString() {          //Método toString() para mostrar los datos. No lo necesitamos pero igualmente lo implementamos
+        return "Constantes{" + "PASSWORD=" + PASSWORD + ", UBICACION_COMISARIA_FILA=" + UBICACION_COMISARIA_FILA + ", UBICACION_COMISARIA_COLUMNA=" + UBICACION_COMISARIA_COLUMNA + '}';
     }
 
 }

@@ -24,9 +24,8 @@ public class MenuPrincipal {
 
     public static Policia jugador;
     //Variable global jugador, que almacena al Personaje de subclase Policía LunaCastillo, con sus atributos inicializados y un objeto ArmaLargoAlcance con velocidad, daño y diámetro inicializados. Este objeto ha sido creado e inicializado directamente en el constructor del personaje.
-    public static Comisaria comisaria;
-    public static Arma armaJugador;
-    public static Almacen almacen;
+    public static Comisaria comisaria;      //Variable global de tipo Comisaria  que inicializaremos más tarde
+    public static Almacen almacen;  //Variable global de tipo Almacen que inicializaremos más tarde
 
     public static void submenuComisaria() {
         Scanner entrada = new Scanner(System.in);
@@ -57,7 +56,6 @@ public class MenuPrincipal {
                         comisaria.eliminarPolicia();
                         break;
                     case 6:
-                        comisaria.buscarPolicias();
                         break;
                     case 7:
                         System.out.println(DescifrarMensajes.descifrar());
@@ -103,10 +101,27 @@ public class MenuPrincipal {
             try {
 
                 switch (entrada.nextInt()) {
-                    case 1:
+                    case 1:     //Hemos añadido un control especial para poder asignar solamente un arma que coincida con el permiso de armas del jugador
+                        if (jugador != null) {      //Si hay algún policía almacenado en la variable global jugador, comenzamos el proceso de selección de arma
+                            Arma armaJugador = almacen.elegirArma();        //Inicializamos una variable de tipo arma con el objeto que nos devuelva el método elegirArma() en la variable global almacem
 
-                        jugador.setArma(almacen.elegirArma());
-                        
+                            String permisoJug = jugador.getPermisoArma();   //Inicializamos una variable String con el permiso del jugador actual
+
+                            boolean armaAdecuada = (armaJugador instanceof ArmaCortoAlcance && permisoJug.equals("Corto Alcance") || armaJugador instanceof ArmaLargoAlcance && permisoJug.equals("Largo Alcance"));
+                            //Valor booleano que almacena como condiciones que el permiso de arma del jugador coincida con el arma elegida anteriormente.
+                            
+                            if (!almacen.getArmas().isEmpty() && armaAdecuada) {        //Si el permiso de arma coincide con el tipo de arma elegida, se la asignamos al jugador.
+
+                                System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Tu jugador lleva el arma con el identificador " + armaJugador.getIdentificador() + "." + Constantes.BORRAR);
+                                jugador.setArma(armaJugador);
+
+                            } else if (almacen.getArmas().isEmpty() && !armaAdecuada) {     //Si el permiso de arma no coincide con el tipo de arma elegida, no se la asignamos e imprimimos una advetencia.
+                                System.out.println(Constantes.AMARILLO + "Advertencia: Tu jugador tiene un permiso de armas de " + permisoJug + " y no es compatible con ese arma. Cambie su permiso o elija otra.");
+                            }
+                        } else {        //Nos guardamos de NullPointerException en el caso de tratar de elegir armas cuando aún no controlamos a ningún personaje
+                            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad a los que asignar arma." + Constantes.BORRAR);
+                        }
+
                         break;
                     case 2:
                         almacen.crearArma();
@@ -125,7 +140,6 @@ public class MenuPrincipal {
 
                         break;
                     case 7:
-                        almacen.buscarArma();
                         break;
                     case 8:
                         cerrar = true;
@@ -234,9 +248,9 @@ public class MenuPrincipal {
         Cyborg Kai = new Cyborg("Liderazgo", "Francia", "Kai Patel (Nexus)", 'N', 5, 5, armaLiberacion1);   //Personaje de subclase Cyborg Kai Patel, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
         Cyborg Siren = new Cyborg("Logistica", "Francia", "??? (Siren)", 'S', 5, 6, armaLiberacion2);   //Personaje de subclase Cyborg Siren, con sus atributos inicializados y su objeto ArmaCortoAlcance asignado.
         Cyborg Logan = new Cyborg("Explosivos y Armas", "Francia", "Logan", 'V', 5, 5, new ArmaCortoAlcance()); //Creamos al personaje Logan tal como vimos en los mensajes cifrados, le asignamos un arma por defecto
-        jugador = new Policia();
-        comisaria = new Comisaria();
-        almacen = new Almacen();
+
+        comisaria = new Comisaria();        //Inicializamos la variable global comisaria en el main
+        almacen = new Almacen();          //Inicializamos la variable global almacen en el main
 
         menuPrincipal();
 

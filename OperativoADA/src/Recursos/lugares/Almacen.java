@@ -45,168 +45,94 @@ public class Almacen {
         return "Almacen{" + "armas=" + armas + '}';
     }
 
-    public Arma elegirArma() {
+    public Arma elegirArma() {       //Método para elegir un arma, devolverlo y asignárselo al jugador principal
 
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
-        Arma armaBuscada = MenuPrincipal.jugador.getArma(); 
+        Arma armaBuscada = MenuPrincipal.jugador.getArma();      //Inicializamos el arma que vamos a buscar con el jugador
+        if (armas.isEmpty()) {       //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
+            System.out.println(Constantes.FONDO_ROJO + "No hay armas en el almacen." + Constantes.BORRAR);
+        } else {        //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarArma()
 
-        System.out.println(Constantes.CELESTE + "[*] [*] [*] Seleccionando arma... [*] [*] [*]" + Constantes.BORRAR);
-        System.out.println("Escribe el identificador del arma: ");
-        String respuesta = entrada.next();
-        Iterator it = armas.keySet().iterator();
+            Arma aux = buscarArma();
 
-        while (!enc && it.hasNext()) {
-            String clave = (String) it.next();
-            Arma arma = armas.get(clave);
-            String id = arma.getIdentificador();
-            if (respuesta.equalsIgnoreCase(id)) {
-                System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
-                
-                armaBuscada = arma;
-                System.out.println(Constantes.FONDO_VERDE + "¡Hecho! Tu jugador lleva el arma con identificador " + id + "." + Constantes.BORRAR);
-                enc = true;
+            if (aux != null) {      //Si buscarArma() nos devuelve un objeto y no un null, el arma que inicializamos al principio se sobreescribe con esta. De lo contrario, nada sucederá y el propio método buscar nos dirá que el arma no ha sido encontrada
+
+                armaBuscada = aux;
 
             }
 
         }
 
-        if (!enc) {
-            System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
-
-        }
-
-        return armaBuscada;
+        return armaBuscada;     //Devolvemos el arma que inicializamos al principio. Si no encontramos ninguno, seguirá siendo el del jugador.
     }
 
-    public void eliminarArma() {
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
+    public void eliminarArma() {        //Método para eliminar un arma del mapa
+
         System.out.println(Constantes.FONDO_ROJO + "[*] [*] [*] Eliminando arma... [*] [*] [*] " + Constantes.BORRAR);
-        if (armas.isEmpty()) {
+        if (armas.isEmpty()) {   //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
-        } else {
+        } else {    //Si hay armas en el mapa, inicializamos una variable auxiliar con lo que nos devuelva el método buscarArma() y otra con su índice en el mapa
 
-            System.out.println("Escribe el identificador del arma: ");
-            String respuesta = entrada.next();
-            Iterator it = armas.keySet().iterator();
-
-            while (!enc && it.hasNext()) {
-                String clave = (String) it.next();
-                Arma aux = armas.get(clave);
-
-                if (respuesta.equalsIgnoreCase(aux.getIdentificador())) {
-                    System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
-                    System.out.println(Constantes.FONDO_VERDE + "[v] Arma eliminada" + Constantes.BORRAR);
-                    armas.remove(aux.getIdentificador(), aux);
-                    enc = true;
-
-                }
-
-            }
-
-            if (!enc) {
-                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
+            Arma aux = buscarArma();
+            String idaux = aux.getIdentificador();
+            if (aux != null) {  //Si buscarArma() nos devuelve un objeto y no un null, lo eliminamos de la lista. De lo contrario, nada sucederá y el propio método buscar nos dirá que el arma no ha sido encontrado
+                armas.remove(idaux);
+                System.out.println(Constantes.FONDO_VERDE + "[v] Arma eliminada." + Constantes.BORRAR);
             }
         }
     }
 
-    public Arma buscarArma() {
+    public Arma buscarArma() {       //Método para buscar un arma y devolverla. Este método se utilizará para ejecutar los demás de esta clase
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
-        Arma armaBuscada = null;
+        Arma armaBuscada = null;         //Inicializamos el arma que vamos a buscar con el jugador
 
-        if (armas.isEmpty()) {
+        if (armas.isEmpty()) {      //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
-        } else {
-
+        } else {        //Si el Array no está vacío, iniciamos la búsqueda
+            Iterator it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
             System.out.println("Escribe el identificador del arma: ");
-            String respuesta = entrada.next();
-            Iterator it = armas.keySet().iterator();
+            String respuesta = entrada.next();      //Buscamos el ID de un arma a través del escáner
 
-            while (!enc && it.hasNext()) {
-                String clave = (String) it.next();
-                armaBuscada = armas.get(clave);
+            while (!enc && it.hasNext()) {      //Las condiciones son que enc permanezca en falso y que siga habiendo objetos en el mapa
+                String clave = (String) it.next();      //Almacenamos el índice del siguiente objeto en el mapa casteando a String el siguiente índice
+                Arma actual = armas.get(clave);     //Inicializamos un objeto arma para almacenar el arma actual del mapa según lo vamos recorriendo
 
-                if (respuesta.equalsIgnoreCase(armaBuscada.getIdentificador())) {
-                    enc = true;
-                    System.out.println("[v] Arma encontrada");
+                if (respuesta.equalsIgnoreCase(actual.getIdentificador())) {    //Si el id buscado coincide con el número de placa del policía actual en la lista, este sobreescribe al armaBuscado (que estaba en null)
+                    armaBuscada = actual;
+                    enc = true;     //Enc cambia a true y el bucle se cierra
 
-                    if (armaBuscada instanceof ArmaCortoAlcance) {
-                        System.out.println("Arma de corto alcance - ID:" + armaBuscada.getIdentificador());
-                    } else if (armaBuscada instanceof ArmaLargoAlcance) {
-                        System.out.println("Arma de largo alcance - ID:" + armaBuscada.getIdentificador());
-                    }
-
-                    System.out.println("Daño: " + armaBuscada.getDaño());
-                    System.out.println("Diámetro bala: " + armaBuscada.getDiametro());
-                    System.out.println("Tamaño cargador: " + armaBuscada.getCargador().length);
-
-                    int contador = 0;
-                    int i;
-
-                    for (i = 0; i < armaBuscada.getCargador().length; i++) {
-                        if (armaBuscada.getCargador()[i] != null) {
-                            contador++;
-                        }
-                        i++;
-                    }
-
-                    System.out.println("Nº balas: " + contador);
-
-                    if (armaBuscada instanceof ArmaCortoAlcance) {
-                        System.out.println("Alcance:" + ((ArmaCortoAlcance) armaBuscada).getAlcance());
-                    } else if (armaBuscada instanceof ArmaLargoAlcance) {
-                        System.out.println("Velocidad: " + ((ArmaLargoAlcance) armaBuscada).getVelocidad());
-                    }
-
-                }
-
-            }
-
-            if (!enc) {
-                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
-            }
-        }
-        return armaBuscada;
-    }
-
-    public void modificarArma() {
-
-        Scanner entrada = new Scanner(System.in);
-        boolean enc = false;
-        if (armas.isEmpty()) {
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
-        } else {
-            System.out.println("Escribe el identificador del arma: ");
-            String respuesta = entrada.next();
-            Iterator it = armas.keySet().iterator();
-
-            while (!enc && it.hasNext()) {
-                String clave = (String) it.next();
-                Arma aux = armas.get(clave);
-
-                if (respuesta.equalsIgnoreCase(aux.getIdentificador())) {
-                    enc = true;
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
 
-                    if (aux instanceof ArmaCortoAlcance) {
-                        modificarArmaCortoAlcance(aux);
-                    } else {
-                        modificarArmaLargoAlcance(aux);
-                    }
-
                 }
 
             }
-            if (!enc) {
+
+            if (!enc) {     //Si llegamos al final de la lista sin encontrar el objeto, enc nunca cambiará a true y este mensaje aparecerá.
                 System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
             }
+        }
+        return armaBuscada;     //El objeto devuelto seguirá en null si no se ha encontrado nada, o será el que tenga el ID buscado
+
+    }
+
+    public void modificarArma() {        //Método para modificar un arma del mapa
+
+        if (armas.isEmpty()) {      //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
+            System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
+        } else {          //Si hay armas en el mapa, inicializamos una variable auxiliar con lo que nos devuelva el método buscarArma()
+            Arma aux = buscarArma();
+
+            if (aux != null && aux instanceof ArmaCortoAlcance) {       //Asegurando que el arma aux no es un objeto null, y en función del tipo de arma llamamos a un método u otro para modificar aux
+                modificarArmaCortoAlcance(aux);
+            } else if (aux != null && aux instanceof ArmaLargoAlcance) {
+                modificarArmaLargoAlcance(aux);
+            }
+
         }
 
     }
 
-    public void modificarArmaLargoAlcance(Arma arma) {
+    public void modificarArmaLargoAlcance(Arma arma) {      //Método que recibe por parámetro un objeto de tipo arma para modificar sus atributos
         Scanner entrada = new Scanner(System.in);
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Modificando arma... [*] [*] [*]" + Constantes.BORRAR);
         System.out.println("¿Qué atributo quieres modificar?");
@@ -214,20 +140,20 @@ public class Almacen {
         System.out.println("[2] Diametro de bala");
         System.out.println("[3] Alcance");
         try {
-            switch (entrada.nextInt()) {
+            switch (entrada.nextInt()) {        //Se inicia un menú para preguntar por el atributo a modificar. En cada opción llamaremos al setter correspondiente para modificar el atributo deseado
                 case 1:
-                    arma.setCargador(pedirTamañoCargador());
+                    arma.setCargador(pedirTamañoCargador());        //El setter llama al método que devuelve el tamaño del cargador
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
                 case 2:
-                    arma.setDiametro(pedirDiametro());
+                    arma.setDiametro(pedirDiametro());      //El setter llama al método que devuelve el diámetro
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
 
                 case 3:
-                    ((ArmaLargoAlcance) arma).setVelocidad(pedirVelocidad());
+                    ((ArmaLargoAlcance) arma).setVelocidad(pedirVelocidad());           //Mediante polimorfismo, el setter llama al método que devuelve la velocidad
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
@@ -240,7 +166,7 @@ public class Almacen {
         }
     }
 
-    public void modificarArmaCortoAlcance(Arma arma) {
+    public void modificarArmaCortoAlcance(Arma arma) {      //Método que recibe por parámetro un objeto de tipo arma para modificar sus atributos
         Scanner entrada = new Scanner(System.in);
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Modificando arma... [*] [*] [*]" + Constantes.BORRAR);
         System.out.println("¿Qué atributo quieres modificar?");
@@ -248,20 +174,20 @@ public class Almacen {
         System.out.println("[2] Diametro de bala");
         System.out.println("[3] Alcance");
         try {
-            switch (entrada.nextInt()) {
+            switch (entrada.nextInt()) {        //Se inicia un menú para preguntar por el atributo a modificar. En cada opción llamaremos al setter correspondiente para modificar el atributo deseado
                 case 1:
-                    arma.setCargador(pedirTamañoCargador());
+                    arma.setCargador(pedirTamañoCargador());         //El setter llama al método que devuelve el tamaño del cargador
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
                 case 2:
-                    arma.setDiametro(pedirDiametro());
+                    arma.setDiametro(pedirDiametro());           //El setter llama al método que devuelve el diámetro
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
 
                 case 3:
-                    ((ArmaCortoAlcance) arma).setAlcance(pedirAlcance());
+                    ((ArmaCortoAlcance) arma).setAlcance(pedirAlcance());       //Mediante polimorfismo, el setter llama al método que devuelve el alcance
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma modificada" + Constantes.BORRAR);
 
                     break;
@@ -274,22 +200,21 @@ public class Almacen {
         }
     }
 
-    public void mostrarArmas() {
-        Iterator it = armas.keySet().iterator();
+    public void mostrarArmas() {          //Método para ir mostrando todas las armas de la lista
 
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Mostrando armas... [*] [*] [*]" + Constantes.BORRAR);
 
-        if (armas.isEmpty()) {
+        if (armas.isEmpty()) {           //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
         } else {
+            Iterator it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
+            while (it.hasNext()) {      //La condición es que haya más objetos en el mapa
+                String clave = (String) it.next();      //Almacenamos el índice del objeto en un String
+                Arma aux = armas.get(clave);        //Inicializamos una variable auxiliar en la que almacenamos el siguiente objeto del mapa, usando la el ID almacenado en clave como índice
 
-            while (it.hasNext()) {
-                String clave = (String) it.next();
-                Arma aux = armas.get(clave);
-
-                if (aux instanceof ArmaCortoAlcance) {
+                if (aux instanceof ArmaCortoAlcance) {          //En función del tipo de arma, mostramos un mensaje u otro
                     System.out.println("Arma de corto alcance - ID: " + aux.getIdentificador());
-                } else if (aux instanceof ArmaLargoAlcance) {
+                } else if (aux instanceof ArmaLargoAlcance) {       //Aunque no es necesario usar un else if porque solo hay dos opciones, nos aseguramos de cubrir la contigencia específica y evitamos un warning
                     System.out.println("Arma de largo alcance - ID: " + aux.getIdentificador());
                 }
 
@@ -300,17 +225,17 @@ public class Almacen {
                 int contador = 0;
                 int i;
 
-                for (i = 0; i < aux.getCargador().length; i++) {
-                    if (aux.getCargador()[i] != null) {
+                for (i = 0; i < aux.getCargador().length; i++) {        // Recorremos el array mientras no lleguemos al final
+                    if (aux.getCargador()[i] != null) {     //Por cada bala que encontremos (not null), se aumenta el cargador en uno
                         contador++;
                     }
-                    i++;
+                    i++;        // Incrementamos el índice en cada iteración. Esto OPTIMIZA LA UTILIZACIÓN DE RECURSOS ya que el array no seguirá recorriéndose aunque ya no queden Balas
                 }
 
                 System.out.println("Nº balas: " + contador);
 
-                if (aux instanceof ArmaCortoAlcance) {
-                    System.out.println("Alcance:" + ((ArmaCortoAlcance) aux).getAlcance());
+                if (aux instanceof ArmaCortoAlcance) {      //En función de si el arma es de un tipo u otro, utilizamos el polimofrismo para mostrar el atributo particular de cada tipo de arma (alcance o velocidad)
+                    System.out.println("Alcance: " + ((ArmaCortoAlcance) aux).getAlcance());
                 } else if (aux instanceof ArmaLargoAlcance) {
                     System.out.println("Velocidad: " + ((ArmaLargoAlcance) aux).getVelocidad());
                 }
@@ -321,30 +246,33 @@ public class Almacen {
         }
     }
 
-    public void crearArma() {
+    public void crearArma() {   //Método para crear un objeto Arma y añadirlo al mapa
         Scanner entrada = new Scanner(System.in);
 
-        Arma aux;
+        Arma aux;       //Declaramos una variable de tipo arma sin inicializar
+        String idaux;   //Hacemos lo mismo con un String que guardará el ID de dicho arma
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Creando arma... [*] [*] [*]" + Constantes.BORRAR);
 
         System.out.println("¿Que tipo de arma quieres crear?");
         System.out.println("[1] Corto Alcance");
         System.out.println("[2] Largo Alcance");
         try {
-            switch (entrada.nextInt()) {
+            switch (entrada.nextInt()) {            //Iniciamos un menú con dos opciones para crear un arma de corto o de largo alcance
                 case 1:
-                    aux = new ArmaCortoAlcance();
+                    aux = new ArmaCortoAlcance();       //Si se elige la primera opción, la variable aux se inicializa en la subclase ArmaCortoAlcance
+                    idaux = aux.getIdentificador();     //La variable idaux se inicializa con el identificador de aux
                     aux.setDiametro(pedirDiametro());
-                    ((ArmaCortoAlcance) aux).setAlcance(pedirAlcance());
-                    armas.put(aux.getIdentificador(), aux);
+                    ((ArmaCortoAlcance) aux).setAlcance(pedirAlcance());            //Usamos el polimorfismo para asignarle el valor Alcance a aux
+                    armas.put(idaux, aux);               //Añadimos aux al mapa
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma creada en el almacen" + Constantes.BORRAR);
 
                     break;
                 case 2:
-                    aux = new ArmaLargoAlcance();
+                    aux = new ArmaLargoAlcance();         //Si se elige la segunda opción, la variable aux se inicializa en la subclase ArmaLargoAlcance
+                    idaux = aux.getIdentificador();         //La variable idaux se inicializa con el identificador de aux
                     aux.setDiametro(pedirDiametro());
-                    ((ArmaLargoAlcance) aux).setVelocidad(pedirVelocidad());
-                    armas.put(aux.getIdentificador(), aux);
+                    ((ArmaLargoAlcance) aux).setVelocidad(pedirVelocidad());            //Usamos el polimorfismo para asignarle el valor Velocidad a aux
+                    armas.put(idaux, aux);      //Añadimos aux al mapa
                     System.out.println(Constantes.FONDO_VERDE + "[v] Arma creada en el almacen" + Constantes.BORRAR);
 
                     break;
@@ -358,15 +286,15 @@ public class Almacen {
 
     }
 
-    public Bala[] pedirTamañoCargador() {
+    public Bala[] pedirTamañoCargador() {       //Método Bala[] que devuelve un Array de objetos de tipo bala, cuya longitud es introducida a través del escáner
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        Bala[] cargador = new Bala[10];
+        Bala[] cargador = new Bala[10];     //La variable se inicializa en diez, que es el valor por defecto que asignamos en el constructor de las armas después se alterará a través del escáner
 
-        do {
+        do {          //El bucle se cerrará cuando el usuario introduzca un número
             try {
                 System.out.println("Introduzca nuevo tamaño del cargador: ");
-                cargador = new Bala[entrada.nextInt()];
+                cargador = new Bala[entrada.nextInt()];           //Pedimos el tamaño del cargador a través de un escáner
                 cerrar = true;
             } catch (InputMismatchException e) {
                 System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
@@ -375,18 +303,18 @@ public class Almacen {
             }
         } while (!cerrar);
 
-        return cargador;
+        return cargador;    //Devolvemos el Array de objetos Bala con la longitud que le hemos asignado
 
     }
 
-    public int pedirDiametro() {
+    public int pedirDiametro() {        //Método int que devuelve una variable introducida por escáner
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        int diametro = 0;
+        int diametro = 0;            //La variable se inicializa en cero, después se alterará a través del escáner
 
-        do {
+        do {                 //El bucle se cerrará cuando el usuario introduzca un número
             try {
-                System.out.println("Diametro de bala: ");
+                System.out.println("Diametro de bala: ");           //Pedimos el diámetro a través de un escáner
                 diametro = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
@@ -395,18 +323,18 @@ public class Almacen {
 
             }
         } while (!cerrar);
-        return diametro;
+        return diametro;        //Devolvemos el int diámetro alterado
 
     }
 
-    public int pedirAlcance() {
+    public int pedirAlcance() {     //Método int que devuelve una variable introducida por escáner
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        int alcance = 0;
+        int alcance = 0;                //La variable se inicializa en cero, después se alterará a través del escáner
 
-        do {
+        do {                //El bucle se cerrará cuando el usuario introduzca un número
             try {
-                System.out.println("Alcance de bala: ");
+                System.out.println("Alcance de bala: ");        //Pedimos el alcance a través de un escáner
                 alcance = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
@@ -415,18 +343,18 @@ public class Almacen {
 
             }
         } while (!cerrar);
-        return alcance;
+        return alcance;         //Devolvemos el int alcance alterado
 
     }
 
-    public double pedirVelocidad() {
+    public double pedirVelocidad() {        //Método double que devuelve una variable introducida por escáner
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        double velocidad = 0;
+        double velocidad = 0;       //La variable se inicializa en cero, después se alterará a través del escáner
 
-        do {
+        do {        //El bucle se cerrará cuando el usuario introduzca un número
             try {
-                System.out.println("Velocidad de bala: ");
+                System.out.println("Velocidad de bala: ");      //Pedimos la velocidad a través de un escáner
                 velocidad = entrada.nextDouble();
                 cerrar = true;
             } catch (InputMismatchException e) {
@@ -436,7 +364,7 @@ public class Almacen {
             }
         } while (!cerrar);
 
-        return velocidad;
+        return velocidad;        //Devolvemos el doube velocidad alterado
 
     }
 
