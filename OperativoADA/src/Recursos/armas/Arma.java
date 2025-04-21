@@ -116,7 +116,7 @@ public abstract class Arma implements Disparable { //La clase implemente la inte
         int contador = 0;   //Contador inicializado en cero
         int i; // Variable i que representa el índice para recorrer el array
 
-       for (i = 0; i < cargador.length; i++ ) { // Recorremos el array mientras no lleguemos al final
+        for (i = 0; i < cargador.length; i++) { // Recorremos el array mientras no lleguemos al final
             if (cargador[i] != null) {  //Por cada bala que encontremos (not null), se aumenta el cargador en uno
                 contador++;
             }

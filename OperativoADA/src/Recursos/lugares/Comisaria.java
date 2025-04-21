@@ -41,28 +41,25 @@ public class Comisaria {
 
     @Override
     public String toString() {
+
         return "Comisaria{" + "policias=" + policias + '}';
     }
 
     public Policia elegirPolicia() {        //Método para elegir un policía, devolverlo y asignárselo al jugador principal
-        Policia policiaBuscado = MenuPrincipal.jugador;         //Inicializamos el policía que vamos a buscar con el jugador
 
-        if (!policias.isEmpty()) {      //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
+        Policia policiaElegido = MenuPrincipal.jugador;     //Inicializamos un policía con el que esté asignado al jugador principal. Incluso si este estuviera vacío, no importa ya que el control pertinente ya está programado en el método buscar
 
-            Policia aux = buscarPolicias();
+        Policia aux = buscarPolicias();      //Inicializamos una variable auxiliar con lo que nos devuelva buscarPolicuas()
 
-            if (aux != null) {      //Si buscarPolicias() nos devuelve un objeto y no un null, el policía que inicializamos al principio se sobreescribe con este. De lo contrario, nada sucederá y el propio método buscar nos dirá que el policía no ha sido encontrado
-                policiaBuscado = aux;
+        if (aux != null) {         //Si buscarPolicias() nos devuelve un objeto y no un null, sobreescribimos al policiaBuscado con aux
 
-                System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + policiaBuscado.getNombre() + "." + Constantes.BORRAR);
-
-            }
-
-        } else {     //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
+            policiaElegido = aux;
+            System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Ahora controlas a " + policiaElegido.getNombre() + "." + Constantes.BORRAR);
 
         }
-        return policiaBuscado;      //Devolvemos el policía que inicializamos al principio. Si no encontramos ninguno, seguirá siendo el jugador.
+
+        return policiaElegido;  //Devolveremos un objeto vacío si se ha encontrado, o al policía que hemos buscado si la búsqueda ha tenido éxito
+
     }
 
     public void eliminarPolicia() {     //Método para eliminar un arma del mapa
@@ -127,10 +124,10 @@ public class Comisaria {
                         System.out.println(Constantes.AMARILLO + "Opcion no permitida" + Constantes.BORRAR);
                 }
 
-            } else {    //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
-                System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
-
             }
+        } else {    //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarPolicias()
+            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
+
         }
 
     }
@@ -139,7 +136,12 @@ public class Comisaria {
         Scanner entrada = new Scanner(System.in);       //Inicializamos el escáner
         boolean enc = false;        //Variable booleana para detener la búsqueda cuando encontremos el objeto que necesitamos
         Policia policiaBuscado = null;      //Inicializamos el policía que vamos a buscar en null
-        if (!policias.isEmpty()) {      //Si el Array no está vacío, iniciamos la búsqueda
+
+        if (policias.isEmpty()) { //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
+
+            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
+
+        } else {
 
             System.out.println("Escribe el nº de placa del policia: ");
             try {
@@ -160,23 +162,19 @@ public class Comisaria {
                 }
 
                 if (!enc) {     //Si llegamos al final de la lista sin encontrar el objeto, enc nunca cambiará a true y este mensaje aparecerá.
-                    System.out.println(Constantes.ROJO + "Policia no encontrado." + Constantes.BORRAR);
+                    System.out.println(Constantes.FONDO_ROJO + "Policia no encontrado." + Constantes.BORRAR);
 
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
-        } else {       //Si la lista está vacía, nos cuidamos de nullPointerException imprimiendo este mensaje
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad." + Constantes.BORRAR);
-
         }
-
         return policiaBuscado;      //El objeto devuelto seguirá en null si no se ha encontrado nada, o será el que tenga el número de placa buscado
 
     }
 
-    public void mostrarPolicias() {     //Método para ir mostrando todos los policías de la lista
+    public void mostrarPolicias() {     //Método para ir mostrando todos los policías de la lista. Por cuestiones de comodidad, configuramos la presentación en este método en lugar de hacerlo en toString(), ya que tendríamos que combinar el toString() de la superclase con el de la subclase
 
         System.out.println(Constantes.AZUL + "[*] [*] [*] Mostrando policias... [*] [*] [*] " + Constantes.BORRAR);
 
@@ -196,7 +194,7 @@ public class Comisaria {
                     System.out.println("Arma: Arma de largo alcance - ID: " + armaux.getIdentificador());
                 }
 
-                System.out.println("Daño: " + armaux.getDaño());
+                System.out.println("Daño: " + armaux.getDaño());        //Se nos advierte de un posible nullPointer, pero por la naturaleza del proyecto, no se va a dar el caso de que el personaje no tenga arma equipada
                 System.out.println("Diámetro bala: " + armaux.getDiametro());
                 System.out.println("Tamaño del cargador: " + armaux.getCargador().length);
                 int contador = 0;
@@ -235,18 +233,18 @@ public class Comisaria {
     public void crearPolicia() {        //Método para crear un objeto Policía y añadirlo al Array
 
         Constantes ubicaciones = new Constantes();      //Creamos una variable de tipo Constantes de la que usaremos las ubicaciones
-        Policia nuevoPolicia = new Policia();       //Creamos un policía usando el constructor por defecto
+        Policia nuevoPolicia;       //Creamos un policía usando el constructor por defecto
 
-        nuevoPolicia.setNombre(pedirNombre());                  //Usamos el setter para ir asignando los valores a través de los métodos que usamos para pedir dichos valores
+        String nombre = pedirNombre();
+        String departamento = pedirDepartamento();
+        String permiso = pedirPermisoArma();
+        String rango = pedirRango();
+        Arma arma = new ArmaCortoAlcance();     //Tal como se nos pide en el enunciado, le asignamos un arma de corto alcance
+        char marca = nombre.charAt(0);       //Usamos la primera posición charAt(0) del nombre para asignar el alias del policía
+        int coordenadaX = ubicaciones.getUBICACION_COMISARIA_FILA();         //Usamos las variables almacenadas en el objeto de tipo Constantes para asignarlas en las coordenadas del policía
+        int coordenadaY = ubicaciones.getUBICACION_COMISARIA_COLUMNA();
 
-        nuevoPolicia.setDepartamento(pedirDepartamento());
-        nuevoPolicia.setPermisoArma(pedirPermisoArma());
-        nuevoPolicia.setRango(pedirRango());
-        nuevoPolicia.setArma(new ArmaCortoAlcance());           //Tal como se nos pide en el enunciado, le asignamos un arma de corto alcance
-        nuevoPolicia.setMarca(nuevoPolicia.getNombre().charAt(0));                  //Usamos la primera posición charAt(0) del nombre para asignar el alias del policía
-
-        nuevoPolicia.setCoordenadaX(ubicaciones.getUBICACION_COMISARIA_FILA());     //Usamos las variables almacenadas en el objeto de tipo Constantes para asignarlas en las coordenadas del policía
-        nuevoPolicia.setCoordenadaY(ubicaciones.getUBICACION_COMISARIA_COLUMNA());
+        nuevoPolicia = new Policia(departamento, permiso, rango, nombre, marca, coordenadaX, coordenadaY, arma);
 
         this.policias.add(nuevoPolicia);        //Finalmente, añadimos al policía al Array
 
@@ -296,7 +294,7 @@ public class Comisaria {
                         System.out.println(Constantes.AMARILLO + "Las tres opciones posibles son 'Inteligencia', 'Operaciones' o 'Investigacion'." + Constantes.BORRAR);
                 }
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -330,7 +328,7 @@ public class Comisaria {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -368,7 +366,7 @@ public class Comisaria {
                         System.out.println(Constantes.AMARILLO + "Las posibles opciones son: 1 para Agente. 2 para Inspector. 3 para Comisario." + Constantes.BORRAR);
                 }
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }

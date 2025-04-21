@@ -81,7 +81,8 @@ public class MenuPrincipal {
                 }
             } catch (InputMismatchException e) {
 
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
 
             }
 
@@ -103,23 +104,40 @@ public class MenuPrincipal {
                 switch (entrada.nextInt()) {
                     case 1:     //Hemos añadido un control especial para poder asignar solamente un arma que coincida con el permiso de armas del jugador
                         if (jugador != null) {      //Si hay algún policía almacenado en la variable global jugador, comenzamos el proceso de selección de arma
-                            Arma armaJugador = almacen.elegirArma();        //Inicializamos una variable de tipo arma con el objeto que nos devuelva el método elegirArma() en la variable global almacem
 
-                            String permisoJug = jugador.getPermisoArma();   //Inicializamos una variable String con el permiso del jugador actual
+                            if (!almacen.getArmas().isEmpty()) {        //Este control sirve para que el permiso de armas se evalúe solamente si hay armas en el almacén. De lo contrario, se da una anomalía donde el programa evaluará el arma con el que el personaje viene equipado por defecto
 
-                            boolean armaAdecuada = (armaJugador instanceof ArmaCortoAlcance && permisoJug.equals("Corto Alcance") || armaJugador instanceof ArmaLargoAlcance && permisoJug.equals("Largo Alcance"));
-                            //Valor booleano que almacena como condiciones que el permiso de arma del jugador coincida con el arma elegida anteriormente.
-                            
-                            if (!almacen.getArmas().isEmpty() && armaAdecuada) {        //Si el permiso de arma coincide con el tipo de arma elegida, se la asignamos al jugador.
+                                Arma armaAnterior = jugador.getArma();  //Guardamos una referencia al arma que el jugador ya tenía antes de elegir una nueva. Esto nos evitará problemas si la búsqueda del arma resulta en un objeto vacío, puesto que no estaremos sustituyendo al arma del jugador todavía
 
-                                System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Tu jugador lleva el arma con el identificador " + armaJugador.getIdentificador() + "." + Constantes.BORRAR);
-                                jugador.setArma(armaJugador);
+                                Arma armaTemporal = almacen.elegirArma();        //Inicializamos una variable temporal de tipo arma con el objeto que nos devuelva el método elegirArma() en la variable global almacén
+                                if (armaTemporal == null) { //Controlamos que no se haya devuelto ningún arma
+                                    System.out.println(Constantes.FONDO_ROJO + "No se ha seleccionado ningún arma." + Constantes.BORRAR);
+                                } else if (armaTemporal == armaAnterior) {        //Este mensaje salta si el objeto devuelto en elegirArma() (que de entrada ya es el arma del jugador) es el mismo
+                                    System.out.println(Constantes.AMARILLO + "Tu jugador ya lleva ese arma." + Constantes.BORRAR);
+                                } else { //Comprobamos si el arma devuelta es distinta a la que ya tenía el jugador
 
-                            } else if (almacen.getArmas().isEmpty() && !armaAdecuada) {     //Si el permiso de arma no coincide con el tipo de arma elegida, no se la asignamos e imprimimos una advetencia.
-                                System.out.println(Constantes.AMARILLO + "Advertencia: Tu jugador tiene un permiso de armas de " + permisoJug + " y no es compatible con ese arma. Cambie su permiso o elija otra.");
+                                    String permisoJug = jugador.getPermisoArma();   //Inicializamos una variable String con el permiso del jugador actual
+
+                                    boolean armaAdecuada = (armaTemporal instanceof ArmaCortoAlcance && permisoJug.equals("Corto Alcance") || armaTemporal instanceof ArmaLargoAlcance && permisoJug.equals("Largo Alcance"));
+                                    //Valor booleano que almacena como condiciones que el permiso de arma del jugador coincida con el arma elegida anteriormente.
+
+                                    if (armaAdecuada) {        //Si el permiso de arma coincide con el tipo de arma elegida, se la asignamos al jugador.
+                                        jugador.setArma(armaTemporal);
+                                        System.out.println(Constantes.FONDO_VERDE + "[v] ¡Hecho! Tu jugador lleva el arma con el identificador " + armaTemporal.getIdentificador() + "." + Constantes.BORRAR);
+
+                                    } else {     //Si el permiso de arma no coincide con el tipo de arma elegida, no se la asignamos e imprimimos una advertencia.
+                                        System.out.println(Constantes.AMARILLO + "Advertencia: Tu jugador tiene un permiso de armas de " + permisoJug + " y no es compatible con ese arma. Cambie su permiso o elija otra." + Constantes.BORRAR);
+                                    }
+
+                                }
+
+                            } else {
+                                // Aquí ya no se hace comprobación de permisos porque no hay armas en el almacén
+                                System.out.println(Constantes.FONDO_ROJO + "No hay armas en el almacén para asignar." + Constantes.BORRAR);
                             }
+
                         } else {        //Nos guardamos de NullPointerException en el caso de tratar de elegir armas cuando aún no controlamos a ningún personaje
-                            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policias en la unidad a los que asignar arma." + Constantes.BORRAR);
+                            System.out.println(Constantes.FONDO_ROJO + "[x] No hay policías en la unidad a los que asignar arma." + Constantes.BORRAR);
                         }
 
                         break;
@@ -154,7 +172,8 @@ public class MenuPrincipal {
 
             } catch (InputMismatchException e) {
 
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
 
             }
 
@@ -195,7 +214,8 @@ public class MenuPrincipal {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
 
             }
 
@@ -235,7 +255,7 @@ public class MenuPrincipal {
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
             }
         } while (!cerrarBucle);
     }

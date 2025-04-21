@@ -23,7 +23,8 @@ public class ArmaCortoAlcance extends Arma { //La subclase hereda de Arma.
         setDaño(15); //También se inicializa por defecto, para esto llamamos al setter.
         this.alcance = 0;
     }
-                                //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public int getAlcance() {
         return alcance;
     }

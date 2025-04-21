@@ -23,7 +23,8 @@ public class ArmaLargoAlcance extends Arma {    //La subclase hereda de Arma.
         setDaño(10);   //También se inicializa por defecto, para esto llamamos al setter.
         this.velocidad = 0;
     }
-                                    //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public double getVelocidad() {
         return velocidad;
     }

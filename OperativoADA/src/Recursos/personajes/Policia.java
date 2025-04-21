@@ -72,6 +72,7 @@ public class Policia extends Personajes implements Jugable { //La subclase hered
 
     @Override
     public String toString() {
+
         return super.toString() + "Policia{" + "numeroPlaca=" + numeroPlaca + ", departamento=" + departamento + ", permisoArma=" + permisoArma + ", rango=" + rango + '}';
     }
 

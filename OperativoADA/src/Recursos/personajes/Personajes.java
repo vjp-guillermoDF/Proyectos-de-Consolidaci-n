@@ -48,7 +48,8 @@ public class Personajes { //Atributos privados de la clase.
         this.arma = new ArmaCortoAlcance(); //Se inicializa por defecto como ArmaCortoAlcance.
 
     }
-                                        //Getters, setters y toString().
+    //Getters, setters y toString().
+
     public String getIdentificador() {
         return identificador;
     }

@@ -22,17 +22,17 @@ import java.util.Scanner;
  */
 public class Almacen {
 
-    private Map<String, Arma> armas;
+    private Map<String, Arma> armas;        //Declaramos el atributo como un mapa
 
-    public Almacen() {
+    public Almacen() {      //En el constructor por defecto, usamos el polimorfismo para inicializarlo como un HashMap
         this.armas = new HashMap();
     }
 
-    public Almacen(Map<String, Arma> armas) {
+    public Almacen(Map<String, Arma> armas) {       //Constructor parametrizado
         this.armas = armas;
     }
 
-    public Map<String, Arma> getArmas() {
+    public Map<String, Arma> getArmas() {       //Getter y setter
         return armas;
     }
 
@@ -41,40 +41,36 @@ public class Almacen {
     }
 
     @Override
-    public String toString() {
+    public String toString() {      //Método toString()
         return "Almacen{" + "armas=" + armas + '}';
     }
 
     public Arma elegirArma() {       //Método para elegir un arma, devolverlo y asignárselo al jugador principal
+        Arma armaElegida = null;    //Inicializamos un objeto vacío en la superclase arma. IMPORTANTE: La única razón de devolver un objeto null es por mejorar el control que hemos establecido más tarde en el menú del almacén, para que no salte el mensaje "el jugador ya lleva ese arma" en caso de no encontrar ninguna
 
-        Arma armaBuscada = MenuPrincipal.jugador.getArma();      //Inicializamos el arma que vamos a buscar con el jugador
-        if (armas.isEmpty()) {       //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
-            System.out.println(Constantes.FONDO_ROJO + "No hay armas en el almacen." + Constantes.BORRAR);
-        } else {        //Si hay policías en el Array, inicializamos una variable auxiliar con lo que nos devuelva el método buscarArma()
+        Arma aux = buscarArma();        //Inicializamos una variable auxiliar en lo que nos aparezca en buscarArma
 
-            Arma aux = buscarArma();
+        if (aux != null) {      //Si buscarArma() nos devuelve un objeto y no un null, sobreescribimos el arma elegida con aux
 
-            if (aux != null) {      //Si buscarArma() nos devuelve un objeto y no un null, el arma que inicializamos al principio se sobreescribe con esta. De lo contrario, nada sucederá y el propio método buscar nos dirá que el arma no ha sido encontrada
-
-                armaBuscada = aux;
-
-            }
+            armaElegida = aux;
 
         }
 
-        return armaBuscada;     //Devolvemos el arma que inicializamos al principio. Si no encontramos ninguno, seguirá siendo el del jugador.
+        return armaElegida;     //Si no hemos encontrado el arma, devolvemos el objeto vacío
     }
 
     public void eliminarArma() {        //Método para eliminar un arma del mapa
 
-        System.out.println(Constantes.FONDO_ROJO + "[*] [*] [*] Eliminando arma... [*] [*] [*] " + Constantes.BORRAR);
         if (armas.isEmpty()) {   //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
         } else {    //Si hay armas en el mapa, inicializamos una variable auxiliar con lo que nos devuelva el método buscarArma() y otra con su índice en el mapa
 
+            System.out.println(Constantes.FONDO_ROJO + "[*] [*] [*] Eliminando arma... [*] [*] [*] " + Constantes.BORRAR);
+
             Arma aux = buscarArma();
-            String idaux = aux.getIdentificador();
+
             if (aux != null) {  //Si buscarArma() nos devuelve un objeto y no un null, lo eliminamos de la lista. De lo contrario, nada sucederá y el propio método buscar nos dirá que el arma no ha sido encontrado
+                String idaux = aux.getIdentificador();      //Necesitamos asignar el índice del arma aux DESPUÉS de asegurarnos que no es null
                 armas.remove(idaux);
                 System.out.println(Constantes.FONDO_VERDE + "[v] Arma eliminada." + Constantes.BORRAR);
             }
@@ -84,33 +80,30 @@ public class Almacen {
     public Arma buscarArma() {       //Método para buscar un arma y devolverla. Este método se utilizará para ejecutar los demás de esta clase
         Scanner entrada = new Scanner(System.in);
         boolean enc = false;
-        Arma armaBuscada = null;         //Inicializamos el arma que vamos a buscar con el jugador
+        Arma armaBuscada = null;         //Inicializamos el arma que vamos a buscar en null
 
-        if (armas.isEmpty()) {      //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
-            System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
-        } else {        //Si el Array no está vacío, iniciamos la búsqueda
-            Iterator it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
-            System.out.println("Escribe el identificador del arma: ");
-            String respuesta = entrada.next();      //Buscamos el ID de un arma a través del escáner
+        Iterator<String> it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
+        System.out.println("Escribe el identificador del arma: ");
+        String respuesta = entrada.next();      //Buscamos el ID de un arma a través del escáner
 
-            while (!enc && it.hasNext()) {      //Las condiciones son que enc permanezca en falso y que siga habiendo objetos en el mapa
-                String clave = (String) it.next();      //Almacenamos el índice del siguiente objeto en el mapa casteando a String el siguiente índice
-                Arma actual = armas.get(clave);     //Inicializamos un objeto arma para almacenar el arma actual del mapa según lo vamos recorriendo
+        while (!enc && it.hasNext()) {      //Las condiciones son que enc permanezca en falso y que siga habiendo objetos en el mapa
+            String clave = it.next();      //Almacenamos el índice del siguiente objeto en el mapa en una variable String 
+            Arma actual = armas.get(clave);     //Inicializamos un objeto arma para almacenar el arma actual del mapa según lo vamos recorriendo
 
-                if (respuesta.equalsIgnoreCase(actual.getIdentificador())) {    //Si el id buscado coincide con el número de placa del policía actual en la lista, este sobreescribe al armaBuscado (que estaba en null)
-                    armaBuscada = actual;
-                    enc = true;     //Enc cambia a true y el bucle se cierra
+            if (respuesta.equalsIgnoreCase(actual.getIdentificador())) {    //Si el id buscado coincide con el número de placa del policía actual en la lista, este sobreescribe al armaBuscado (que estaba en null)
+                armaBuscada = actual;
+                enc = true;     //Enc cambia a true y el bucle se cierra
 
-                    System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
-
-                }
+                System.out.println(Constantes.FONDO_VERDE + "[v] Arma encontrada" + Constantes.BORRAR);
 
             }
 
-            if (!enc) {     //Si llegamos al final de la lista sin encontrar el objeto, enc nunca cambiará a true y este mensaje aparecerá.
-                System.out.println(Constantes.ROJO + "Arma no encontrada" + Constantes.BORRAR);
-            }
         }
+
+        if (!enc) {     //Si llegamos al final de la lista sin encontrar el objeto, enc nunca cambiará a true y este mensaje aparecerá.
+            System.out.println(Constantes.FONDO_ROJO + "Arma no encontrada." + Constantes.BORRAR);
+        }
+
         return armaBuscada;     //El objeto devuelto seguirá en null si no se ha encontrado nada, o será el que tenga el ID buscado
 
     }
@@ -138,7 +131,7 @@ public class Almacen {
         System.out.println("¿Qué atributo quieres modificar?");
         System.out.println("[1] Numero de balas del cartucho");
         System.out.println("[2] Diametro de bala");
-        System.out.println("[3] Alcance");
+        System.out.println("[3] Velocidad");
         try {
             switch (entrada.nextInt()) {        //Se inicia un menú para preguntar por el atributo a modificar. En cada opción llamaremos al setter correspondiente para modificar el atributo deseado
                 case 1:
@@ -162,7 +155,7 @@ public class Almacen {
             }
 
         } catch (InputMismatchException e) {
-            System.out.println(Constantes.ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
+            System.out.println(Constantes.FONDO_ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
         }
     }
 
@@ -196,20 +189,20 @@ public class Almacen {
             }
 
         } catch (InputMismatchException e) {
-            System.out.println(Constantes.ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
+            System.out.println(Constantes.FONDO_ROJO + "Error. Debes introducir un numero." + Constantes.BORRAR);
         }
     }
 
-    public void mostrarArmas() {          //Método para ir mostrando todas las armas de la lista
+    public void mostrarArmas() {          //Método para ir mostrando todas las armas de la lista. Por cuestiones de comodidad, configuramos la presentación en este método en lugar de hacerlo en toString(), ya que tendríamos que combinar el toString() de la superclase con el de la subclase
 
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Mostrando armas... [*] [*] [*]" + Constantes.BORRAR);
 
         if (armas.isEmpty()) {           //Si el mapa está vacío, nos cuidamos de nullPointerException imprimiendo este mensaje
             System.out.println(Constantes.FONDO_ROJO + "[x] No hay armas en el almacen." + Constantes.BORRAR);
         } else {
-            Iterator it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
+            Iterator<String> it = armas.keySet().iterator();            //Creamos el iterador que usaremos para recorrer el mapa con el índice (keySet()) de los objetos en el mapa
             while (it.hasNext()) {      //La condición es que haya más objetos en el mapa
-                String clave = (String) it.next();      //Almacenamos el índice del objeto en un String
+                String clave = it.next();      //Almacenamos el índice del objeto en un String
                 Arma aux = armas.get(clave);        //Inicializamos una variable auxiliar en la que almacenamos el siguiente objeto del mapa, usando la el ID almacenado en clave como índice
 
                 if (aux instanceof ArmaCortoAlcance) {          //En función del tipo de arma, mostramos un mensaje u otro
@@ -248,7 +241,6 @@ public class Almacen {
 
     public void crearArma() {   //Método para crear un objeto Arma y añadirlo al mapa
         Scanner entrada = new Scanner(System.in);
-
         Arma aux;       //Declaramos una variable de tipo arma sin inicializar
         String idaux;   //Hacemos lo mismo con un String que guardará el ID de dicho arma
         System.out.println(Constantes.CELESTE + "[*] [*] [*] Creando arma... [*] [*] [*]" + Constantes.BORRAR);
@@ -279,17 +271,15 @@ public class Almacen {
                 default:
                     System.out.println(Constantes.AMARILLO + "No se pueden crear armas del tipo seleccionado." + Constantes.BORRAR);
             }
-
         } catch (InputMismatchException e) {
-            System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+            System.out.println(Constantes.FONDO_ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
         }
-
     }
 
     public Bala[] pedirTamañoCargador() {       //Método Bala[] que devuelve un Array de objetos de tipo bala, cuya longitud es introducida a través del escáner
         Scanner entrada = new Scanner(System.in);
         boolean cerrar = false;
-        Bala[] cargador = new Bala[10];     //La variable se inicializa en diez, que es el valor por defecto que asignamos en el constructor de las armas después se alterará a través del escáner
+        Bala[] cargador = new Bala[10];     //Hemos inicializado el cargador para poder implementar el try/ catch. Aunque no tenga relevancia mayor, la variable se ha inicializado en diez, que es el valor por defecto que asignamos en el constructor de las armas después se alterará a través del escáner
 
         do {          //El bucle se cerrará cuando el usuario introduzca un número
             try {
@@ -297,7 +287,7 @@ public class Almacen {
                 cargador = new Bala[entrada.nextInt()];           //Pedimos el tamaño del cargador a través de un escáner
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -318,7 +308,7 @@ public class Almacen {
                 diametro = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -338,7 +328,7 @@ public class Almacen {
                 alcance = entrada.nextInt();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
@@ -358,7 +348,7 @@ public class Almacen {
                 velocidad = entrada.nextDouble();
                 cerrar = true;
             } catch (InputMismatchException e) {
-                System.out.println(Constantes.ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
+                System.out.println(Constantes.FONDO_ROJO + "Error. Se debe introducir un numero." + Constantes.BORRAR);
                 entrada.next();
 
             }
