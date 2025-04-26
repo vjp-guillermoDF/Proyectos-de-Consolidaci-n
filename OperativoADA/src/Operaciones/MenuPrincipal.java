@@ -256,6 +256,7 @@ public class MenuPrincipal {
 
             } catch (InputMismatchException e) {
                 System.out.println(Constantes.FONDO_ROJO + "ERROR. Debe introducir un numero." + Constantes.BORRAR);
+                entrada.next();
             }
         } while (!cerrarBucle);
     }
